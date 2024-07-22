@@ -29,12 +29,15 @@ configurationファイル内の「Genome size」は、小数点を含めて入�
 【対処法】
 以下のサイトを参考にメモリ割り当てを変更してください。
 
-Windows
+* Windows
+
 下記サイトを参考に、WSL2のメモリ割り当てを変更
 
 https://zenn.dev/karaage0703/articles/d38e17bd6efbaa
 
-Mac
+
+* Mac
+
 下記サイトを参考に、Docker desktopでメモリ割り当てを変更
 
 https://qiita.com/wsigma21/items/3c7305631db0cf629cc7
