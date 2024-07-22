@@ -15,7 +15,7 @@ configurationファイル内の「Genome size」は、小数点を含めて入�
 <br>
 
 ### 2. リストで指定したサンプル名（菌株名）の長さが異なる場合、誤ったfastqファイルが読み込まれる場合がある。
-【原因】例えば、リストで「strain1」を指定した場合、「strain1*R1*fastq.gz」（*は任意の文字列）をfastqファイルとして認識するため、誤って「strain11.R1.fastq.gz」や「strain101.R1.fastq.gz」のようなファイルを読み込む可能性がある。
+【原因】例えば、リストで「strain1」を指定した場合、「strain1\*R1*fastq.gz」（*は任意の文字列）をfastqファイルとして認識するため、誤って「strain11.R1.fastq.gz」や「strain101.R1.fastq.gz」のようなファイルを読み込む可能性がある。
 
 【対処法】サンプル名は、全て同じ長さにしてください。例えば、「strain01」, 「strain12」など
 
