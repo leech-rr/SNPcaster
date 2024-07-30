@@ -44,6 +44,7 @@ https://zenn.dev/karaage0703/articles/d38e17bd6efbaa
 
 https://qiita.com/wsigma21/items/3c7305631db0cf629cc7
 
+<br>
 
 ## 4. リファレンス配列の配列名にスペースが入っているとSNPcasterが動作しない
 
@@ -55,3 +56,16 @@ SNPcasterで用いるリファレンス配列の配列名（FASTAファイルの
 
 * 【正】>Sakai_BA000007
 * 【誤】>BA000007 Escherichia coli Sakai
+
+<br>
+
+***
+
+# その他注意点
+## 1. SNP抽出条件
+SNP抽出の際
+
+大腸菌の集団感染調査では、いずれも大きな影響がないことを確認していますが、
+* リピート領域の除去
+* クラスターSNPの除去
+* Gubbins
