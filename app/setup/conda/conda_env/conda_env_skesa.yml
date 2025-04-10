@@ -1,0 +1,13 @@
+name: skesa
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - libgcc-ng=13.2.0=h807b86a_3
+  - libgomp=13.2.0=h807b86a_3
+  - libstdcxx-ng=13.2.0=h7e041cc_3
+  - libzlib=1.2.13=hd590300_5
+  - skesa=2.5.1=hdcf5f25_0
+prefix: /opt/conda/envs/skesa
