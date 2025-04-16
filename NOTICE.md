@@ -1,0 +1,586 @@
+grape, SNPcasterが依存しているライブラリは以下の通りです。
+各URLはライブラリのソースコードへのリンクです。ソースコード中に詳細なラインセンス情報が含まれています。
+
+## 依存しているライブラリとそのライセンス
+- **_libgcc_mutex** (version: 0.1): None
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
+- **_openmp_mutex** (version: 4.5): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-2_gnu.tar.bz2
+- **bzip2** (version: 1.0.8): bzip2-1.0.6
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/bzip2-1.0.8-h4bc722e_7.conda
+- **ca-certificates** (version: 2024.8.30): ISC
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2024.8.30-hbcca054_0.conda
+- **et_xmlfile** (version: 2.0.0): MIT
+  - URL: https://conda.anaconda.org/conda-forge/noarch/et_xmlfile-2.0.0-pyhd8ed1ab_0.conda
+- **ld_impl_linux-64** (version: 2.43): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.43-h712a8e2_2.conda
+- **libblas** (version: 3.9.0): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libblas-3.9.0-25_linux64_openblas.conda
+- **libcblas** (version: 3.9.0): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libcblas-3.9.0-25_linux64_openblas.conda
+- **libffi** (version: 3.4.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libffi-3.4.2-h7f98852_5.tar.bz2
+- **libgcc** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgcc-14.2.0-h77fa898_1.conda
+- **libgcc-ng** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-14.2.0-h69a702a_1.conda
+- **libgfortran** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgfortran-14.2.0-h69a702a_1.conda
+- **libgfortran5** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgfortran5-14.2.0-hd5240d6_1.conda
+- **libgomp** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgomp-14.2.0-h77fa898_1.conda
+- **liblapack** (version: 3.9.0): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/liblapack-3.9.0-25_linux64_openblas.conda
+- **libnsl** (version: 2.0.1): LGPL-2.1-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libnsl-2.0.1-hd590300_0.conda
+- **libopenblas** (version: 0.3.28): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libopenblas-0.3.28-pthreads_h94d23a6_1.conda
+- **libsqlite** (version: 3.47.0): Unlicense
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libsqlite-3.47.0-hadc24fc_1.conda
+- **libstdcxx** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-14.2.0-hc0a3c3a_1.conda
+- **libstdcxx-ng** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-ng-14.2.0-h4852527_1.conda
+- **libuuid** (version: 2.38.1): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.38.1-h0b41bf4_0.conda
+- **libxcrypt** (version: 4.4.36): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libxcrypt-4.4.36-hd590300_1.conda
+- **libzlib** (version: 1.3.1): Zlib
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.3.1-hb9d3cd8_2.conda
+- **ncurses** (version: 6.5): X11
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.5-he02047a_1.conda
+- **numpy** (version: 1.26.4): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/numpy-1.26.4-py39h474f0d3_0.conda
+- **openpyxl** (version: 3.1.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/openpyxl-3.1.2-py39hd1e30aa_1.conda
+- **openssl** (version: 3.4.0): Apache-2.0
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.4.0-hb9d3cd8_0.conda
+- **pandas** (version: 2.1.1): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/pandas-2.1.1-py39hddac248_1.conda
+- **pip** (version: 24.3.1): MIT
+  - URL: https://conda.anaconda.org/conda-forge/noarch/pip-24.3.1-pyh8b19718_0.conda
+- **python** (version: 3.9.18): Python-2.0
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/python-3.9.18-h0755675_1_cpython.conda
+- **python-dateutil** (version: 2.9.0): Apache-2.0
+  - URL: https://conda.anaconda.org/conda-forge/noarch/python-dateutil-2.9.0-pyhd8ed1ab_0.conda
+- **python-tzdata** (version: 2024.2): Apache-2.0
+  - URL: https://conda.anaconda.org/conda-forge/noarch/python-tzdata-2024.2-pyhd8ed1ab_0.conda
+- **python_abi** (version: 3.9): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/python_abi-3.9-5_cp39.conda
+- **pytz** (version: 2024.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/noarch/pytz-2024.2-pyhd8ed1ab_0.conda
+- **readline** (version: 8.2): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/readline-8.2-h8228510_1.conda
+- **setuptools** (version: 75.3.0): MIT
+  - URL: https://conda.anaconda.org/conda-forge/noarch/setuptools-75.3.0-pyhd8ed1ab_0.conda
+- **six** (version: 1.16.0): MIT
+  - URL: https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2
+- **tk** (version: 8.6.13): TCL
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_h4845f30_101.conda
+- **tzdata** (version: 2024b): LicenseRef-Public-Domain
+  - URL: https://conda.anaconda.org/conda-forge/noarch/tzdata-2024b-hc8b5060_0.conda
+- **wheel** (version: 0.45.0): MIT
+  - URL: https://conda.anaconda.org/conda-forge/noarch/wheel-0.45.0-pyhd8ed1ab_0.conda
+- **xz** (version: 5.2.6): LGPL-2.1
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.6-h166bdaf_0.tar.bz2
+- **atk-1.0** (version: 2.38.0): LGPL-2.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/atk-1.0-2.38.0-h04ea711_2.conda
+- **bzip2** (version: 1.0.8): bzip2-1.0.6
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/bzip2-1.0.8-h4bc722e_7.conda
+- **ca-certificates** (version: 2025.1.31): ISC
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2025.1.31-hbcca054_0.conda
+- **cairo** (version: 1.16.0): LGPL
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/cairo-1.16.0-h9f066cc_1006.tar.bz2
+- **expat** (version: 2.2.10): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/expat-2.2.10-h9c3ff4c_0.tar.bz2
+- **font-ttf-dejavu-sans-mono** (version: 2.37): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/noarch/font-ttf-dejavu-sans-mono-2.37-hab24e00_0.tar.bz2
+- **fontconfig** (version: 2.13.1): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/fontconfig-2.13.1-hba837de_1005.tar.bz2
+- **fonts-conda-ecosystem** (version: 1): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/noarch/fonts-conda-ecosystem-1-0.tar.bz2
+- **fonts-conda-forge** (version: 1): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/noarch/fonts-conda-forge-1-0.tar.bz2
+- **freetype** (version: 2.12.1): GPL-2.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda
+- **fribidi** (version: 1.0.10): LGPL-2.1
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/fribidi-1.0.10-h36c2ea0_0.tar.bz2
+- **gdk-pixbuf** (version: 2.42.8): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/gdk-pixbuf-2.42.8-hff1cb4f_1.tar.bz2
+- **gettext** (version: 0.23.1): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/gettext-0.23.1-h5888daf_0.conda
+- **gettext-tools** (version: 0.23.1): GPL-3.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/gettext-tools-0.23.1-h5888daf_0.conda
+- **giflib** (version: 5.2.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/giflib-5.2.2-hd590300_0.conda
+- **graphite2** (version: 1.3.13): LGPL-2.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/graphite2-1.3.13-h59595ed_1003.conda
+- **gtk2** (version: 2.24.33): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/gtk2-2.24.33-hab0c2f8_0.tar.bz2
+- **gts** (version: 0.7.6): LGPL-2.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/gts-0.7.6-h977cf35_4.conda
+- **harfbuzz** (version: 2.7.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/harfbuzz-2.7.2-ha5b49bf_1.tar.bz2
+- **icu** (version: 67.1): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/icu-67.1-he1b5a44_0.tar.bz2
+- **jpeg** (version: 9e): IJG
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/jpeg-9e-h0b41bf4_3.conda
+- **lerc** (version: 4.0.0): Apache-2.0
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/lerc-4.0.0-h27087fc_0.tar.bz2
+- **libasprintf** (version: 0.23.1): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libasprintf-0.23.1-h8e693c7_0.conda
+- **libasprintf-devel** (version: 0.23.1): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libasprintf-devel-0.23.1-h8e693c7_0.conda
+- **libdb** (version: 6.2.32): AGPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libdb-6.2.32-h9c3ff4c_0.tar.bz2
+- **libdeflate** (version: 1.14): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libdeflate-1.14-h166bdaf_0.tar.bz2
+- **libffi** (version: 3.4.6): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libffi-3.4.6-h2dba641_0.conda
+- **libgcc** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgcc-14.2.0-h767d61c_2.conda
+- **libgcc-ng** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-14.2.0-h69a702a_2.conda
+- **libgettextpo** (version: 0.23.1): GPL-3.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgettextpo-0.23.1-h5888daf_0.conda
+- **libgettextpo-devel** (version: 0.23.1): GPL-3.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgettextpo-devel-0.23.1-h5888daf_0.conda
+- **libglib** (version: 2.80.2): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libglib-2.80.2-hf974151_0.conda
+- **libgomp** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libgomp-14.2.0-h767d61c_2.conda
+- **libiconv** (version: 1.18): LGPL-2.1-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libiconv-1.18-h4ce23a2_1.conda
+- **libltdl** (version: 2.4.3a): LGPL-2.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libltdl-2.4.3a-h5888daf_0.conda
+- **liblzma** (version: 5.6.4): 0BSD
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/liblzma-5.6.4-hb9d3cd8_0.conda
+- **liblzma-devel** (version: 5.6.4): 0BSD
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/liblzma-devel-5.6.4-hb9d3cd8_0.conda
+- **libpng** (version: 1.6.43): zlib-acknowledgement
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libpng-1.6.43-h2797004_0.conda
+- **libstdcxx** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-14.2.0-h8f9b012_2.conda
+- **libstdcxx-ng** (version: 14.2.0): GPL-3.0-only
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-ng-14.2.0-h4852527_2.conda
+- **libtool** (version: 2.5.4): GPL-2.0-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libtool-2.5.4-h5888daf_0.conda
+- **libuuid** (version: 2.38.1): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libuuid-2.38.1-h0b41bf4_0.conda
+- **libwebp** (version: 1.2.4): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libwebp-1.2.4-h522a892_0.tar.bz2
+- **libwebp-base** (version: 1.2.4): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libwebp-base-1.2.4-h166bdaf_0.tar.bz2
+- **libxcb** (version: 1.17.0): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libxcb-1.17.0-h8a09558_0.conda
+- **libxml2** (version: 2.9.10): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libxml2-2.9.10-h68273f3_2.tar.bz2
+- **libxslt** (version: 1.1.33): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libxslt-1.1.33-hf705e74_1.tar.bz2
+- **libzlib** (version: 1.2.13): Zlib
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/libzlib-1.2.13-h4ab18f5_6.conda
+- **pango** (version: 1.42.4): LGPL-2.1-or-later
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/pango-1.42.4-h69149e4_5.tar.bz2
+- **pcre2** (version: 10.43): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/pcre2-10.43-hcad00b1_0.conda
+- **perl** (version: 5.26.2): Perl
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/perl-5.26.2-h36c2ea0_1008.tar.bz2
+- **perl-aceperl** (version: 1.92): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-aceperl-1.92-pl526_2.tar.bz2
+- **perl-algorithm-munkres** (version: 0.08): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-algorithm-munkres-0.08-pl526_1.tar.bz2
+- **perl-apache-test** (version: 1.40): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-apache-test-1.40-pl526_1.tar.bz2
+- **perl-app-cpanminus** (version: 1.7044): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-app-cpanminus-1.7044-pl526_1.tar.bz2
+- **perl-appconfig** (version: 1.71): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-appconfig-1.71-pl526_1.tar.bz2
+- **perl-array-compare** (version: 3.0.1): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-array-compare-3.0.1-pl526_1.tar.bz2
+- **perl-autoloader** (version: 5.74): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-autoloader-5.74-pl526_2.tar.bz2
+- **perl-base** (version: 2.23): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-base-2.23-pl526_1.tar.bz2
+- **perl-bio-phylo** (version: 0.58): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-bio-phylo-0.58-pl5262hdfd78af_3.tar.bz2
+- **perl-bioperl-core** (version: 1.007002): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-bioperl-core-1.007002-pl5262hdfd78af_3.tar.bz2
+- **perl-business-isbn** (version: 3.004): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-business-isbn-3.004-pl526_0.tar.bz2
+- **perl-business-isbn-data** (version: 20140910.003): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-business-isbn-data-20140910.003-pl526_0.tar.bz2
+- **perl-cache-cache** (version: 1.08): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-cache-cache-1.08-pl526_0.tar.bz2
+- **perl-carp** (version: 1.38): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-carp-1.38-pl526_3.tar.bz2
+- **perl-cgi** (version: 4.44): GPL
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-cgi-4.44-pl526h14c3975_1.tar.bz2
+- **perl-class-inspector** (version: 1.34): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-class-inspector-1.34-pl526_0.tar.bz2
+- **perl-class-load** (version: 0.25): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-class-load-0.25-pl526_0.tar.bz2
+- **perl-class-load-xs** (version: 0.10): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-class-load-xs-0.10-pl526h6bb024c_2.tar.bz2
+- **perl-class-method-modifiers** (version: 2.12): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-class-method-modifiers-2.12-pl526_0.tar.bz2
+- **perl-clone** (version: 0.42): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-clone-0.42-pl526h516909a_0.tar.bz2
+- **perl-common-sense** (version: 3.74): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-common-sense-3.74-pl526_2.tar.bz2
+- **perl-compress-raw-zlib** (version: 2.087): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-compress-raw-zlib-2.087-pl526hc9558a2_0.tar.bz2
+- **perl-constant** (version: 1.33): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-constant-1.33-pl526_1.tar.bz2
+- **perl-convert-binary-c** (version: 0.78): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-convert-binary-c-0.78-pl526h6bb024c_3.tar.bz2
+- **perl-convert-binhex** (version: 1.125): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-convert-binhex-1.125-pl526_1.tar.bz2
+- **perl-crypt-rc4** (version: 2.02): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-crypt-rc4-2.02-pl526_1.tar.bz2
+- **perl-data-dumper** (version: 2.173): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-data-dumper-2.173-pl526_0.tar.bz2
+- **perl-data-optlist** (version: 0.110): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-data-optlist-0.110-pl526_2.tar.bz2
+- **perl-data-stag** (version: 0.14): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-data-stag-0.14-pl526_1.tar.bz2
+- **perl-date-format** (version: 2.30): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-date-format-2.30-pl526_2.tar.bz2
+- **perl-db-file** (version: 1.855): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-db-file-1.855-pl526h516909a_0.tar.bz2
+- **perl-dbd-sqlite** (version: 1.64): Perl
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-dbd-sqlite-1.64-pl526h516909a_0.tar.bz2
+- **perl-dbi** (version: 1.642): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-dbi-1.642-pl526_0.tar.bz2
+- **perl-devel-globaldestruction** (version: 0.14): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-devel-globaldestruction-0.14-pl526_0.tar.bz2
+- **perl-devel-overloadinfo** (version: 0.005): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-devel-overloadinfo-0.005-pl526_0.tar.bz2
+- **perl-devel-stacktrace** (version: 2.04): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-devel-stacktrace-2.04-pl526_0.tar.bz2
+- **perl-digest-hmac** (version: 1.03): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-digest-hmac-1.03-pl526_3.tar.bz2
+- **perl-digest-md5** (version: 2.55): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-digest-md5-2.55-pl526_0.tar.bz2
+- **perl-digest-perl-md5** (version: 1.9): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-digest-perl-md5-1.9-pl526_1.tar.bz2
+- **perl-digest-sha1** (version: 2.13): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-digest-sha1-2.13-pl526h6bb024c_1.tar.bz2
+- **perl-dist-checkconflicts** (version: 0.11): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-dist-checkconflicts-0.11-pl526_2.tar.bz2
+- **perl-dynaloader** (version: 1.25): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-dynaloader-1.25-pl526_1.tar.bz2
+- **perl-email-date-format** (version: 1.005): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-email-date-format-1.005-pl526_2.tar.bz2
+- **perl-encode** (version: 2.88): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-encode-2.88-pl526_1.tar.bz2
+- **perl-encode-locale** (version: 1.05): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-encode-locale-1.05-pl526_6.tar.bz2
+- **perl-error** (version: 0.17027): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-error-0.17027-pl526_1.tar.bz2
+- **perl-eval-closure** (version: 0.14): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-eval-closure-0.14-pl526h6bb024c_4.tar.bz2
+- **perl-exporter** (version: 5.72): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-exporter-5.72-pl526_1.tar.bz2
+- **perl-exporter-tiny** (version: 1.002001): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-exporter-tiny-1.002001-pl526_0.tar.bz2
+- **perl-extutils-makemaker** (version: 7.36): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-extutils-makemaker-7.36-pl526_1.tar.bz2
+- **perl-file-listing** (version: 6.04): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-file-listing-6.04-pl526_1.tar.bz2
+- **perl-file-path** (version: 2.16): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-file-path-2.16-pl526_0.tar.bz2
+- **perl-file-slurp-tiny** (version: 0.004): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-file-slurp-tiny-0.004-pl526_1.tar.bz2
+- **perl-file-temp** (version: 0.2304): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-file-temp-0.2304-pl526_2.tar.bz2
+- **perl-file-which** (version: 1.23): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-file-which-1.23-pl526_0.tar.bz2
+- **perl-font-afm** (version: 1.20): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-font-afm-1.20-pl526_2.tar.bz2
+- **perl-font-ttf** (version: 1.06): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-font-ttf-1.06-pl526_0.tar.bz2
+- **perl-gd** (version: 2.71): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-gd-2.71-pl526he860b03_0.tar.bz2
+- **perl-getopt-long** (version: 2.50): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-getopt-long-2.50-pl526_1.tar.bz2
+- **perl-graph** (version: 0.9704): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-graph-0.9704-pl526_1.tar.bz2
+- **perl-graphviz** (version: 2.24): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-graphviz-2.24-pl526h734ff71_0.tar.bz2
+- **perl-html-element-extended** (version: 1.18): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-element-extended-1.18-pl526_1.tar.bz2
+- **perl-html-entities-numbered** (version: 0.04): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-entities-numbered-0.04-pl526_1.tar.bz2
+- **perl-html-formatter** (version: 2.16): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-formatter-2.16-pl526_0.tar.bz2
+- **perl-html-parser** (version: 3.72): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-parser-3.72-pl526h6bb024c_5.tar.bz2
+- **perl-html-tableextract** (version: 2.13): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-tableextract-2.13-pl526_2.tar.bz2
+- **perl-html-tagset** (version: 3.20): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-tagset-3.20-pl526_3.tar.bz2
+- **perl-html-tidy** (version: 1.60): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-tidy-1.60-pl526_0.tar.bz2
+- **perl-html-tree** (version: 5.07): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-tree-5.07-pl526_1.tar.bz2
+- **perl-html-treebuilder-xpath** (version: 0.14): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-html-treebuilder-xpath-0.14-pl526_1.tar.bz2
+- **perl-http-cookies** (version: 6.04): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-http-cookies-6.04-pl526_0.tar.bz2
+- **perl-http-daemon** (version: 6.01): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-http-daemon-6.01-pl526_1.tar.bz2
+- **perl-http-date** (version: 6.02): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-http-date-6.02-pl526_3.tar.bz2
+- **perl-http-message** (version: 6.18): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-http-message-6.18-pl526_0.tar.bz2
+- **perl-http-negotiate** (version: 6.01): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-http-negotiate-6.01-pl526_3.tar.bz2
+- **perl-image-info** (version: 1.38): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-image-info-1.38-pl526_1.tar.bz2
+- **perl-image-size** (version: 3.300): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-image-size-3.300-pl526_2.tar.bz2
+- **perl-io-html** (version: 1.001): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-io-html-1.001-pl526_2.tar.bz2
+- **perl-io-sessiondata** (version: 1.03): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-io-sessiondata-1.03-pl526_1.tar.bz2
+- **perl-io-socket-ssl** (version: 2.066): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-io-socket-ssl-2.066-pl526_0.tar.bz2
+- **perl-io-string** (version: 1.08): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-io-string-1.08-pl526_3.tar.bz2
+- **perl-io-stringy** (version: 2.111): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-io-stringy-2.111-pl526_1.tar.bz2
+- **perl-io-tty** (version: 1.12): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-io-tty-1.12-pl526_1.tar.bz2
+- **perl-ipc-run** (version: 20180523.0): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-ipc-run-20180523.0-pl526_0.tar.bz2
+- **perl-ipc-sharelite** (version: 0.17): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-ipc-sharelite-0.17-pl526h6bb024c_1.tar.bz2
+- **perl-jcode** (version: 2.07): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-jcode-2.07-pl526_2.tar.bz2
+- **perl-json** (version: 4.02): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-json-4.02-pl526_0.tar.bz2
+- **perl-json-xs** (version: 2.34): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-json-xs-2.34-pl526h6bb024c_3.tar.bz2
+- **perl-lib** (version: 0.63): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-lib-0.63-pl526_1.tar.bz2
+- **perl-libwww-perl** (version: 6.39): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-libwww-perl-6.39-pl526_0.tar.bz2
+- **perl-libxml-perl** (version: 0.08): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-libxml-perl-0.08-pl526_2.tar.bz2
+- **perl-list-moreutils** (version: 0.428): apache_2_0
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-list-moreutils-0.428-pl526_1.tar.bz2
+- **perl-list-moreutils-xs** (version: 0.428): apache_2_0
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-list-moreutils-xs-0.428-pl526_0.tar.bz2
+- **perl-lwp-mediatypes** (version: 6.04): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-lwp-mediatypes-6.04-pl526_0.tar.bz2
+- **perl-lwp-protocol-https** (version: 6.07): Perl
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-lwp-protocol-https-6.07-pl526_4.tar.bz2
+- **perl-lwp-simple** (version: 6.15): Perl
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-lwp-simple-6.15-pl526h470a237_4.tar.bz2
+- **perl-mailtools** (version: 2.21): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-mailtools-2.21-pl526_0.tar.bz2
+- **perl-math-cdf** (version: 0.1): Public
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-math-cdf-0.1-pl526h14c3975_5.tar.bz2
+- **perl-math-derivative** (version: 1.01): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-math-derivative-1.01-pl526_0.tar.bz2
+- **perl-math-random** (version: 0.72): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-math-random-0.72-pl526h14c3975_2.tar.bz2
+- **perl-math-spline** (version: 0.02): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-math-spline-0.02-pl526_2.tar.bz2
+- **perl-mime-base64** (version: 3.15): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mime-base64-3.15-pl526_1.tar.bz2
+- **perl-mime-lite** (version: 3.030): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mime-lite-3.030-pl526_1.tar.bz2
+- **perl-mime-tools** (version: 5.508): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mime-tools-5.508-pl526_1.tar.bz2
+- **perl-mime-types** (version: 2.17): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mime-types-2.17-pl526_0.tar.bz2
+- **perl-mldbm** (version: 2.05): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mldbm-2.05-pl526_1.tar.bz2
+- **perl-module-implementation** (version: 0.09): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-module-implementation-0.09-pl526_2.tar.bz2
+- **perl-module-runtime** (version: 0.016): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-module-runtime-0.016-pl526_1.tar.bz2
+- **perl-module-runtime-conflicts** (version: 0.003): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-module-runtime-conflicts-0.003-pl526_0.tar.bz2
+- **perl-moo** (version: 2.003004): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-moo-2.003004-pl526_0.tar.bz2
+- **perl-moose** (version: 2.2011): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-moose-2.2011-pl526hf484d3e_1.tar.bz2
+- **perl-mozilla-ca** (version: 20180117): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mozilla-ca-20180117-pl526_1.tar.bz2
+- **perl-mro-compat** (version: 0.13): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-mro-compat-0.13-pl526_0.tar.bz2
+- **perl-net-http** (version: 6.19): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-net-http-6.19-pl526_0.tar.bz2
+- **perl-net-ssleay** (version: 1.88): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-net-ssleay-1.88-pl526h90d6eec_0.tar.bz2
+- **perl-ntlm** (version: 1.09): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-ntlm-1.09-pl526_4.tar.bz2
+- **perl-ole-storage_lite** (version: 0.19): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-ole-storage_lite-0.19-pl526_3.tar.bz2
+- **perl-package-deprecationmanager** (version: 0.17): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-package-deprecationmanager-0.17-pl526_0.tar.bz2
+- **perl-package-stash** (version: 0.38): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-package-stash-0.38-pl526hf484d3e_1.tar.bz2
+- **perl-package-stash-xs** (version: 0.28): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-package-stash-xs-0.28-pl526hf484d3e_1.tar.bz2
+- **perl-params-util** (version: 1.07): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-params-util-1.07-pl526h6bb024c_4.tar.bz2
+- **perl-parent** (version: 0.236): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-parent-0.236-pl526_1.tar.bz2
+- **perl-parse-recdescent** (version: 1.967015): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-parse-recdescent-1.967015-pl526_0.tar.bz2
+- **perl-pathtools** (version: 3.75): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-pathtools-3.75-pl526h14c3975_1.tar.bz2
+- **perl-pdf-api2** (version: 2.035): lgpl_2_1
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-pdf-api2-2.035-pl526_0.tar.bz2
+- **perl-pod-escapes** (version: 1.07): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-pod-escapes-1.07-pl526_1.tar.bz2
+- **perl-pod-usage** (version: 1.69): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-pod-usage-1.69-pl526_1.tar.bz2
+- **perl-postscript** (version: 0.06): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-postscript-0.06-pl526_2.tar.bz2
+- **perl-role-tiny** (version: 2.000008): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-role-tiny-2.000008-pl526_0.tar.bz2
+- **perl-scalar-list-utils** (version: 1.52): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-scalar-list-utils-1.52-pl526h516909a_0.tar.bz2
+- **perl-set-scalar** (version: 1.29): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-set-scalar-1.29-pl526_2.tar.bz2
+- **perl-soap-lite** (version: 1.19): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-soap-lite-1.19-pl526_1.tar.bz2
+- **perl-socket** (version: 2.027): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-socket-2.027-pl526_1.tar.bz2
+- **perl-sort-naturally** (version: 1.03): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sort-naturally-1.03-pl526_2.tar.bz2
+- **perl-spreadsheet-parseexcel** (version: 0.65): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-spreadsheet-parseexcel-0.65-pl526_2.tar.bz2
+- **perl-spreadsheet-writeexcel** (version: 2.40): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-spreadsheet-writeexcel-2.40-pl526_2.tar.bz2
+- **perl-statistics-descriptive** (version: 3.0702): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-statistics-descriptive-3.0702-pl526_0.tar.bz2
+- **perl-storable** (version: 3.15): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-storable-3.15-pl526h14c3975_0.tar.bz2
+- **perl-sub-exporter** (version: 0.987): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sub-exporter-0.987-pl526_2.tar.bz2
+- **perl-sub-exporter-progressive** (version: 0.001013): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sub-exporter-progressive-0.001013-pl526_0.tar.bz2
+- **perl-sub-identify** (version: 0.14): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sub-identify-0.14-pl526h14c3975_0.tar.bz2
+- **perl-sub-install** (version: 0.928): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sub-install-0.928-pl526_2.tar.bz2
+- **perl-sub-name** (version: 0.21): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sub-name-0.21-pl526_1.tar.bz2
+- **perl-sub-quote** (version: 2.006003): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-sub-quote-2.006003-pl526_1.tar.bz2
+- **perl-svg** (version: 2.84): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-svg-2.84-pl526_0.tar.bz2
+- **perl-svg-graph** (version: 0.02): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-svg-graph-0.02-pl526_3.tar.bz2
+- **perl-task-weaken** (version: 1.06): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-task-weaken-1.06-pl526_0.tar.bz2
+- **perl-template-toolkit** (version: 2.26): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-template-toolkit-2.26-pl526_1.tar.bz2
+- **perl-test** (version: 1.26): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-test-1.26-pl526_1.tar.bz2
+- **perl-test-harness** (version: 3.42): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-test-harness-3.42-pl526_0.tar.bz2
+- **perl-test-leaktrace** (version: 0.16): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-test-leaktrace-0.16-pl526h14c3975_2.tar.bz2
+- **perl-test-requiresinternet** (version: 0.05): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-test-requiresinternet-0.05-pl526_0.tar.bz2
+- **perl-tie-ixhash** (version: 1.23): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-tie-ixhash-1.23-pl526_2.tar.bz2
+- **perl-time-hires** (version: 1.9760): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-time-hires-1.9760-pl526h14c3975_1.tar.bz2
+- **perl-time-local** (version: 1.28): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-time-local-1.28-pl526_1.tar.bz2
+- **perl-timedate** (version: 2.30): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-timedate-2.30-pl526_1.tar.bz2
+- **perl-tree-dag_node** (version: 1.31): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-tree-dag_node-1.31-pl526_0.tar.bz2
+- **perl-try-tiny** (version: 0.30): mit
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-try-tiny-0.30-pl526_1.tar.bz2
+- **perl-type-tiny** (version: 1.004004): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-type-tiny-1.004004-pl526_0.tar.bz2
+- **perl-types-serialiser** (version: 1.0): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-types-serialiser-1.0-pl526_2.tar.bz2
+- **perl-unicode-map** (version: 0.112): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-unicode-map-0.112-pl526h6bb024c_3.tar.bz2
+- **perl-uri** (version: 1.76): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-uri-1.76-pl526_0.tar.bz2
+- **perl-www-robotrules** (version: 6.02): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-www-robotrules-6.02-pl526_3.tar.bz2
+- **perl-xml-dom** (version: 1.46): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-dom-1.46-pl526_0.tar.bz2
+- **perl-xml-dom-xpath** (version: 0.14): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-dom-xpath-0.14-pl526_1.tar.bz2
+- **perl-xml-filter-buffertext** (version: 1.01): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-filter-buffertext-1.01-pl526_2.tar.bz2
+- **perl-xml-libxml** (version: 2.0132): Perl
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-libxml-2.0132-pl526h7ec2d77_1.tar.bz2
+- **perl-xml-libxslt** (version: 1.94): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-libxslt-1.94-pl526_1.tar.bz2
+- **perl-xml-namespacesupport** (version: 1.12): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-namespacesupport-1.12-pl526_0.tar.bz2
+- **perl-xml-parser** (version: 2.44): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-parser-2.44-pl526h4e0c4b3_7.tar.bz2
+- **perl-xml-regexp** (version: 0.04): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-regexp-0.04-pl526_2.tar.bz2
+- **perl-xml-sax** (version: 1.02): unknown
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-xml-sax-1.02-pl526_0.tar.bz2
+- **perl-xml-sax-base** (version: 1.09): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-sax-base-1.09-pl526_0.tar.bz2
+- **perl-xml-sax-expat** (version: 0.51): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-sax-expat-0.51-pl526_3.tar.bz2
+- **perl-xml-sax-writer** (version: 0.57): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-sax-writer-0.57-pl526_0.tar.bz2
+- **perl-xml-simple** (version: 2.25): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-simple-2.25-pl526_1.tar.bz2
+- **perl-xml-twig** (version: 3.52): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-twig-3.52-pl526_2.tar.bz2
+- **perl-xml-writer** (version: 0.625): unrestricted
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-writer-0.625-pl526_2.tar.bz2
+- **perl-xml-xpath** (version: 1.44): artistic_2
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-xpath-1.44-pl526_0.tar.bz2
+- **perl-xml-xpathengine** (version: 0.14): unknown
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xml-xpathengine-0.14-pl526_2.tar.bz2
+- **perl-xsloader** (version: 0.24): perl_5
+  - URL: https://conda.anaconda.org/bioconda/linux-64/perl-xsloader-0.24-pl526_0.tar.bz2
+- **perl-yaml** (version: 1.29): perl_5
+  - URL: https://conda.anaconda.org/bioconda/noarch/perl-yaml-1.29-pl526_0.tar.bz2
+- **pixman** (version: 0.44.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/pixman-0.44.2-h29eaf8c_0.conda
+- **pthread-stubs** (version: 0.4): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/pthread-stubs-0.4-hb9d3cd8_1002.conda
+- **tidyp** (version: 1.04): BSD-like
+  - URL: https://conda.anaconda.org/bioconda/linux-64/tidyp-1.04-h7b50bb2_7.tar.bz2
+- **xorg-libice** (version: 1.1.2): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libice-1.1.2-hb9d3cd8_0.conda
+- **xorg-libsm** (version: 1.2.6): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libsm-1.2.6-he73a12e_0.conda
+- **xorg-libx11** (version: 1.8.12): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libx11-1.8.12-h4f16b4b_0.conda
+- **xorg-libxau** (version: 1.0.12): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libxau-1.0.12-hb9d3cd8_0.conda
+- **xorg-libxdmcp** (version: 1.1.5): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libxdmcp-1.1.5-hb9d3cd8_0.conda
+- **xorg-libxext** (version: 1.3.6): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libxext-1.3.6-hb9d3cd8_0.conda
+- **xorg-libxpm** (version: 3.5.17): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libxpm-3.5.17-hb9d3cd8_1.conda
+- **xorg-libxrender** (version: 0.9.12): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libxrender-0.9.12-hb9d3cd8_0.conda
+- **xorg-libxt** (version: 1.3.1): MIT
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xorg-libxt-1.3.1-hb9d3cd8_0.conda
+- **xz** (version: 5.6.4): 0BSD
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xz-5.6.4-hbcc6ac9_0.conda
+- **xz-gpl-tools** (version: 5.6.4): 0BSD
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xz-gpl-tools-5.6.4-hbcc6ac9_0.conda
+- **xz-tools** (version: 5.6.4): 0BSD
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/xz-tools-5.6.4-hb9d3cd8_0.conda
+- **zlib** (version: 1.2.13): Zlib
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/zlib-1.2.13-h4ab18f5_6.conda
+- **zstd** (version: 1.5.6): BSD-3-Clause
+  - URL: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.6-ha6fb4c9_0.conda

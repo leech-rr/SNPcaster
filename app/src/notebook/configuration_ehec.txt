@@ -1,0 +1,7 @@
+Genome size [Mbp]:	5.5
+Coverage threshold:	40
+Maximum number of contigs:	1000
+Minimum genome size (Mbp):	4
+Maximum genome size (Mbp):	6.5
+Minimum completeness (%):	98
+Maximum contamination (%):	2
