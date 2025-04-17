@@ -16,7 +16,8 @@ RUN apt-get update &&\
     unzip \
 	sed \
     gawk \
-    rename &&\
+    rename \
+    rsync &&\
 	apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
 

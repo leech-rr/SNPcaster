@@ -22,10 +22,7 @@ else
 fi
 
 SNPCASTER_HOME_DIR=/home/jovyan/snpcaster
-NOTEBOOK_DIR="${SNPCASTER_HOME_DIR}/notebook"
-if [ ! -d "${NOTEBOOK_DIR}" ]; then
-    cp -pvr /usr/local/src/snpcaster/notebook "${SNPCASTER_HOME_DIR}/"
-fi
+rsync -av --update /usr/local/src/snpcaster/notebook "${SNPCASTER_HOME_DIR}/"
 
 export HOME="${SNPCASTER_HOME_DIR}"
 chown -R $LOCAL_UID:$LOCAL_GID "${SNPCASTER_HOME_DIR}"
