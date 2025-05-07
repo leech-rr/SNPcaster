@@ -16,7 +16,8 @@ RUN apt-get update &&\
     unzip \
 	sed \
     gawk \
-    rename &&\
+    rename \
+    rsync &&\
 	apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
 
@@ -75,3 +76,5 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
     ln -s /usr/local/src/snpcaster/snpcaster/n_combine.sh /usr/local/bin/n_combine.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/repeat_detect.sh /usr/local/bin/repeat_detect.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/iqtree.sh /usr/local/bin/iqtree.sh
+
+RUN find /usr/local/src/snpcaster -type f -exec chmod +x {} \;
