@@ -79,3 +79,4 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
 
 # # ----------    Create notebook folder   ----------
 COPY notebook/ /home/jovyan/snpcaster/notebook/
+RUN find /usr/local/src/snpcaster -type f -exec chmod +x {} \;
