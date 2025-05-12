@@ -56,7 +56,7 @@ RUN mamba env update -f=conda_env_base.yml
 RUN chmod +x /usr/local/src/snpcaster/setup/conda/conda_env_create.sh
 RUN ./conda_env_create.sh conda_env
     
-# # ----------    Create a user in entrypoint    ----------
+# # ----------    Set an entrypoint    ----------
 RUN apt-get update && apt-get -y install gosu
 COPY setup/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
@@ -79,4 +79,13 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
 
 # # ----------    Create notebook folder   ----------
 COPY notebook/ /home/jovyan/snpcaster/notebook/
-RUN find /usr/local/src/snpcaster -type f -exec chmod +x {} \;
+
+# # ----------    Grant execution permission   ----------
+RUN find /usr/local/src -type f -exec chmod +x {} \;
+RUN find /usr/local/bin -type f -exec chmod +x {} \;
+
+# # ----------    Create mounted folder   ----------
+RUN mkdir /home/jovyan/snpcaster/notebook/project
+WORKDIR /home/jovyan/snpcaster/notebook/project
+RUN useradd -m -u 1001 snpcaster
+RUN chown -R snpcaster:snpcaster /home/jovyan/snpcaster/notebook/project
