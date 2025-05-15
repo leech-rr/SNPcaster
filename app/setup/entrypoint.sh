@@ -1,5 +1,5 @@
 #!/bin/bash
-MOUNTED_DIR=${MY_MOUNTED_DIR:-/home/jovyan/snpcaster/notebook/project}
+MOUNTED_DIR=${MY_MOUNTED_DIR:-/home/snpcaster/notebook/project}
 echo "MOUNTED_DIR: $MOUNTED_DIR"
 
 # ホストのnotebooksのUIDとGIDを取得
