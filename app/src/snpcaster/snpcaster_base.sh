@@ -90,7 +90,6 @@ function prepare4snpcaster() {
     # Skip if pre-executed SNP folder exists
     if [ -d "${strain}" ]; then
       cp -pvr "${strain}" "${OUTPUT_DIR}"/
-      rename 's/\.fasta$/.fa/' "${OUTPUT_DIR}/${strain}"/*.fasta
       echo "${strain}" >> "${BACTSNP_SKIP_LIST}"
       continue
     fi

@@ -188,9 +188,5 @@ fi
 if [ "${EXEC_GUBBINS}" -eq 1 ]; then
   rename_fasta_extension_in_directories "${GUBBINS_OUTDIR}" "${RESULTS_WITH_GUBBINS_OUTDIR}"
 fi
-# Rename fasta file in BactSNP output
-for strain in $(extract_strain_names "${BACTSNP_LIST}"); do
-  rename_fasta_extension "${strain}"
-done
 
 echo "Done!"
