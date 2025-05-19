@@ -77,15 +77,17 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
     ln -s /usr/local/src/snpcaster/snpcaster/repeat_detect.sh /usr/local/bin/repeat_detect.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/iqtree.sh /usr/local/bin/iqtree.sh
 
-# # ----------    Create notebook folder   ----------
-COPY notebook/ /home/jovyan/snpcaster/notebook/
-
 # # ----------    Grant execution permission   ----------
 RUN find /usr/local/src -type f -exec chmod +x {} \;
 RUN find /usr/local/bin -type f -exec chmod +x {} \;
+    
+# # ----------    Create SNPcaster user   ----------
+RUN useradd -m -u 1001 snpcaster
+
+# # ----------    Create notebook folder   ----------
+COPY notebook/ /home/snpcaster/notebook/
 
 # # ----------    Create mounted folder   ----------
-RUN mkdir /home/jovyan/snpcaster/notebook/project
-WORKDIR /home/jovyan/snpcaster/notebook/project
-RUN useradd -m -u 1001 snpcaster
-RUN chown -R snpcaster:snpcaster /home/jovyan/snpcaster/notebook/project
+RUN mkdir /home/snpcaster/notebook/project
+RUN chown -R snpcaster:snpcaster /home/snpcaster/notebook/project
+WORKDIR /home/snpcaster/notebook/project
