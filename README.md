@@ -65,10 +65,6 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 - SNPcaster
   - SNP analysis + Phylogenetic tree construction
 
-## Workshop
-A workshop on how to use SNPcaster is planned. <br>
-Once the details are confirmed, we will announce it on [Github Discussions](https://github.com/leech-rr/SNPcaster/discussions/8).
-
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
 Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-20_SNPcaster_Installation_Operation_Manual.pdf). Please refer to it if you have any questions.
