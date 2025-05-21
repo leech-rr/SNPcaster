@@ -83,13 +83,13 @@ function prepare4snpcaster() {
   [ -f "${BACTSNP_SKIP_LIST}" ] && rm -f "${BACTSNP_SKIP_LIST}"
   [ -f "${NOT_EXIST_LIST}" ] && rm -f "${NOT_EXIST_LIST}"
 
-  touch $BACTSNP_SKIP_LIST
+  touch "${BACTSNP_LIST}"
+  touch "${BACTSNP_SKIP_LIST}"
   local strain
   for strain in $(cat "${LIST_FULL}"); do
     # Skip if pre-executed SNP folder exists
     if [ -d "${strain}" ]; then
       cp -pvr "${strain}" "${OUTPUT_DIR}"/
-      rename 's/\.fasta$/.fa/' "${OUTPUT_DIR}/${strain}"/*.fasta
       echo "${strain}" >> "${BACTSNP_SKIP_LIST}"
       continue
     fi
@@ -144,13 +144,13 @@ function prepare4snpcaster() {
     exit 1
   fi
 
-  cp -v "${LIST_FULL}" "${OUTPUT_DIR}"/ || exit 1
-  cp -v "${REFERENCE_FILE}" "${OUTPUT_DIR}"/ || exit 1
+  cp -pv "${LIST_FULL}" "${OUTPUT_DIR}"/ || exit 1
+  cp -pv "${REFERENCE_FILE}" "${OUTPUT_DIR}"/ || exit 1
   if [ -n "${MASK_FILE}" ]; then
-    cp -v "${MASK_FILE}" "${OUTPUT_DIR}"/ || exit 1
+    cp -pv "${MASK_FILE}" "${OUTPUT_DIR}"/ || exit 1
   fi
-  [ -f "${BACTSNP_LIST}" ] && mv -v "${BACTSNP_LIST}" "${OUTPUT_DIR}"/
-  [ -f "${BACTSNP_SKIP_LIST}" ] && mv -v "${BACTSNP_SKIP_LIST}" "${OUTPUT_DIR}"/
+  mv -v "${BACTSNP_LIST}" "${OUTPUT_DIR}"/
+  mv -v "${BACTSNP_SKIP_LIST}" "${OUTPUT_DIR}"/
 }
 
 function process_bactsnp() {
@@ -160,15 +160,18 @@ function process_bactsnp() {
   local THREAD=$4
   local JOBS=$5
 
-  echo '===================BactSNP==================='
-  if [ -f "${BACTSNP_LIST}" ]; then
-    [ -d "${BACTSNP_OUTDIR}" ] && rm -r "${BACTSNP_OUTDIR}"
-    which bactsnp
-    echo "bactsnp -r ${REFERENCE_FILE} --fastq_list ${BACTSNP_LIST} --allele_freq ${ALLELE_FREQ} -t ${THREAD} -j ${JOBS} -o ${BACTSNP_OUTDIR}"
-    source activate bactsnp-dependencies
-    bactsnp -r "${REFERENCE_FILE}" --fastq_list "${BACTSNP_LIST}" --allele_freq "${ALLELE_FREQ}" -t "${THREAD}" -j "${JOBS}" -o "${BACTSNP_OUTDIR}"
-    conda deactivate
+  echo '=================== BactSNP ==================='
+  if [ ! -s "${BACTSNP_LIST}" ]; then
+    echo "BactSNP is skipped, as the execution results for all strains are provided."
+    return 0
   fi
+
+  [ -d "${BACTSNP_OUTDIR}" ] && rm -r "${BACTSNP_OUTDIR}"
+  which bactsnp
+  echo "bactsnp -r ${REFERENCE_FILE} --fastq_list ${BACTSNP_LIST} --allele_freq ${ALLELE_FREQ} -t ${THREAD} -j ${JOBS} -o ${BACTSNP_OUTDIR}"
+  source activate bactsnp-dependencies
+  bactsnp -r "${REFERENCE_FILE}" --fastq_list "${BACTSNP_LIST}" --allele_freq "${ALLELE_FREQ}" -t "${THREAD}" -j "${JOBS}" -o "${BACTSNP_OUTDIR}"
+  conda deactivate
 
   local PSEUDO_GENOME_DIR="${BACTSNP_OUTDIR}"/pseudo_genome
   local TITLE="#CHROM\tPOS\tID\tREF\tALT"
@@ -190,7 +193,7 @@ function process_snippy() {
   local STRAIN_LIST=$1
   local REFERENCE_FILE=$2
 
-  echo '===================Snippy==================='
+  echo '=================== Snippy ==================='
   local my_snps=""
   for strain in $(cat "${STRAIN_LIST}"); do
     my_snps="${my_snps}"" ${strain}"
@@ -214,7 +217,7 @@ function postprocess_snippy() {
     using_mask_file=1
   fi
 
-  echo '===================Snippy results conversion ==================='
+  echo '=================== Snippy results conversion ==================='
   # substitution (core.tab --> snp_position.csv)
   sed -e "s/\\t/,/g" "${SNIPPY_OUTDIR}"/core.tab > "${SNP_POSITION_FILE}"
   sed -i -e "s/,LOCUS_TAG,GENE,PRODUCT,EFFECT//" -e "s/,,,,\$//g" "${SNP_POSITION_FILE}"

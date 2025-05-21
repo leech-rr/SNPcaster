@@ -16,7 +16,8 @@ RUN apt-get update &&\
     unzip \
 	sed \
     gawk \
-    rename &&\
+    rename \
+    rsync &&\
 	apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
 
@@ -55,7 +56,7 @@ RUN mamba env update -f=conda_env_base.yml
 RUN chmod +x /usr/local/src/snpcaster/setup/conda/conda_env_create.sh
 RUN ./conda_env_create.sh conda_env
     
-# # ----------    Create a user in entrypoint    ----------
+# # ----------    Set an entrypoint    ----------
 RUN apt-get update && apt-get -y install gosu
 COPY setup/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
@@ -75,3 +76,18 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
     ln -s /usr/local/src/snpcaster/snpcaster/n_combine.sh /usr/local/bin/n_combine.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/repeat_detect.sh /usr/local/bin/repeat_detect.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/iqtree.sh /usr/local/bin/iqtree.sh
+
+# # ----------    Grant execution permission   ----------
+RUN find /usr/local/src -type f -exec chmod +x {} \;
+RUN find /usr/local/bin -type f -exec chmod +x {} \;
+    
+# # ----------    Create SNPcaster user   ----------
+RUN useradd -m -u 1001 snpcaster
+
+# # ----------    Create notebook folder   ----------
+COPY notebook/ /home/snpcaster/notebook/
+
+# # ----------    Create mounted folder   ----------
+RUN mkdir /home/snpcaster/notebook/project
+RUN chown -R snpcaster:snpcaster /home/snpcaster/notebook/project
+WORKDIR /home/snpcaster/notebook/project

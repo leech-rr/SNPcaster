@@ -1,35 +1,41 @@
 #!/bin/bash
+MOUNTED_DIR=${MY_MOUNTED_DIR:-/home/snpcaster/notebook/project}
+echo "MOUNTED_DIR: $MOUNTED_DIR"
 
-USER_ID=${LOCAL_UID:-9001}
-GROUP_ID=${LOCAL_GID:-9001}
-USER_NAME=user
+# ホストのnotebooksのUIDとGIDを取得
+HOST_UID=$(stat -c %u "${MOUNTED_DIR}")
+HOST_GID=$(stat -c %g "${MOUNTED_DIR}")
 
-echo "Starting with UID : $USER_ID, GID: $GROUP_ID"
-# UIDの確認：なかったら新しいユーザーを作成
-if cat /etc/passwd | grep ${USER_ID}:${GROUP_ID} 1>/dev/null 2>&1 ; then
-    echo "UID '${USER_ID}' already exists"
-	USER_NAME=$(cat /etc/passwd | grep ${USER_ID}:${GROUP_ID} | awk -F ':' '{print $1}')
+# 既存ユーザーを検索
+EXISTING_USER=$(getent passwd "$HOST_UID" | cut -d: -f1)
+echo "EXISTING_USER: $EXISTING_USER"
+if [ -n "$EXISTING_USER" ]; then
+    # 既存ユーザーがいればそのユーザー
+    EXEC_USER="$EXISTING_USER"
 else
-    useradd -u ${USER_ID} -o -m ${USER_NAME}
+    # いなければsnpcasterのUIDを変更
+    usermod -u "$HOST_UID" snpcaster || true
+    EXEC_USER="snpcaster"
 fi
-# GIDの確認：なかったら新しいグループを作成、ある場合は既存グループに所属
-if cat /etc/group | grep ${GROUP_ID} 1>/dev/null 2>&1 ; then
-    echo "GID '${GROUP_ID}' already exists"
-	GROUP_NAME=$(cat /etc/group | grep :${GROUP_ID}: | awk -F ':' '{print $1}')
-	usermod -G ${GROUP_NAME} ${USER_NAME} 
+
+# 既存グループを検索
+EXISTING_GROUP=$(getent group "$HOST_GID" | cut -d: -f1)
+echo "EXISTING_GROUP: $EXISTING_GROUP"
+if [ -n "$EXISTING_GROUP" ]; then
+    # 既存グループがあればそのグループ
+    EXEC_GROUP="$EXISTING_GROUP"
 else
-    groupmod -g ${GROUP_ID} ${USER_NAME}
+    # いなければsnpcasterのGIDを変更
+    groupmod -g "$HOST_GID" snpcaster || true
+    EXEC_GROUP="snpcaster"
 fi
 
-SNPCASTER_HOME_DIR=/home/jovyan/snpcaster
-NOTEBOOK_DIR="${SNPCASTER_HOME_DIR}/notebook"
-if [ ! -d "${NOTEBOOK_DIR}" ]; then
-    cp -pvr /usr/local/src/snpcaster/notebook "${SNPCASTER_HOME_DIR}/"
-fi
+# ユーザーのプライマリグループを設定
+usermod -g "$EXEC_GROUP" "$EXEC_USER"
 
-export HOME="${SNPCASTER_HOME_DIR}"
-chown -R $LOCAL_UID:$LOCAL_GID "${SNPCASTER_HOME_DIR}"
-chown -R $LOCAL_UID:$LOCAL_GID /usr/local
+# パーミッションを調整
+chown -R "$EXEC_USER:$EXEC_GROUP" "$MOUNTED_DIR"
 
-exec /usr/sbin/gosu ${USER_NAME} "$@"
-
+# コマンド実行
+echo "Starting with UID: $HOST_UID, GID: $HOST_GID as USER: $EXEC_USER"
+exec gosu "$EXEC_USER" "$@"

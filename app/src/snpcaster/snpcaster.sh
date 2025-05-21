@@ -181,14 +181,15 @@ fi
 rm -v matching_list.txt core.ref.fa
 
 # Rename fasta file extension to ${EXT}
-echo '===================Rename .fa and .fas to .fasta ==================='
-rename_fasta_extension_in_directories "${BACTSNP_OUTDIR}" "${SNIPPY_OUTDIR}" "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"
+echo '=================== Rename .fa and .fas to .fasta ==================='
+if [ -d "${BACTSNP_OUTDIR}" ]; then
+  rename_fasta_extension_in_directories "${BACTSNP_OUTDIR}"
+fi
+
+rename_fasta_extension_in_directories "${SNIPPY_OUTDIR}" "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"
+
 if [ "${EXEC_GUBBINS}" -eq 1 ]; then
   rename_fasta_extension_in_directories "${GUBBINS_OUTDIR}" "${RESULTS_WITH_GUBBINS_OUTDIR}"
 fi
-# Rename fasta file in BactSNP output
-for strain in $(extract_strain_names "${BACTSNP_LIST}"); do
-  rename_fasta_extension "${strain}"
-done
 
 echo "Done!"

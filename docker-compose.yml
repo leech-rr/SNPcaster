@@ -17,5 +17,5 @@ services:
       - "59829:8888"
     restart: always
     volumes:
-      - ./data:/home/jovyan/snpcaster
-    command: jupyter-lab --allow-root --ip=* --port=8888 --no-browser --NotebookApp.token='' --notebook-dir=/home/jovyan/snpcaster/notebook
+      - ./project:/home/snpcaster/notebook/project
+    command: jupyter-lab --allow-root --ip=* --port=8888 --no-browser --NotebookApp.token='' --notebook-dir=/home/snpcaster/notebook
