@@ -6,30 +6,6 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 - SNPcaster
   - SNP analysis + Phylogenetic tree construction
 
-## Release Notifications
-To receive notifications about new version releases of SNPcaster, configure your GitHub account to receive release notifications.  
-Follow these steps:  
-- If you don’t have a GitHub account, create one (it’s free).  
-  - [Account Creation Guide (GitHub Official)](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)  
-- [Sign in to GitHub](https://github.com/login).  
-- Visit the [SNPcaster page](https://github.com/leech-rr/SNPcaster).  
-- Click **Watch** > **Custom** in the top-right corner of the page.  
-
-<div align="left">  
-  <img src="/doc/readme/images/watch_github1.png" alt="GitHub Watch button setup" style="width: 400px; border: 1px solid gray;">  
-</div>
-
-- Select **Releases** and click **Apply**.  
-
-<div align="left">  
-  <img src="/doc/readme/images/watch_github2.png" alt="Selecting Releases in GitHub Watch settings" style="width: 400px; border: 1px solid gray;">  
-</div>  
-
-- You will now receive notifications at the email address registered with your GitHub account whenever a new version is released.
-
-### If You’re Not Getting Notifications
-- If notifications aren’t arriving, check the [GitHub Official Documentation](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository) for guidance.
-
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
 Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-20_SNPcaster_Installation_Operation_Manual.pdf). Please refer to it if you have any questions.
@@ -71,6 +47,30 @@ When describing methods using this program in papers or other publications, plea
 ```
 Lee K, Iguchi A, Uda K, Matsumura S, Miyairi I, Ishikura K, Ohnishi M, Seto J, Ishikawa K, Konishi N, Obata H, Furukawa I, Nagaoka H, Morinushi H, Hama N, Nomoto R, Nakajima H, Kariya H, Hamasaki M, Iyoda S. 2021. Whole-genome sequencing of Shiga toxin-producing Escherichia coli OX18 from a fatal hemolytic uremic syndrome case. Emerg Infect Dis 27:1509-1512.
 ```
+
+## Release Notifications
+To receive notifications about new version releases of SNPcaster, configure your GitHub account to receive release notifications.  
+Follow these steps:  
+- If you don’t have a GitHub account, create one (it’s free).  
+  - [Account Creation Guide (GitHub Official)](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)  
+- [Sign in to GitHub](https://github.com/login).  
+- Visit the [SNPcaster page](https://github.com/leech-rr/SNPcaster).  
+- Click **Watch** > **Custom** in the top-right corner of the page.  
+
+<div align="left">  
+  <img src="/doc/readme/images/watch_github1.png" alt="GitHub Watch button setup" style="width: 400px; border: 1px solid gray;">  
+</div>
+
+- Select **Releases** and click **Apply**.  
+
+<div align="left">  
+  <img src="/doc/readme/images/watch_github2.png" alt="Selecting Releases in GitHub Watch settings" style="width: 400px; border: 1px solid gray;">  
+</div>  
+
+- You will now receive notifications at the email address registered with your GitHub account whenever a new version is released.
+
+### If You’re Not Getting Notifications
+- If notifications aren’t arriving, check the [GitHub Official Documentation](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository) for guidance.
 
 ## License
 SNPcaster is licensed under [GPL v3.0](/COPYING).

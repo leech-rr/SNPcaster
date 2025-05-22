@@ -6,30 +6,6 @@ SNPcasterは次世代シーケンサーから得たショートリードデー�
 - SNPcaster
   - SNP解析 + 系統樹作成
 
-## リリース通知について
-SNPcasterの新バージョンリリースの通知を受け取りたい方は、GitHubからリリース通知を受信できるように設定してください。<br>
-設定方法は以下の通りです。
-- GitHubアカウントを持っていなければ、作成してください(無料)。
-  - [作成手順(GitHub公式)](https://docs.github.com/ja/get-started/start-your-journey/creating-an-account-on-github)
-- [Githubにサインイン](https://github.com/login)します。
-- [SNPcasterのページ](https://github.com/leech-rr/SNPcaster)にアクセスします。
-- 画面右上にある「Watch」 > 「Custom」をクリックします。
-
-<div align="left">
-  <img src="/doc/readme/images/watch_github1.png" alt="Watchの設定" style="width: 400px; border: 1px solid gray;">
-</div>
-
-- 「Releases」を選択して、「Apply」をクリックします。
-
-<div align="left">
-  <img src="/doc/readme/images/watch_github2.png" alt="WatchでReleasesの選択" style="width: 400px; border: 1px solid gray;">
-</div>
-
-- これで、新バージョンがリリースされた際に、githubに登録したEメールアドレス宛てに通知が届くようになります。
-
-### 通知が届かない場合
-- 通知設定がうまくいかない場合は、[GitHub公式ドキュメント](https://docs.github.com/ja/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository)をご確認ください。
-
 ## インストール方法
 以下の手順でSNPcasterを起動してください。<br>
 詳細なインストール手順や使い方は[マニュアル](/doc/manual/2025-05-20_SNPcaster_インストール_操作マニュアル.pdf)に記載しています。ご不明点がある場合はそちらをご覧ください。
@@ -71,6 +47,30 @@ Dockerのインストール方法などの詳細は、[マニュアル](/doc/man
 ```
 Lee K, Iguchi A, Uda K, Matsumura S, Miyairi I, Ishikura K, Ohnishi M, Seto J, Ishikawa K, Konishi N, Obata H, Furukawa I, Nagaoka H, Morinushi H, Hama N, Nomoto R, Nakajima H, Kariya H, Hamasaki M, Iyoda S. 2021. Whole-genome sequencing of Shiga toxin-producing Escherichia coli OX18 from a fatal hemolytic uremic syndrome case. Emerg Infect Dis 27:1509-1512.
 ```
+
+## リリース通知について
+SNPcasterの新バージョンリリースの通知を受け取りたい方は、GitHubからリリース通知を受信できるように設定してください。<br>
+設定方法は以下の通りです。
+- GitHubアカウントを持っていなければ、作成してください(無料)。
+  - [作成手順(GitHub公式)](https://docs.github.com/ja/get-started/start-your-journey/creating-an-account-on-github)
+- [Githubにサインイン](https://github.com/login)します。
+- [SNPcasterのページ](https://github.com/leech-rr/SNPcaster)にアクセスします。
+- 画面右上にある「Watch」 > 「Custom」をクリックします。
+
+<div align="left">
+  <img src="/doc/readme/images/watch_github1.png" alt="Watchの設定" style="width: 400px; border: 1px solid gray;">
+</div>
+
+- 「Releases」を選択して、「Apply」をクリックします。
+
+<div align="left">
+  <img src="/doc/readme/images/watch_github2.png" alt="WatchでReleasesの選択" style="width: 400px; border: 1px solid gray;">
+</div>
+
+- これで、新バージョンがリリースされた際に、githubに登録したEメールアドレス宛てに通知が届くようになります。
+
+### 通知が届かない場合
+- 通知設定がうまくいかない場合は、[GitHub公式ドキュメント](https://docs.github.com/ja/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository)をご確認ください。
 
 ## License
 SNPcasterは[GPL v3.0](/COPYING)でライセンスされています。
