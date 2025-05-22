@@ -1,7 +1,7 @@
 # SNPcaster
 **English version is [here](#snpcasterenglish)**<br>
-SNPcasterは次世代シーケンサーから得たショートリードデータに対し、以下の処理を行う解析パイプラインです。
-- Grape
+SNPcasterは次世代シーケンサーから得たショートリードデータに対し、以下の処理を行う解析パイプラインです。次の二つのプログラムから構成されています。
+- Grape_qc_assembly
   - 品質チェック + アセンブリ
 - SNPcaster
   - SNP解析 + 系統樹作成
@@ -59,8 +59,8 @@ SNPcasterは[GPL v3.0](/COPYING)でライセンスされています。
 問題や質問がある場合は、[GitHub Issuesページ](https://github.com/leech-rr/SNPcaster/issues)を確認してください。
 
 # SNPcaster(English)
-SNPcaster is an analysis pipeline that performs the following processes on short-read data obtained from next-generation sequencers.
-- Grape
+SNPcaster is an analysis pipeline that performs the following processes on short-read data obtained from next-generation sequencers.The system is composed of the following two programs.
+- Grape_qc_assembly
   - Quality check + Assembly
 - SNPcaster
   - SNP analysis + Phylogenetic tree construction
