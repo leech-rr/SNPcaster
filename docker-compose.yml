@@ -12,7 +12,8 @@ services:
         - https_proxy=$HTTPS_PROXY
     init: true
     env_file:
-     - .env
+      - path: .env
+        required: false
     ports:
       - "59829:8888"
     restart: always
