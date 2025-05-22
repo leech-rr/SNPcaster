@@ -25,7 +25,8 @@ source activate iqtree
 iqtree -s $INPUT -nt AUTO -bb $BB
 conda deactivate
 
-# 
 OUT=iqtree_results_`date +%Y%m%d_%H%M%S`
 mkdir ${OUT}
 mv ${INPUT}.* ${OUT}/
+
+cp -pv "${OUT}"/final_snp.fasta.contree "${OUT}"/final_snp.fasta.contree.nwk
