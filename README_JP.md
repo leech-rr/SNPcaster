@@ -43,7 +43,7 @@ Dockerのインストール方法などの詳細は、[マニュアル](/doc/man
 [Create Project](http://localhost:59829/lab/tree/CreateProject_jp.ipynb)から新規のプロジェクトを作成して解析を行ってください。
 
 ## 引用
-論文等で本プログラムを用いた方法を記載する際には、次の論文をご参照ください。
+論文等で本プログラムを用いた方法を記載する際には、GitHub page (https://github.com/leech-rr/SNPcaster)または次の論文をご参照ください。
 ```
 Lee K, Iguchi A, Uda K, Matsumura S, Miyairi I, Ishikura K, Ohnishi M, Seto J, Ishikawa K, Konishi N, Obata H, Furukawa I, Nagaoka H, Morinushi H, Hama N, Nomoto R, Nakajima H, Kariya H, Hamasaki M, Iyoda S. 2021. Whole-genome sequencing of Shiga toxin-producing Escherichia coli OX18 from a fatal hemolytic uremic syndrome case. Emerg Infect Dis 27:1509-1512.
 ```
@@ -77,3 +77,6 @@ SNPcasterは[GPL v3.0](/COPYING)でライセンスされています。
 
 ## サポート
 問題や質問がある場合は、[GitHub Issuesページ](https://github.com/leech-rr/SNPcaster/issues)を確認してください。
+
+## 免責事項
+このソフトウェアはGPLv3ライセンスの下で提供されます。本ソフトウェアは無保証であり、使用によって生じたいかなる損害に対しても、作者は責任を負いません。

@@ -43,7 +43,7 @@ Once started, you can access the Jupyter notebook by visiting [http://localhost:
 Create a new project from [Create Project](http://localhost:59829/lab/tree/CreateProject_jp.ipynb) to perform analysis.
 
 ## Citation
-When describing methods using this program in papers or other publications, please refer to the following paper:
+When describing methods using this program in papers or other publications, please refer to GitHub page (https://github.com/leech-rr/SNPcaster) or the following paper:
 ```
 Lee K, Iguchi A, Uda K, Matsumura S, Miyairi I, Ishikura K, Ohnishi M, Seto J, Ishikawa K, Konishi N, Obata H, Furukawa I, Nagaoka H, Morinushi H, Hama N, Nomoto R, Nakajima H, Kariya H, Hamasaki M, Iyoda S. 2021. Whole-genome sequencing of Shiga toxin-producing Escherichia coli OX18 from a fatal hemolytic uremic syndrome case. Emerg Infect Dis 27:1509-1512.
 ```
