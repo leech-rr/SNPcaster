@@ -142,7 +142,7 @@ sub is_cluster_snp {
     my ($cur_snp_hash_ref, $next_snp_hash_ref) = @_;
     my $cur_pos = $cur_snp_hash_ref->{position};
     my $next_pos = $next_snp_hash_ref->{position};
-    if ($next_pos - $cur_pos >= $gap) {
+    if ($next_pos - $cur_pos > $gap) {
         return 0;
     }
     my $cur_ref = $cur_snp_hash_ref->{ref};
