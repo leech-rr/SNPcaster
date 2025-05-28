@@ -31,7 +31,7 @@ cd SNPcaster
 docker compose up -d --build
 ```
 初回起動は、1～数時間かかります。<br>
-Dockerのインストール方法などの詳細は、[マニュアル](/doc/manual/2025-05-20_SNPcaster_インストール_操作マニュアル.pdf)に記載してあるのでご覧ください。
+Dockerのインストール方法などの詳細は、[マニュアル](/doc/manual/2025-05-28_SNPcaster_manual_Japanese.pdf)に記載してあるのでご覧ください。
 
 ### Jupyter notebookへのアクセス
 起動後、お好きなブラウザで[http://localhost:59829](http://localhost:59829)にアクセスすると、Jupyter notebookにアクセス可能です。
@@ -46,6 +46,9 @@ Dockerのインストール方法などの詳細は、[マニュアル](/doc/man
 論文等で本プログラムを用いた方法を記載する際には、GitHub page (https://github.com/leech-rr/SNPcaster)または次の論文をご参照ください。
 ```
 Lee K, Iguchi A, Uda K, Matsumura S, Miyairi I, Ishikura K, Ohnishi M, Seto J, Ishikawa K, Konishi N, Obata H, Furukawa I, Nagaoka H, Morinushi H, Hama N, Nomoto R, Nakajima H, Kariya H, Hamasaki M, Iyoda S. 2021. Whole-genome sequencing of Shiga toxin-producing Escherichia coli OX18 from a fatal hemolytic uremic syndrome case. Emerg Infect Dis 27:1509-1512.
+```
+```
+Lee K., Iguchi A., Terano C., Hataya H., Isobe J., Seto K., Ishijima N., Akeda Y., Ohnishi M., and Iyoda S. Combined usage of serodiagnosis and O antigen typing to isolate Shiga toxin-producing Escherichia coli O76:H7 from a hemolytic uremic syndrome case and genomic insights from the isolate. 2024. Microbiology spectrum 12:e0235523.
 ```
 
 ## リリース通知について

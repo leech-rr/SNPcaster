@@ -8,7 +8,7 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
-Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-20_SNPcaster_Installation_Operation_Manual.pdf). Please refer to it if you have any questions.
+Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-28_SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.
 
 ### Downloading the Source Code
 
@@ -43,10 +43,14 @@ Once started, you can access the Jupyter notebook by visiting [http://localhost:
 Create a new project from [Create Project](http://localhost:59829/lab/tree/CreateProject_jp.ipynb) to perform analysis.
 
 ## Citation
-When describing methods using this program in papers or other publications, please refer to GitHub page (https://github.com/leech-rr/SNPcaster) or the following paper:
+When describing methods using this program in papers or other publications, please refer to GitHub page (https://github.com/leech-rr/SNPcaster) or the following papers:
 ```
 Lee K, Iguchi A, Uda K, Matsumura S, Miyairi I, Ishikura K, Ohnishi M, Seto J, Ishikawa K, Konishi N, Obata H, Furukawa I, Nagaoka H, Morinushi H, Hama N, Nomoto R, Nakajima H, Kariya H, Hamasaki M, Iyoda S. 2021. Whole-genome sequencing of Shiga toxin-producing Escherichia coli OX18 from a fatal hemolytic uremic syndrome case. Emerg Infect Dis 27:1509-1512.
 ```
+```
+Lee K., Iguchi A., Terano C., Hataya H., Isobe J., Seto K., Ishijima N., Akeda Y., Ohnishi M., and Iyoda S. Combined usage of serodiagnosis and O antigen typing to isolate Shiga toxin-producing Escherichia coli O76:H7 from a hemolytic uremic syndrome case and genomic insights from the isolate. 2024. Microbiology spectrum 12:e0235523.
+```
+
 
 ## Release Notifications
 To receive notifications about new version releases of SNPcaster, configure your GitHub account to receive release notifications.  
