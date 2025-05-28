@@ -31,7 +31,7 @@ cd SNPcaster
 docker compose up -d --build
 ```
 初回起動は、1～数時間かかります。<br>
-Dockerのインストール方法などの詳細は、[マニュアル](/doc/manual/2025-05-20_SNPcaster_インストール_操作マニュアル.pdf)に記載してあるのでご覧ください。
+Dockerのインストール方法などの詳細は、[マニュアル](/doc/manual/2025-05-28_SNPcaster_manual_Japanese.pdf)に記載してあるのでご覧ください。
 
 ### Jupyter notebookへのアクセス
 起動後、お好きなブラウザで[http://localhost:59829](http://localhost:59829)にアクセスすると、Jupyter notebookにアクセス可能です。

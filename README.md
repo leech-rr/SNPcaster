@@ -8,7 +8,7 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
-Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-20_SNPcaster_Installation_Operation_Manual.pdf). Please refer to it if you have any questions.
+Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-28_SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.
 
 ### Downloading the Source Code
 
