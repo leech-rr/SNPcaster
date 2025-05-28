@@ -162,7 +162,7 @@ function process_bactsnp() {
 
   echo '=================== BactSNP ==================='
   if [ ! -s "${BACTSNP_LIST}" ]; then
-    echo "BactSNP is skipped, as the execution results for all strains are provided."
+    echo "All sample SNP folders exist. BactSNP is skipped."
     return 0
   fi
 
