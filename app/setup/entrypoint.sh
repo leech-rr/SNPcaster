@@ -1,5 +1,6 @@
 #!/bin/bash
-MOUNTED_DIR=${MY_MOUNTED_DIR:-/home/snpcaster/notebook/project}
+HOME_DIR=${MY_MOUNTED_DIR:-/home/snpcaster}
+MOUNTED_DIR=${MY_MOUNTED_DIR:-${HOME_DIR}/notebook/project}
 echo "MOUNTED_DIR: $MOUNTED_DIR"
 
 # ホストのnotebooksのUIDとGIDを取得
@@ -34,7 +35,7 @@ fi
 usermod -g "$EXEC_GROUP" "$EXEC_USER"
 
 # パーミッションを調整
-chown -R "$EXEC_USER:$EXEC_GROUP" "$MOUNTED_DIR"
+chown -Rv "$EXEC_USER:$EXEC_GROUP" "$HOME_DIR"
 
 # コマンド実行
 echo "Starting with UID: $HOST_UID, GID: $HOST_GID as USER: $EXEC_USER"
