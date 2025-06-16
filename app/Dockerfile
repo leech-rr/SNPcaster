@@ -16,6 +16,7 @@ RUN apt-get update &&\
     unzip \
 	sed \
     gawk \
+    pigz \
     rename \
     rsync &&\
 	apt-get clean &&\
