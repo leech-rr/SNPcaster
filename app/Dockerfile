@@ -3,6 +3,42 @@ FROM --platform=linux/amd64 r-base:4.3.0
 ENV TZ=Asia/Tokyo
 USER root
 
+# ARG & ENV
+# Default values for ARGs are set in docker-compose.yml using variable substitution.
+# Default values are also set here for building without Docker Compose.
+ARG HTTP_PROXY=""
+ARG HTTPS_PROXY=""
+ARG APT_PIPELINING=""
+ARG APT_NO_CACHE="1"
+ARG APT_HTTP_SETTING_FILE="/etc/apt/apt.conf.d/http_setting"
+ENV HTTP_PROXY=$HTTP_PROXY
+ENV http_proxy=$HTTP_PROXY
+ENV HTTPS_PROXY=$HTTPS_PROXY
+ENV https_proxy=$HTTPS_PROXY
+
+# apt setting
+RUN if [ -n "${APT_PIPELINING}" ]; then \
+        if [ "${APT_PIPELINING}" -ge 0 ]; then \
+            echo "Acquire::http::Pipeline-Depth ${APT_PIPELINING};" >> "${APT_HTTP_SETTING_FILE}"; \
+        else \
+            echo "[Error] APT_PIPELINING [${APT_PIPELINING}] must be a non-negative integer. Exit..." >&2; \
+            exit 1; \
+        fi; \
+    else \
+        if [ -n "${HTTP_PROXY}" ] || [ -n "${HTTPS_PROXY}" ]; then \
+            echo "Acquire::http::Pipeline-Depth 0;" >> "${APT_HTTP_SETTING_FILE}"; \
+        fi; \
+    fi;
+
+RUN if [ "${APT_NO_CACHE}" -eq 0 ]; then \
+            echo "Acquire::http::No-Cache false;" >> "${APT_HTTP_SETTING_FILE}"; \
+    elif [ "${APT_NO_CACHE}" -eq 1 ]; then \
+        echo "Acquire::http::No-Cache true;" >> "${APT_HTTP_SETTING_FILE}"; \
+    else \
+        echo "[Error] APT_NO_CACHE [${APT_NO_CACHE}] must be 0 or 1. Exit..." >&2; \
+        exit 1; \
+    fi;
+
 # apt install
 RUN apt-get update &&\
     apt-get -y install \

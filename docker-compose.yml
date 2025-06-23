@@ -1,19 +1,16 @@
 services:
   snpcaster:
-    container_name: snpcaster-0.9.3a
-    image: snpcaster:0.9.3a
+    container_name: snpcaster-0.9.3
+    image: snpcaster:0.9.3
     build:
       context: app
       dockerfile: Dockerfile
       args:
-        - HTTP_PROXY=$HTTP_PROXY
-        - http_proxy=$HTTP_PROXY
-        - HTTPS_PROXY=$HTTPS_PROXY
-        - https_proxy=$HTTPS_PROXY
+        - HTTP_PROXY=${HTTP_PROXY:-}
+        - HTTPS_PROXY=${HTTPS_PROXY:-}
+        - APT_PIPELINING=${APT_PIPELINING:-}
+        - APT_NO_CACHE=${APT_NO_CACHE:-1}
     init: true
-    env_file:
-      - path: .env
-        required: false
     ports:
       - "59829:8888"
     restart: always
