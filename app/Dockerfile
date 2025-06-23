@@ -17,12 +17,6 @@ ENV HTTPS_PROXY=$HTTPS_PROXY
 ENV https_proxy=$HTTPS_PROXY
 
 # apt setting
-RUN if [ -n "${HTTP_PROXY}" ]; then \
-        echo "Acquire::http::Proxy \""${HTTP_PROXY}"\";" >> "${APT_HTTP_SETTING_FILE}"; \
-    fi; \
-    if [ -n ""${HTTPS_PROXY}"" ]; then \
-        echo "Acquire::https::Proxy \""${HTTPS_PROXY}"\";" >> "${APT_HTTP_SETTING_FILE}"; \
-    fi;
 RUN if [ -n "${APT_PIPELINING}" ]; then \
         if [ "${APT_PIPELINING}" -ge 0 ]; then \
             echo "Acquire::http::Pipeline-Depth ${APT_PIPELINING};" >> "${APT_HTTP_SETTING_FILE}"; \
@@ -44,9 +38,6 @@ RUN if [ "${APT_NO_CACHE}" -eq 0 ]; then \
         echo "[Error] APT_NO_CACHE [${APT_NO_CACHE}] must be 0 or 1. Exit..." >&2; \
         exit 1; \
     fi;
-
-RUN cat "${APT_HTTP_SETTING_FILE}"
-RUN exit 1
 
 # apt install
 RUN apt-get update &&\
