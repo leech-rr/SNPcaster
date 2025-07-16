@@ -8,7 +8,8 @@ SNPcasterは次世代シーケンサーから得たショートリードデー�
 
 ## インストール方法
 以下の手順でSNPcasterを起動してください。<br>
-詳細なインストール手順や使い方は[マニュアル](/doc/manual/SNPcaster_manual_Japanese.pdf)に記載しています。ご不明点がある場合はそちらをご覧ください。
+詳細なインストール手順や使い方は[マニュアル](/doc/manual/SNPcaster_manual_Japanese.pdf)に記載しています。ご不明点がある場合はそちらをご覧ください。<br>
+*※マニュアルがリンク切れしている場合、[マニュアルフォルダ](https://github.com/leech-rr/SNPcaster/tree/main/doc/manual)からご確認ください。*
 
 ### ソースコードのダウンロード
 

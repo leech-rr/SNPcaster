@@ -8,7 +8,8 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
-Detailed installation instructions and usage are described in the [manual](/doc/manual/SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.
+Detailed installation instructions and usage are described in the [manual](/doc/manual/SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.<br>
+*Note: Please check the [Manual Folder](https://github.com/leech-rr/SNPcaster/tree/main/doc/manual), if the manual link is broken.*
 
 ### Downloading the Source Code
 
