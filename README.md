@@ -8,7 +8,8 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
-Detailed installation instructions and usage are described in the [manual](/doc/manual/2025-05-28_SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.
+Detailed installation instructions and usage are described in the [manual](/doc/manual/SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.<br>
+*Note: Please check the [Manual Folder](https://github.com/leech-rr/SNPcaster/tree/main/doc/manual), if the manual link is broken.*
 
 ### Downloading the Source Code
 
@@ -31,7 +32,7 @@ cd SNPcaster
 docker compose up -d --build
 ```
 The initial startup may take from 1 to several hours.<br>
-For details on Docker installation and other information, please refer to the [manual](/doc/manual/2025-05-20_SNPcaster_Installation_Operation_Manual.pdf).
+For details on Docker installation and other information, please refer to the [manual](/doc/manual/SNPcaster_manual_Japanese.pdf).
 
 ### Accessing Jupyter Notebook
 Once started, you can access the Jupyter notebook by visiting [http://localhost:59829](http://localhost:59829) in your preferred browser.
