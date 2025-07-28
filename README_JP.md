@@ -8,7 +8,8 @@ SNPcasterは次世代シーケンサーから得たショートリードデー�
 
 ## インストール方法
 以下の手順でSNPcasterを起動してください。<br>
-詳細なインストール手順や使い方は[マニュアル](/doc/manual/2025-05-20_SNPcaster_インストール_操作マニュアル.pdf)に記載しています。ご不明点がある場合はそちらをご覧ください。
+詳細なインストール手順や使い方は[マニュアル](/doc/manual/SNPcaster_manual_Japanese.pdf)に記載しています。ご不明点がある場合はそちらをご覧ください。<br>
+*※マニュアルがリンク切れしている場合、[マニュアルフォルダ](https://github.com/leech-rr/SNPcaster/tree/main/doc/manual)からご確認ください。*
 
 ### ソースコードのダウンロード
 
@@ -31,7 +32,7 @@ cd SNPcaster
 docker compose up -d --build
 ```
 初回起動は、1～数時間かかります。<br>
-Dockerのインストール方法などの詳細は、[マニュアル](/doc/manual/2025-05-28_SNPcaster_manual_Japanese.pdf)に記載してあるのでご覧ください。
+Dockerのインストール方法などの詳細は、[マニュアル](/doc/manual/SNPcaster_manual_Japanese.pdf)に記載してあるのでご覧ください。
 
 ### Jupyter notebookへのアクセス
 起動後、お好きなブラウザで[http://localhost:59829](http://localhost:59829)にアクセスすると、Jupyter notebookにアクセス可能です。
