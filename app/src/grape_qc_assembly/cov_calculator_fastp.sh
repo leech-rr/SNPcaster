@@ -22,12 +22,12 @@ DIR=${BAC1}/grape_qc_assembly
 INPUT_DIR=$1
 LIST=$2
 FASTP_DIR=$3
-if [ -n $FASTP_DIR ]; then
+if [ -n "$FASTP_DIR" ]; then
   	FASTP_DIR="${FASTP_DIR%/}"
 fi
 
 THREADS=3
-if [ -n $4 ]; then
+if [ -n "$4" ]; then
   THREADS=$4
 fi
 

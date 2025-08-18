@@ -241,11 +241,11 @@ cd "${OUTPUT_DIR}"
 FASTP_DIR="${OUTPUT_DIR}/fastp"
 mkdir "${FASTP_DIR}"
 
-bash ${DIR}/cov_calculator_fastp.sh ${INITIAL_DIR} "${LIST}" "${FASTP_DIR}" ${THREAD} ${SIZE}
+bash ${DIR}/cov_calculator_fastp.sh "${INITIAL_DIR}" "${LIST}" "${FASTP_DIR}" "${THREAD}" "${SIZE}"
 
 
 # get new list of over coverage
-if [ -n $COVERAGE ]; then
+if [ -n "$COVERAGE" ]; then
   source activate perl-bioperl-core
   perl ${DIR}/get_cov_over40.pl "${OVER_COVERAGE_STRAIN_LIST}" "$COVERAGE"
   conda deactivate
