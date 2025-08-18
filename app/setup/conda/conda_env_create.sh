@@ -13,7 +13,7 @@ fi
 
 # directory check
 env_dir=$1
-if [ ! -d $env_dir ]; then
+if [ ! -d "$env_dir" ]; then
     echo "$env_dir is not a valid directory"
     exit 1
 fi
