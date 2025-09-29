@@ -12,7 +12,7 @@ function _usage() {
   Usage: $(basename "$0") [OPTION]...
 
   -i      SNPcaster directory having SNPcaster outputs   (Required!)
-  -c      Gap threshold for cluster SNPs. If set to 0, no SNPs will be removed. (Default: 0)
+  -c      Gap threshold for clustered SNPs. If set to 0, no SNPs will be removed. (Default: 0)
   -d      Mask file name
   -t      Number of Threads                              (Default: 8)
 

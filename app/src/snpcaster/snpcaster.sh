@@ -14,7 +14,7 @@ function _usage() {
   -i      Strain List (Text file listing strain names)   (Required!)
   -r      Reference Sequence File                        (Required!)
   -a      Allele frequency threshold for BactSNP. If allele frequency is smaller than this value, an ambiguous allele is called. (Default: 0.9)
-  -c      Gap threshold for cluster SNPs. If set to 0, no SNPs will be removed. (Default: 0)
+  -c      Gap threshold for clustered SNPs. If set to 0, no SNPs will be removed. (Default: 0)
   -d      Mask file name
   -f      Fastq List (Tab-separated file with strain name, read1, and read2 file names) (Optional, but required for BactSNP execution)
   -g      Run Gubbins [1: run, 0: don't run]              (Default: 0)

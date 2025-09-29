@@ -18,7 +18,7 @@ $gap = 0;
 # Output files
 # processing order is:
 # 1. Create snp_position_sample_only.csv ($output_1)
-# 2. Remove cluster SNP ($output_2-4) but will be skipped if $gap is 0
+# 2. Remove clustered SNP ($output_2-4) but will be skipped if $gap is 0
 # 3. Remove masking region ($output_5-7)
 # 4. Create final_snp.fas ($output_8)
 my $output_1 = 'snp_position_sample_only.csv';   # $snp_fileのうち、サンプル間で差異があるSNPのみを出力したファイル
@@ -69,7 +69,7 @@ sub main {
 sub print_usage {
     print "Usage: $0 [-h] [-d mask_file -n mask_name] [-g gap] snp_file.csv\n";
     print '  $1  Input SNP CSV file', "\n";
-    print '  -c  Cluster SNP max distance(for 0, no cluster SNP will be removed. Default: 0)', "\n";
+    print '  -c  Clustered SNP max distance(for 0, no clustered SNP will be removed. Default: 0)', "\n";
     print '  -d  Mask region tsv file path"', "\n";
 }
 
@@ -99,7 +99,7 @@ sub check_parameters {
     # Print args
     print "Input SNP file: $snp_file\n";
     print "Mask region file: ", defined $mask_region_file ? $mask_region_file : '-', "\n";
-    print "Cluster SNP max distance: $gap\n";
+    print "Clustered SNP max distance: $gap\n";
 }
 
 # snpファイルからデータ抽出

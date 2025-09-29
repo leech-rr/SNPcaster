@@ -355,7 +355,7 @@ function append_report_information() {
     echo "No masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ]; then
-    echo "After cluster SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusterSNP.csv)" >> "${REPORT}"
+    echo "After clustered SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusterSNP.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking.csv)" >> "${REPORT}"
@@ -370,7 +370,7 @@ function append_report_information() {
     echo "No masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_sample_only.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ]; then
-    echo "After cluster SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusterSNP_sample_only.csv)" >> "${REPORT}"
+    echo "After clustered SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusterSNP_sample_only.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking_sample_only.csv)" >> "${REPORT}"
@@ -383,7 +383,7 @@ function append_report_information() {
     echo "" >> "${REPORT}"
     echo "Removed SNPs" >> "${REPORT}"
     if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ]; then
-      echo "Cluster SNP: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/removed_clusterSNP.csv)" >> "${REPORT}"
+      echo "Clustered SNP: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/removed_clusterSNP.csv)" >> "${REPORT}"
     fi
     if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
       echo "Masked region: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/masked_region.csv)" >> "${REPORT}"
