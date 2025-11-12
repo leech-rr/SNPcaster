@@ -1,4 +1,5 @@
-#!/bin/bash -eu
+#!/bin/bash
+set -euo pipefail
 
 CMDNAME=`basename $0`
 echo $CMDNAME
@@ -127,25 +128,25 @@ while getopts "a:c:i:L:p:r:t:u:s:" optKey; do
 done
 
 
-if [ -z $LIST ]; then
-  	_usage
-  	exit 0
+if [ -z "${LIST}" ]; then
+  _usage
+  exit 0
 fi
 
-if [ "$ASSEMBLER" != "P" ] && [ "$ASSEMBLER" != "p" ] && [ "$ASSEMBLER" != "K" ] && \
-[ "$ASSEMBLER" != "k" ]; then
-	echo 'Enter p or k for ASSEMBLER'
-	exit 1
+if [ "${ASSEMBLER}" != "P" ] && [ "${ASSEMBLER}" != "p" ] && [ "${ASSEMBLER}" != "K" ] && \
+   [ "${ASSEMBLER}" != "k" ]; then
+  echo 'Enter p or k for ASSEMBLER'
+  exit 1
 fi
 
-if [ "$FASTP" != "1" ] && [ "$FASTP" != "0" ]; then
-	echo 'Enter 1 or 0 for FASTP'
-	exit 1
+if [ "${FASTP}" != "1" ] && [ "${FASTP}" != "0" ]; then
+  echo 'Enter 1 or 0 for FASTP'
+  exit 1
 fi
 
-if [ "$REDUCE_MEMORY" != "1" ] && [ "$REDUCE_MEMORY" != "0" ]; then
-	echo 'Enter 1 or 0 for REDUCE_MEMORY'
-	exit 1
+if [ "${REDUCE_MEMORY}" != "1" ] && [ "${REDUCE_MEMORY}" != "0" ]; then
+  echo 'Enter 1 or 0 for REDUCE_MEMORY'
+  exit 1
 fi
 
 if [ $(($THREAD*1)) -lt 1 ]; then   # 数値かどうかの判定
@@ -153,14 +154,12 @@ if [ $(($THREAD*1)) -lt 1 ]; then   # 数値かどうかの判定
 	exit 1
 fi
 
-# validate CLEANUP option
-if [ $CLEANUP -ne 0 ] && [ $CLEANUP -ne 1 ]; then
+if [ "${CLEANUP}" -ne 0 ] && [ "${CLEANUP}" -ne 1 ]; then
   echo "Error: Invalid cleanup option." >&2
   exit 1
 fi
 
-# validate SCAFFOLD option
-if [ $SCAFFOLD -ne 0 ] && [ $SCAFFOLD -ne 1 ]; then
+if [ "${SCAFFOLD}" -ne 0 ] && [ "${SCAFFOLD}" -ne 1 ]; then
   echo "Error: Invalid scaffold option." >&2
   exit 1
 fi
@@ -199,31 +198,26 @@ if [ -n "$CONFIG" ]; then
     # 前後の空白とタブを削除
     val=$(echo ${ARR[1]} | sed -e 's/^[ \t]*//' | sed -e 's/[ \t]*$//')
     if [[ "$line" =~ "Contamination" ]] || [[ "$line" =~ "contamination" ]]; then
-      CONTAMINATION=${val} 
-      echo "MAX CONTAMINATION:" $CONTAMINATION
-      qc_summary_options+=("--max-contamination" "${CONTAMINATION}") 
+      echo "MAX CONTAMINATION:" ${val}
+      qc_summary_options+=("--max-contamination" "${val}") 
     elif [[ "$line" =~ "Completeness" ]] || [[ "$line" =~ "completeness" ]]; then
-      COMPLETENESS=${val} 
-      echo "MINIMUM COMPLETENESS:" $COMPLETENESS
-      qc_summary_options+=("--min-completeness" "${COMPLETENESS}")
+      echo "MINIMUM COMPLETENESS:" ${val}
+      qc_summary_options+=("--min-completeness" "${val}")
     elif [[ "$line" =~ "Coverage" ]] || [[ "$line" =~ "coverage" ]]; then
-      COVERAGE=${val} 
-      echo "COVERAGE THRESHOLD:" $COVERAGE
+      COVERAGE=${val}
+      echo "COVERAGE THRESHOLD:" ${COVERAGE}
       qc_summary_options+=("--coverage-thresh" "${COVERAGE}")
     elif [[ "$line" =~ "Contig" ]] || [[ "$line" =~ "contig" ]]; then
-      CONTIGS=${val} 
-      echo "MAX CONTIGS:" $CONTIGS
-      qc_summary_options+=("--max-contigs" "${CONTIGS}")
+      echo "MAX CONTIGS:" ${val}
+      qc_summary_options+=("--max-contigs" "${val}")
     elif [[ "$line" =~ "Max" ]] || [[ "$line" =~ "max" ]]; then
-      MAX_SIZE=${val} 
-      echo "MAX GENOME SIZE:" $MAX_SIZE
-      qc_summary_options+=("--max-gen-size" "${MAX_SIZE}")
+      echo "MAX GENOME SIZE:" ${val}
+      qc_summary_options+=("--max-gen-size" "${val}")
     elif [[ "$line" =~ "Min" ]] || [[ "$line" =~ "min" ]]; then
-      MIN_SIZE=${val} 
-      echo "MIN GENOME SIZE:" $MIN_SIZE
-      qc_summary_options+=("--min-gen-size" "${MIN_SIZE}")
+      echo "MIN GENOME SIZE:" ${val}
+      qc_summary_options+=("--min-gen-size" "${val}")
     else
-      SIZE=${val} 
+      SIZE=${val}
       echo "GENOME_SIZE:" $SIZE
     fi
   done < $CONFIG
@@ -241,13 +235,13 @@ cd "${OUTPUT_DIR}"
 FASTP_DIR="${OUTPUT_DIR}/fastp"
 mkdir "${FASTP_DIR}"
 
-bash ${DIR}/cov_calculator_fastp.sh "${INITIAL_DIR}" "${LIST}" "${FASTP_DIR}" "${THREAD}" "${SIZE}"
+bash ${DIR}/cov_calculator_fastp.sh "${INITIAL_DIR}" "${LIST}" "${FASTP_DIR}" "${THREAD}" "${SIZE:-}"
 
 
 # get new list of over coverage
-if [ -n "$COVERAGE" ]; then
+if [ -n "${COVERAGE:-}" ]; then
   source activate perl-bioperl-core
-  perl ${DIR}/get_cov_over40.pl "${OVER_COVERAGE_STRAIN_LIST}" "$COVERAGE"
+  perl ${DIR}/get_cov_over40.pl "${OVER_COVERAGE_STRAIN_LIST}" "${COVERAGE:-}"
   conda deactivate
 else
   extract_strain_names "${LIST}" "${OVER_COVERAGE_STRAIN_LIST}"

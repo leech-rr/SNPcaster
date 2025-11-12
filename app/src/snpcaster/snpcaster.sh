@@ -1,5 +1,6 @@
 #!/bin/bash
 # bactsnp, snps.vcf, snippy, gubbins
+set -euo pipefail
 
 CMDNAME=$(basename $0)
 echo "${CMDNAME}"
