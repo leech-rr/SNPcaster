@@ -56,6 +56,32 @@ df_qc = pd.DataFrame(index=[], columns=cols)
 NA = 'N/A'
 PASS = 'pass'
 FAIL = 'fail'
+def to_float_or_none(x):
+    """Return float(x) or None if conversion fails or x is NA-like."""
+    try:
+        if x is None:
+            return None
+        sx = str(x).strip()
+        if sx == '' or sx.upper() == NA:
+            return None
+        # remove commas commonly used in thousands separators
+        sx = sx.replace(',', '')
+        return float(sx)
+    except Exception as e:
+        # Raise a clear ValueError so caller knows which value failed to parse
+        raise ValueError(f"to_float_or_none: cannot convert {x!r} to float") from e
+
+def to_int_or_none(x):
+    """Return int(x) or None if conversion fails or x is NA-like."""
+    fv = to_float_or_none(x)
+    if fv is None:
+        return None
+    try:
+        return int(fv)
+    except Exception as e:
+        # Raise a clear ValueError so caller knows which value failed to parse
+        raise ValueError(f"to_int_or_none: cannot convert {x!r} to int") from e
+
 for i in range(len(df_coverage)):
     strain_cov = df_coverage.iloc[i,0]
     no_of_reads= df_coverage.iloc[i,1]
@@ -87,45 +113,54 @@ for i in range(len(df_coverage)):
             Total_length=df_assembly.iloc[k,15]           
  
     if(cr_coverage is not None):
-        if(coverage >= float(cr_coverage)):
-            qc_coverage=PASS
+        # coverage from df_coverage may be non-numeric; parse safely
+        coverage_f = to_float_or_none(coverage)
+        if coverage_f is not None and coverage_f >= cr_coverage:
+            qc_coverage = PASS
             qc_results = PASS if qc_results != FAIL else qc_results
         else:
-            qc_coverage=FAIL
+            qc_coverage = FAIL
             qc_results = FAIL
 
     if(cr_max_contigs is not None):
-        if(int(contigs) <= int(cr_max_contigs)):
-            qc_contigs=PASS
+        contigs_i = to_int_or_none(contigs)
+        if contigs_i is not None and contigs_i <= cr_max_contigs:
+            qc_contigs = PASS
             qc_results = PASS if qc_results != FAIL else qc_results
         else:
-            qc_contigs=FAIL
+            qc_contigs = FAIL
             qc_results = FAIL
 
     if(cr_min_gen_size is not None \
        or cr_max_gen_size is not None):
-        if(float(Total_length) >= float(cr_min_gen_size or 0.0)*10**6 \
-           and float(Total_length) <= float(cr_max_gen_size or 10**6)*10**6):
-            qc_Total_length=PASS
+        total_len_f = to_float_or_none(Total_length)
+        min_size = (cr_min_gen_size or 0.0)
+        max_size = (cr_max_gen_size or 10**6)
+        # convert genome sizes to bases (user supplies Mb)
+        if total_len_f is not None and total_len_f >= (min_size * 10**6) \
+           and total_len_f <= (max_size * 10**6):
+            qc_Total_length = PASS
             qc_results = PASS if qc_results != FAIL else qc_results
         else:
-            qc_Total_length=FAIL
+            qc_Total_length = FAIL
             qc_results = FAIL
 
     if(cr_min_completeness is not None):
-        if(float(Completeness) >= float(cr_min_completeness)):
-            qc_completeness=PASS
+        completeness_f = to_float_or_none(Completeness)
+        if completeness_f is not None and completeness_f >= cr_min_completeness:
+            qc_completeness = PASS
             qc_results = PASS if qc_results != FAIL else qc_results
         else:
-            qc_completeness=FAIL
+            qc_completeness = FAIL
             qc_results = FAIL
 
     if(cr_max_contamination is not None):
-        if(float(Contamination) <= float(cr_max_contamination)):
-            qc_contamination=PASS
+        contamination_f = to_float_or_none(Contamination)
+        if contamination_f is not None and contamination_f <= cr_max_contamination:
+            qc_contamination = PASS
             qc_results = PASS if qc_results != FAIL else qc_results
         else:
-            qc_contamination=FAIL
+            qc_contamination = FAIL
             qc_results = FAIL
 
     # convert to upper case
