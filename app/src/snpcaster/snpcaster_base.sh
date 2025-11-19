@@ -46,9 +46,6 @@ function get_version() {
 function count_lines_without_header() {
   local INPUT="$1"
   local header_lines=1
-  if [ -n "$2" ]; then
-    header_lines="$2"
-  fi
   tail -n +$((header_lines + 1)) "${INPUT}" | wc -l
 }
 
@@ -77,7 +74,7 @@ function prepare4snpcaster() {
   local OUTPUT_DIR=$4
   local BACTSNP_SKIP_LIST=$5
   local REFERENCE_FILE=$6
-  local MASK_FILE=$7
+  local MASK_FILE=${7:-}
 
   [ -f "${BACTSNP_LIST}" ] && rm -f "${BACTSNP_LIST}"
   [ -f "${BACTSNP_SKIP_LIST}" ] && rm -f "${BACTSNP_SKIP_LIST}"
@@ -94,17 +91,10 @@ function prepare4snpcaster() {
       continue
     fi
 
-    # User must specify fastq list to execute BactSNP
-    if [ -z "${FASTQ_LIST}" ]; then
-      echo "Error: Please specify fastq list(-f option) for ${strain} to execute BactSNP." >&2
-      _usage
-      exit 1
-    fi
-
     # Find fastq file pair for the strain
     local fastq_line=$(grep -P "^${strain}\t" "${FASTQ_LIST}" | tr -d '\n')
 
-    if [ -z "${fastq_line}" ]; then
+    if [ -z "${fastq_line:-}" ]; then
       echo "${strain}" >> "${NOT_EXIST_LIST}"
       echo "Error: Could not find ${strain} in [${FASTQ_LIST}]." >&2
       continue
@@ -213,7 +203,7 @@ function postprocess_snippy() {
   local MASK_FILE=$3
 
   local using_mask_file=0
-  if [ -n "${MASK_FILE}" ]; then
+  if [ -n "${MASK_FILE:-}" ]; then
     using_mask_file=1
   fi
 
@@ -316,7 +306,7 @@ function postprocess_gubbins() {
   pairsnp -t "${THREAD}" -s final_snp_after_gubbins.fas > dist_final_snp_without_recombination.tsv
   conda deactivate
   sed -i "1i ${TITLE4DIST}" dist_final_snp_without_recombination.tsv
-  create_pairsnp_matrix final_snp_after_gubbins.fas dist_final_snp_matrix_without_recombination.tsv
+  create_pairsnp_matrix final_snp_after_gubbins.fas dist_final_snp_matrix_without_recombination.tsv "${THREAD}"
 
   # final_snp_after_gubbins.fas のRef除外版とnexus変換版を作成**********************************
   bash "${SNPCASTER_SRC_DIR}"/seqmagick_conversion.sh final_snp_after_gubbins.fas
