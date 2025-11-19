@@ -250,7 +250,7 @@ function postprocess_snippy() {
     mv -v snp_position_after_masking_sample_only.csv masked_region.csv snp_position_after_masking.csv core_region_after_masking.tsv "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/
   fi
   if [ "${GAP}" -gt 0 ]; then
-    mv -v snp_position_without_clusterSNP.csv snp_position_without_clusterSNP_sample_only.csv removed_clusterSNP.csv "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/
+    mv -v snp_position_without_clusteredSNP.csv snp_position_without_clusteredSNP_sample_only.csv removed_clusteredSNP.csv "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/
   fi
 }
 
@@ -345,7 +345,7 @@ function append_report_information() {
     echo "No masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ]; then
-    echo "After clustered SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusterSNP.csv)" >> "${REPORT}"
+    echo "After clustered SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusteredSNP.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking.csv)" >> "${REPORT}"
@@ -360,7 +360,7 @@ function append_report_information() {
     echo "No masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_sample_only.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ]; then
-    echo "After clustered SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusterSNP_sample_only.csv)" >> "${REPORT}"
+    echo "After clustered SNP removal: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_without_clusteredSNP_sample_only.csv)" >> "${REPORT}"
   fi
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking_sample_only.csv)" >> "${REPORT}"
@@ -373,7 +373,7 @@ function append_report_information() {
     echo "" >> "${REPORT}"
     echo "Removed SNPs" >> "${REPORT}"
     if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ]; then
-      echo "Clustered SNP: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/removed_clusterSNP.csv)" >> "${REPORT}"
+      echo "Clustered SNP: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/removed_clusteredSNP.csv)" >> "${REPORT}"
     fi
     if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
       echo "Masked region: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/masked_region.csv)" >> "${REPORT}"
