@@ -25,7 +25,7 @@ extract_column_to_stdout() {
 extract_column() {
     input_file="$1"    # Input TSV file path
     column_number="$2" # Column number to extract
-    output_file="$3"   # Output file path (optional, if not specified, output to stdout)
+    output_file="${3:-}"   # Output file path (optional, if not specified, output to stdout)
 
     # Extract the specified column
     if [[ -z "$output_file" ]]; then
@@ -44,7 +44,7 @@ extract_column() {
 # extract_column "list_fastq.tsv" "list.txt"
 extract_strain_names() {
     input_file="$1"    # Input TSV file path
-    output_file="$2"   # (optional) Output file path (if not specified, output to stdout)
+    output_file="${2:-}"   # (optional) Output file path (if not specified, output to stdout)
     extract_column "$input_file" 1 "$output_file"
 
     # Return the exit status of the extraction function

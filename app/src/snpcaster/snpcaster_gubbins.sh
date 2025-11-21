@@ -71,7 +71,7 @@ if [ -d "${GUBBINS_OUTDIR}" ] || [ -d "${RESULTS_WITH_GUBBINS_OUTDIR}" ]; then
     echo "Results with Gubbins folder [${RESULTS_WITH_GUBBINS_OUTDIR}] already exists." >&2
   fi
   echo "Please remove it, then run this script again to re-run Gubbins." >&2
-  echo "Or, use snpclipper.sh to process the Gubbins results by applying filters for the cluster SNP and/or masking regions." >&2
+  echo "Or, use snpclipper.sh to process the Gubbins results by applying filters for the clustered SNP and/or masking regions." >&2
   _usage
   exit 1
 fi
