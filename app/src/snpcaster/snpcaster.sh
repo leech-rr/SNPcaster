@@ -119,7 +119,7 @@ if [ ! -r "${LIST_FULL}" ]; then
   exit 1
 fi
 using_mask_file=0
-if [ -n "${MASK_FILE}" ]; then
+if [ -n "${MASK_FILE:-}" ]; then
   if [ ! -r "${MASK_FILE}" ]; then
     echo "Can not find or read mask file [${MASK_FILE}]" >&2
     _usage
@@ -128,7 +128,7 @@ if [ -n "${MASK_FILE}" ]; then
   using_mask_file=1
 fi
 
-if [ -n "${FASTQ_LIST}" ] && [ ! -r "${FASTQ_LIST}" ]; then
+if [ -n "${FASTQ_LIST:-}" ] && [ ! -r "${FASTQ_LIST}" ]; then
   echo "Error: Can not find or read fastq list [${FASTQ_LIST}]." >&2
   _usage
   exit 1

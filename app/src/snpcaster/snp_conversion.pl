@@ -22,9 +22,9 @@ $gap = 0;
 # 3. Remove masking region ($output_5-7)
 # 4. Create final_snp.fas ($output_8)
 my $output_1 = 'snp_position_sample_only.csv';   # $snp_fileのうち、サンプル間で差異があるSNPのみを出力したファイル
-my $output_2 = 'snp_position_without_clusterSNP.csv';   # 隣接SNPを除いたファイル
-my $output_3 = 'snp_position_without_clusterSNP_sample_only.csv';   # 隣接SNPを除いたファイル
-my $output_4 = 'removed_clusterSNP.csv';               # 隣接SNPを含んだファイル
+my $output_2 = 'snp_position_without_clusteredSNP.csv';   # 隣接SNPを除いたファイル
+my $output_3 = 'snp_position_without_clusteredSNP_sample_only.csv';   # 隣接SNPを除いたファイル
+my $output_4 = 'removed_clusteredSNP.csv';               # 隣接SNPを含んだファイル
 my $output_5 = 'snp_position_after_masking.csv';       # maskなど指定領域を除いたファイル
 my $output_6 = 'snp_position_after_masking_sample_only.csv';       # snp_position_without_specified_region.csvのうち、サンプル間で差異があるSNPのみを出力したファイル
 my $output_7 = 'masked_region.csv';       # 除かれた領域のSNPファイル

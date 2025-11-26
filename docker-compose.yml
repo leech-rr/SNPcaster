@@ -1,7 +1,7 @@
 services:
   snpcaster:
-    container_name: snpcaster-0.9.4
-    image: snpcaster:0.9.4
+    container_name: snpcaster-0.9.5
+    image: snpcaster:0.9.5
     build:
       context: app
       dockerfile: Dockerfile
