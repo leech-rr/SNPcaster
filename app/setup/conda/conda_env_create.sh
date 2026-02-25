@@ -32,3 +32,13 @@ done
 
 ## Need to init the conda for bash
 mamba init --system bash
+
+
+## AMRfinder database download
+echo "Downloading AMRfinder database..."
+source activate amrfinder
+amrfinder --update
+conda deactivate
+echo "Downloading AMRfinder database done!"
+
+echo "All conda env creation done!"

@@ -106,6 +106,7 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
     ln -s /usr/local/src/snpcaster/grape_qc_assembly/grape_qc_assembly.sh /usr/local/bin/grape_qc_assembly.sh && \
     ln -s /usr/local/src/snpcaster/grape_qc_assembly/grape_qc_assembly_reduced_tree.sh /usr/local/bin/grape_qc_assembly_reduced_tree.sh && \
     ln -s /usr/local/src/snpcaster/grape_qc_assembly/fasterq_dump.sh /usr/local/bin/fasterq_dump.sh && \
+    ln -s /usr/local/src/snpcaster/grape_qc_assembly/amrfinder_batch.sh /usr/local/bin/amrfinder_batch.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/snpcaster.sh /usr/local/bin/snpcaster.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/snpclipper.sh /usr/local/bin/snpclipper.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/snpcaster_gubbins.sh /usr/local/bin/snpcaster_gubbins.sh && \
