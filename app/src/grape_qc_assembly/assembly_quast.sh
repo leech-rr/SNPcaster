@@ -34,7 +34,10 @@ post_process() {
   rm "${filtered_contig_file}" *.fai # remove seqkit information file
 
   source activate quast
-  quast --threads ${THREADS} "${contig_file}" -o "${quast_out_dir}"
+  # Quast's Total length is calculated by using --min-contig threshold(default: 500)
+  # We have removed small contigs by using seqkit seq -m ${CUTOFF_LENGTH},
+  # so Quast should calculate Total length with --min-contig 0.
+  quast --threads ${THREADS} --min-contig 0 "${contig_file}" -o "${quast_out_dir}"
   conda deactivate
 }
 
