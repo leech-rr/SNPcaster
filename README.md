@@ -6,6 +6,12 @@ SNPcaster is an analysis pipeline that performs the following processes on short
 - SNPcaster
   - SNP analysis + Phylogenetic tree construction
 
+## Custom ChatGPT
+We provide a dedicated custom ChatGPT to support you with questions and troubleshooting while using SNPcaster.<br/>
+You can access it from the URL below.<br/>  
+
+[SNPcaster GPT](https://chatgpt.com/g/g-69118b0d42f48191906ba605a540cba8-snpcaster-gpt)
+
 ## Installation
 Please follow the steps below to start SNPcaster.<br>
 Detailed installation instructions and usage are described in the [manual](/doc/manual/SNPcaster_manual_Japanese.pdf). Please refer to it if you have any questions.<br>

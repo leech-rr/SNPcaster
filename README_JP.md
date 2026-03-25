@@ -6,6 +6,12 @@ SNPcasterは次世代シーケンサーから得たショートリードデー�
 - SNPcaster
   - SNP解析 + 系統樹作成
 
+## カスタムChatGPT
+SNPcasterの利用にあたって、質問やエラーの解決をサポートする専用のカスタムChatGPTを用意しています。<br/>
+以下のURLからアクセスできますので、ぜひご活用ください。<br/> 
+
+[SNPcaster GPT](https://chatgpt.com/g/g-69118b0d42f48191906ba605a540cba8-snpcaster-gpt)
+
 ## インストール方法
 以下の手順でSNPcasterを起動してください。<br>
 詳細なインストール手順や使い方は[マニュアル](/doc/manual/SNPcaster_manual_Japanese.pdf)に記載しています。ご不明点がある場合はそちらをご覧ください。<br>
