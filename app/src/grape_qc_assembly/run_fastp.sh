@@ -61,5 +61,4 @@ for line in "${lines[@]}"; do
   rm -f fastp.json fastp.html 
 done
 
-rm -v *_12s.fastq
 echo `date +%Y%m%d_%H%M%S`
