@@ -1,10 +1,17 @@
 import pandas as pd
 import argparse
+import os
+import subprocess
+import logging
 
-parser = argparse.ArgumentParser(description='Create a summray for quality check result.')
-parser.add_argument('coverage_result',      type=str,   help='Coverage result')
-parser.add_argument('--checkm-result',      type=str,   help='Checkm result')
-parser.add_argument('--assembly-summary',   type=str,   help='Assembly summary',)
+logger = logging.getLogger(__name__)
+
+parser = argparse.ArgumentParser(description='Create a summary for quality check result.')
+parser.add_argument('--checkm-result',      type=str,   help='Checkm result file', required=True)
+parser.add_argument('--assembly-summary',   type=str,   help='Assembly summary file', required=True)
+parser.add_argument('--assembly-list',      type=str,   help='Assembly list file mapping strains to fastq files', required=True)
+parser.add_argument('--fastq-dir',         type=str,   help='Directory containing fastq files for coverage calculation', required=True)
+parser.add_argument('--threads',           type=int,   default=1, help='Number of threads for seqkit')
 parser.add_argument('--coverage-thresh',    type=float, help='Threshold for coverage')
 parser.add_argument('--max-contigs',        type=int,   help='Maximum number of contigs')
 parser.add_argument('--min-gen-size',       type=float, help='Minimum genome size')
@@ -14,48 +21,55 @@ parser.add_argument('--max-contamination',  type=float, help='Maximum contaminat
 
 args = parser.parse_args()
 
-input_file_1 = args.coverage_result
-input_file_2 = args.checkm_result
-input_file_3 = args.assembly_summary
-output_file = 'qc_results.xlsx'
+def calculate_read_stats(fastq_dir, fastq_filenames, threads=1):
+    """Calculate total read length for a strain using seqkit stats and specific files."""
+    fastq_files = []
+    for fname in fastq_filenames:
+        if fname.strip():
+            fastq_files.append(os.path.join(fastq_dir, fname.strip()))
+    
+    if not fastq_files:
+        logger.warning(f"No fastq files provided to calculate_read_stats in {fastq_dir}")
+        return 0, 0
 
-cr_coverage=args.coverage_thresh
-cr_max_contigs=args.max_contigs
-cr_min_gen_size=args.min_gen_size
-cr_max_gen_size=args.max_gen_size
-cr_min_completeness=args.min_completeness
-cr_max_contamination=args.max_contamination
+    # Ensure files exist before passing to seqkit
+    valid_files = [f for f in fastq_files if os.path.exists(f)]
+    if not valid_files:
+        logger.warning(f"None of the provided fastq files exist in {fastq_dir}: {fastq_files}")
+        return 0, 0
 
-print(f"Coverage file: {input_file_1}")
-print(f"Checkm file: {input_file_2}")
-print(f"Assembly summary file: {input_file_3}")
-print(f"Output file: {output_file}")
-print(f"Coverage threshold: {cr_coverage}")
-print(f"Max contigs: {cr_max_contigs}")
-print(f"Min genome size: {cr_min_gen_size}")
-print(f"Max genome size: {cr_max_gen_size}")
-print(f"Min completeness: {cr_min_completeness}")
-print(f"Max contamination: {cr_max_contamination}")
-
-df_coverage = pd.read_table(input_file_1)
-if args.checkm_result is None:
-    df_checkm = pd.DataFrame()
-else:
-    df_checkm = pd.read_table(input_file_2)
-if args.assembly_summary is None:
-    df_assembly = pd.DataFrame()
-else:
-    df_assembly = pd.read_table(input_file_3)
-
-n=len(df_coverage)
-
-cols = ['strain','no.of_reads','total_read_length','coverage','#contigs','largest_contig','total_length','marker_lineage','completeness','contamination', \
-        'qc_results','qc_coverage','qc_#_contigs','qc_total_length','qc_completeness','qc_contamination']
-df_qc = pd.DataFrame(index=[], columns=cols)
+    total_reads = 0
+    total_len = 0
+    
+    try:
+        # Use conda run -n seqkit seqkit stats if possible, or just seqkit if in environment
+        # Based on previous implementation, we try conda run
+        cmd = ['conda', 'run', '-n', 'seqkit', 'seqkit', 'stats', '-T', '-j', str(threads)] + valid_files
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        
+        lines = result.stdout.strip().split('\n')
+        if len(lines) < 2:
+            return 0,0
+            
+        header = lines[0].split('\t')
+        num_seqs_idx = header.index('num_seqs')
+        sum_len_idx = header.index('sum_len')
+        
+        for line in lines[1:]:
+            parts = line.split('\t')
+            total_reads += int(parts[num_seqs_idx].replace(',', ''))
+            total_len += int(parts[sum_len_idx].replace(',', ''))
+            
+    except Exception as e:
+        logger.error(f"Error running seqkit for files {valid_files}: {e}")
+        return 0, 0
+        
+    return total_reads, total_len
 
 NA = 'N/A'
 PASS = 'pass'
 FAIL = 'fail'
+
 def to_float_or_none(x):
     """Return float(x) or None if conversion fails or x is NA-like."""
     try:
@@ -81,6 +95,69 @@ def to_int_or_none(x):
     except Exception as e:
         # Raise a clear ValueError so caller knows which value failed to parse
         raise ValueError(f"to_int_or_none: cannot convert {x!r} to int") from e
+
+input_file_2 = args.checkm_result
+input_file_3 = args.assembly_summary
+output_file = 'qc_results.xlsx'
+
+cr_coverage=args.coverage_thresh
+cr_max_contigs=args.max_contigs
+cr_min_gen_size=args.min_gen_size
+cr_max_gen_size=args.max_gen_size
+cr_min_completeness=args.min_completeness
+cr_max_contamination=args.max_contamination
+
+print(f"Checkm file: {input_file_2}")
+print(f"Assembly summary file: {input_file_3}")
+print(f"Assembly list file: {args.assembly_list}")
+print(f"Fastq directory: {args.fastq_dir}")
+print(f"Output file: {output_file}")
+print(f"Coverage threshold: {cr_coverage}")
+print(f"Max contigs: {cr_max_contigs}")
+print(f"Min genome size: {cr_min_gen_size}")
+print(f"Max genome size: {cr_max_gen_size}")
+print(f"Min completeness: {cr_min_completeness}")
+print(f"Max contamination: {cr_max_contamination}")
+
+df_assembly = pd.read_table(input_file_3)
+
+# Parse assembly list mapping
+strain_to_fastq = {}
+with open(args.assembly_list, 'r') as f:
+    for line in f:
+        line = line.strip()
+        if not line:
+            continue
+        parts = line.split('\t')
+        if len(parts) > 1:
+            strain_to_fastq[parts[0]] = parts[1:]
+        else:
+            strain_to_fastq[parts[0]] = []
+
+# Build df_coverage from assembly summary and fastq stats
+coverage_data = []
+for i in range(len(df_assembly)):
+    strain = str(df_assembly.iloc[i, 0]).strip()
+    if strain.endswith('_s'): # skip scaffolds
+        continue
+        
+    total_len_assembly = to_float_or_none(df_assembly.iloc[i, 15]) # 'Total length' column
+    
+    if strain not in strain_to_fastq:
+        raise KeyError(f"Strain '{strain}' found in assembly summary but missing from assembly list.")
+    reads, total_read_len = calculate_read_stats(args.fastq_dir, strain_to_fastq[strain], args.threads)
+        
+    coverage = total_read_len / total_len_assembly if total_len_assembly and total_len_assembly > 0 else 0
+    coverage_data.append([strain, reads, total_read_len, coverage])
+
+df_coverage = pd.DataFrame(coverage_data, columns=['strain', 'no. of reads', 'total read length', 'coverage'])
+df_checkm = pd.read_table(input_file_2)
+
+n=len(df_coverage)
+
+cols = ['strain','no.of_reads','total_read_length','coverage','#contigs','largest_contig','total_length','marker_lineage','completeness','contamination', \
+        'qc_results','qc_coverage','qc_#_contigs','qc_total_length','qc_completeness','qc_contamination']
+df_qc = pd.DataFrame(index=[], columns=cols)
 
 for i in range(len(df_coverage)):
     strain_cov = df_coverage.iloc[i,0]
@@ -176,7 +253,6 @@ print(df_qc)
 df_qc.to_csv('qc_results.tsv', sep='\t', index=False)
 
 with pd.ExcelWriter(output_file) as writer:
-    df_coverage.to_excel(writer, sheet_name="coverage", index=False)
     df_checkm.to_excel(writer, sheet_name="checkm_results", index=False)
     df_assembly.to_excel(writer, sheet_name="assembly_summary", index=False)
     df_qc.to_excel(writer,sheet_name="qc", index=False)

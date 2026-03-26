@@ -5,6 +5,7 @@ CMDNAME=`basename $0`
 echo $CMDNAME
 
 DIR=${BAC1}/grape_qc_assembly
+ASSEMBLY_LIST="list_assembly.tsv"
 source "${DIR}/strain_list_functions.sh"
 
 function _usage(){
@@ -31,7 +32,6 @@ __EOF__
 # - INITIAL_DIR: Initial directory
 # - ASSEMBLER: Assembler to use (p for SPAdes, k for Skesa)
 # - THREAD: Number of threads
-# - OVER_COVERAGE_STRAIN_LIST: list of strains over coverage
 # - EXT: Extension for contig files (Default: fasta)
 # - SCAFFOLD: Create scaffold by SPAdes [1: create, 0: not create] (0 by default, if you choose Skesa, this option will be ignored)
 # - CLEANUP: Cleanup intermediate data like quast raw result [1: cleanup, 0: not cleanup] (1 by default)
@@ -42,16 +42,15 @@ __EOF__
 # - CHECKM_RESULT: CheckM result file
 function assembly_and_qc() {
   # Assembly + Quast
-  ASSEMBLY_LIST="list_assembly.tsv"
   > "${ASSEMBLY_LIST}"
   if [ $FASTP = "1" ]; then
     input_dir=${FASTP_DIR}
-    for strain in `cat "$OVER_COVERAGE_STRAIN_LIST"`; do
+    for strain in `extract_strain_names "${LIST}"`; do
       echo -e "${strain}\t${strain}_1.fastq.gz\t${strain}_2.fastq.gz\t${strain}_u1.fastq.gz\t${strain}_u2.fastq.gz" >> "${ASSEMBLY_LIST}"
     done
   else
     input_dir=${INITIAL_DIR}
-    filter_fastq_list "${LIST}" "${OVER_COVERAGE_STRAIN_LIST}" > "${ASSEMBLY_LIST}"
+    cp -p "${LIST}" "${ASSEMBLY_LIST}"
   fi
   bash ${DIR}/assembly_quast.sh -a ${ASSEMBLER} -t ${THREAD} -i "${input_dir}" -l "${ASSEMBLY_LIST}" -x ${EXT} -s ${SCAFFOLD} -c ${CLEANUP} -L ${CUTOFF_LENGTH}
 
@@ -133,6 +132,12 @@ if [ -z "${LIST}" ]; then
   exit 0
 fi
 
+num_all_strains=$(cat "${LIST}" | wc -l)
+if [ "$num_all_strains" -lt 1 ]; then
+  echo "No strains are listed in ${LIST}."
+  exit 1
+fi
+
 if [ "${ASSEMBLER}" != "P" ] && [ "${ASSEMBLER}" != "p" ] && [ "${ASSEMBLER}" != "K" ] && \
    [ "${ASSEMBLER}" != "k" ]; then
   echo 'Enter p or k for ASSEMBLER'
@@ -166,8 +171,6 @@ fi
 
 
 # variables
-OVER_COVERAGE_STRAIN_LIST=list_over_coverage
-rm -f $OVER_COVERAGE_STRAIN_LIST
 
 INITIAL_DIR=$(pwd)
 EXT=fasta
@@ -216,9 +219,6 @@ if [ -n "$CONFIG" ]; then
     elif [[ "$line" =~ "Min" ]] || [[ "$line" =~ "min" ]]; then
       echo "MIN GENOME SIZE:" ${val}
       qc_summary_options+=("--min-gen-size" "${val}")
-    else
-      SIZE=${val}
-      echo "GENOME_SIZE:" $SIZE
     fi
   done < $CONFIG
   IFS="$OIFS"
@@ -233,35 +233,26 @@ cd "${OUTPUT_DIR}"
 
 # FASTP result directory
 FASTP_DIR="${OUTPUT_DIR}/fastp"
-mkdir "${FASTP_DIR}"
-
-bash ${DIR}/cov_calculator_fastp.sh "${INITIAL_DIR}" "${LIST}" "${FASTP_DIR}" "${THREAD}" "${SIZE:-}"
-
-
-# get new list of over coverage
-if [ -n "${COVERAGE:-}" ]; then
-  source activate perl-bioperl-core
-  perl ${DIR}/get_cov_over40.pl "${OVER_COVERAGE_STRAIN_LIST}" "${COVERAGE:-}"
-  conda deactivate
-else
-  extract_strain_names "${LIST}" "${OVER_COVERAGE_STRAIN_LIST}"
+if [ $FASTP = "1" ]; then
+  mkdir "${FASTP_DIR}"
+  bash ${DIR}/run_fastp.sh "${INITIAL_DIR}" "${LIST}" "${FASTP_DIR}" "${THREAD}"
 fi
 
 # Assembly and QC
-num_over_coverage=$(cat "${OVER_COVERAGE_STRAIN_LIST}" | wc -l)
-if [ "$num_over_coverage" -gt 0 ]; then
-  assembly_and_qc
-  qc_summary_options+=("--checkm-result" "${CHECKM_RESULT}")
-  qc_summary_options+=("--assembly-summary" "${ASSEMBLY_SUMMARY_FILE}")
+assembly_and_qc
+
+fastq_input_dir=${INITIAL_DIR}
+if [ $FASTP = "1" ]; then
+  fastq_input_dir=${FASTP_DIR}
 fi
 
 source activate original
-COVERAGE_FILE="${OUTPUT_DIR}/coverage.txt"
-python ${DIR}/write_grape_qc.py "${COVERAGE_FILE}" ${qc_summary_options[@]}
+# assembly_quast.sh hardcodes quast result dir as "quast"
+python ${DIR}/write_grape_qc.py --checkm-result "${CHECKM_RESULT}" --assembly-summary "${ASSEMBLY_SUMMARY_FILE}" --assembly-list "${ASSEMBLY_LIST}" --fastq-dir "${fastq_input_dir}" --threads "${THREAD}" ${qc_summary_options[@]}
 conda deactivate
 
-# remove fastp directory
+# remove intermediate data
 if [ $CLEANUP = "1" ]; then
-  rm -r ${FASTP_DIR}
-  rm -r ${CHECKM_DIR}
+  [ -d "${FASTP_DIR}" ] && rm -r "${FASTP_DIR}"
+  [ -d "${CHECKM_DIR}" ] && rm -r "${CHECKM_DIR}"
 fi
