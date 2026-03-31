@@ -21,6 +21,7 @@ function _usage() {
   -g      Run Gubbins [1: run, 0: don't run]              (Default: 0)
   -j      Number of Jobs for BactSNP                      (Default: 4)
   -t      Number of Threads                               (Default: 8)
+  -v      Show version
 
   [File Format Specifications]
 
@@ -71,8 +72,12 @@ THREAD=8
 JOBS=4
 EXEC_GUBBINS=0
 FASTQ_LIST=""
-while getopts "d:i:r:a:c:f:g:j:t:" optKey; do
+while getopts "d:i:r:a:c:f:g:j:t:v" optKey; do
   case "$optKey" in
+  v)
+    echo "SNPCaster v$(get_version)"
+    exit 0
+    ;;
   d)
     MASK_FILE=${OPTARG}
     ;;

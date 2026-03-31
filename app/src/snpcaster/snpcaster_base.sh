@@ -164,16 +164,13 @@ function process_bactsnp() {
   conda deactivate
 
   local PSEUDO_GENOME_DIR="${BACTSNP_OUTDIR}"/pseudo_genome
-  local TITLE="#CHROM\tPOS\tID\tREF\tALT"
-  source activate perl-bioperl-core
+  source activate original
   for strain in $(extract_strain_names "${BACTSNP_LIST}"); do
     file=${PSEUDO_GENOME_DIR}/${strain}.fa
-    perl "${SNPCASTER_SRC_DIR}"/bactsnp_vcf_script.pl "${REFERENCE_FILE}" "${file}"
-    # Add title to the result file
-    sed -i "1i ${TITLE}" result_vcf.txt
+    python "${SNPCASTER_SRC_DIR}"/vcf_converter.py "${file}" "${REFERENCE_FILE}" "${strain}"
     # Create SNP folder for each strain
     mkdir -v "${strain}"
-    mv -v result_vcf.txt "${strain}"/snps.vcf
+    mv -v "${strain}.vcf" "${strain}"/snps.vcf
     cp -v "${file}" "${strain}"/snps.aligned.fa
   done
   conda deactivate
