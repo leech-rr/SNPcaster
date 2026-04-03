@@ -139,6 +139,14 @@ def main():
         # bcftools keeps VCFv4.1 from snp-sites. Force it to VCFv4.2 via command line string replacement.
         subprocess.run(["sed", "-i", "s/^##fileformat=VCFv4.1/##fileformat=VCFv4.2/", final_vcf])
 
+        # Delete the auto-generated FASTA index (.fai) file
+        fai_path = f"{args.ref_fasta}.fai"
+        if os.path.exists(fai_path):
+            try:
+                os.remove(fai_path)
+            except Exception as e:
+                print(f"Warning: could not delete {fai_path}: {e}", file=sys.stderr)
+
         print(f"Successfully created {final_vcf}", file=sys.stderr)
 
 if __name__ == "__main__":
