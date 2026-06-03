@@ -169,6 +169,9 @@ while IFS=$'\n' read -r strain || [[ -n "$strain" ]]; do
   mv -f "$out" "$TS_DIR/"
 done < "$INPUT_LIST"
 
+echo "[INFO] Merging AMRFinder results..."
+conda run -n original merge_amrfinder.py "$TS_DIR" "$INPUT_LIST" "$TS_DIR"
+
 echo "[INFO] Done. Results in: $TS_DIR ; logs in: $LOG_DIR"
 
 conda deactivate
