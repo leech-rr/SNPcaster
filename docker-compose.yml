@@ -2,6 +2,7 @@ services:
   snpcaster:
     container_name: snpcaster-1.0.1a
     image: snpcaster:1.0.1a
+    shm_size: '2gb'
     build:
       context: app
       dockerfile: Dockerfile
