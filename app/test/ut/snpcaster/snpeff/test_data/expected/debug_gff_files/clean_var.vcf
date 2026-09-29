@@ -1,0 +1,16 @@
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##contig=<ID=BA000007.3,length=5498578>
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##fileDate=20260407
+##source=SNPCaster_v1.0.0
+##reference=Sakai_BA000007.fasta
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##SnpEffVersion="5.4c (build 2026-02-23 07:25), by Pablo Cingolani"
+##SnpEffCmd="SnpEff  -i vcf -o vcf -csvStats /home/snpcaster/notebook/project/Snpeff_test/test_data/expected/strain_B_summary.csv snpeff-custom /home/snpcaster/notebook/project/Snpeff_test/test_data/input_vcf/strain_B/snps.vcf "
+##INFO=<ID=ANN,Number=.,Type=String,Description="Functional annotations: 'Allele | Annotation | Annotation_Impact | Gene_Name | Gene_ID | Feature_Type | Feature_ID | Transcript_BioType | Rank | HGVS.c | HGVS.p | cDNA.pos / cDNA.length | CDS.pos / CDS.length | AA.pos / AA.length | Distance | ERRORS / WARNINGS / INFO' ">
+##INFO=<ID=LOF,Number=.,Type=String,Description="Predicted loss of function effects for this variant. Format: 'Gene_Name | Gene_ID | Number_of_transcripts_in_gene | Percent_of_transcripts_affected'">
+##INFO=<ID=NMD,Number=.,Type=String,Description="Predicted nonsense mediated decay effects for this variant. Format: 'Gene_Name | Gene_ID | Number_of_transcripts_in_gene | Percent_of_transcripts_affected'">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SRR9694420
+BA000007.3	3798	.	G	T	.	.	AC=1;AN=1;ANN=T|synonymous_variant|LOW|thrC|ECs_0004|transcript|ECs_0004|protein_coding|1/1|c.48G>T|p.Ala16Ala|48/1287|48/1287|16/428||,T|downstream_gene_variant|MODIFIER|thrB|ECs_0003|transcript|ECs_0003|protein_coding||c.*48G>T|||||48|	GT	1/1

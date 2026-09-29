@@ -1,0 +1,16 @@
+# The following table is formatted as tab separated values. 
+#GeneName	GeneId	TranscriptId	BioType	variants_impact_LOW	variants_impact_MODERATE	variants_impact_MODIFIER	variants_effect_downstream_gene_variant	variants_effect_missense_variant	variants_effect_synonymous_variant	variants_effect_upstream_gene_variant
+dnaJ	ECs_0015	ECs_0015	protein_coding	8	0	1	0	0	8	1
+dnaK	ECs_0014	ECs_0014	protein_coding	15	0	7	0	0	15	7
+mog	ECs_0009	ECs_0009	protein_coding	6	2	2	2	2	6	0
+satP	ECs_0010	ECs_0010	protein_coding	2	0	8	6	0	2	2
+talB	ECs_0008	ECs_0008	protein_coding	6	0	3	2	0	6	1
+thrA	ECs_0002	ECs_0002	protein_coding	30	1	6	4	1	30	2
+thrB	ECs_0003	ECs_0003	protein_coding	13	1	5	2	1	13	3
+thrC	ECs_0004	ECs_0004	protein_coding	10	0	11	8	0	10	3
+thrL	ECs_0001	ECs_0001	protein_coding	0	0	3	1	0	0	2
+yaaA	ECs_0006	ECs_0006	protein_coding	8	0	8	4	0	8	4
+yaaI	ECs_0013	ECs_0013	protein_coding	6	2	16	5	2	6	11
+yaaJ	ECs_0007	ECs_0007	protein_coding	14	5	6	5	5	14	1
+yaaW	ECs_0012	ECs_0012	protein_coding	11	2	4	1	2	11	3
+yaaX	ECs_0005	ECs_0005	protein_coding	5	2	12	4	2	5	8
