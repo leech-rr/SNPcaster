@@ -3,7 +3,6 @@ import argparse
 import subprocess
 import tempfile
 import os
-import shutil
 import sys
 import datetime
 
@@ -62,7 +61,12 @@ def main():
         try:
             with open(temp_combined_fasta, "w") as out_f:
                 with open(args.ref_fasta, "r") as ref_f:
-                    shutil.copyfileobj(ref_f, out_f)
+                    ref_content = ref_f.read()
+                out_f.write(ref_content)
+                # Ensure the reference ends with a newline; otherwise the next
+                # header line ('>...') would be glued onto the last sequence line.
+                if ref_content and not ref_content.endswith("\n"):
+                    out_f.write("\n")
                 
                 with open(args.source_fasta, "r") as src_f:
                     for line in src_f:
@@ -75,7 +79,19 @@ def main():
             sys.exit(1)
 
         raw_vcf = os.path.join(temp_dir, "raw.vcf")
-        run_command(["snp-sites", "-v", temp_combined_fasta, "-o", raw_vcf])
+        snp_sites_result = run_command(["snp-sites", "-v", temp_combined_fasta, "-o", raw_vcf], check=False)
+        if snp_sites_result.returncode != 0:
+            if "No SNPs were detected" in (snp_sites_result.stderr or ""):
+                print("Note: no SNPs between reference and sample. Generating a header-only VCF.", file=sys.stderr)
+                # Mimic snp-sites header (contig is '1'; renamed to the real name later)
+                with open(raw_vcf, "w") as f:
+                    f.write("##fileformat=VCFv4.1\n")
+                    f.write(f"##contig=<ID=1,length={contig_length}>\n")
+                    f.write('##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">\n')
+                    f.write(f"#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t{args.target_id}\n")
+            else:
+                print(f"Error running snp-sites\n{snp_sites_result.stderr}", file=sys.stderr)
+                sys.exit(snp_sites_result.returncode)
 
         # Step 2: Reformatting and Reheadering via bcftools        
 
