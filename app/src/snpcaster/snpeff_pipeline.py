@@ -6,8 +6,9 @@ import sys
 import shutil
 import logging
 import re
+import bisect
 from dataclasses import dataclass, field
-from typing import List, Optional, IO, Dict
+from typing import List, Optional, IO, Dict, Tuple
 
 # ==============================================================================
 # Constants
@@ -38,17 +39,11 @@ logger = logging.getLogger("snpeff_pipeline")
 class EnvironmentConfig:
     """Configuration for Conda environments."""
     snpeff_env: str = "snpeff"
-    bcftools_env: str = "snippy"
-    snippy_env: str = "snippy"
-    bioperl_env: str = "perl-bioperl-core"
 
     @classmethod
     def from_args(cls, args: argparse.Namespace) -> "EnvironmentConfig":
         return cls(
             snpeff_env=args.snpeff_env,
-            bcftools_env=args.bcftools_env,
-            snippy_env=args.snippy_env,
-            bioperl_env=getattr(args, "bioperl_env", "perl-bioperl-core"),
         )
 
 
@@ -145,9 +140,6 @@ class AnnotationConfig:
 def parse_args(sys_args: Optional[List[str]] = None) -> argparse.Namespace:
     parent_parser = argparse.ArgumentParser(add_help=False)
     parent_parser.add_argument("--snpeff_env", default="snpeff", help="Conda environment for SnpEff")
-    parent_parser.add_argument("--bcftools_env", default="snippy", help="Conda environment for bcftools")
-    parent_parser.add_argument("--snippy_env", default="snippy", help="Conda environment for Snippy (e.g., snippy-vcf_to_tab)")
-    parent_parser.add_argument("--bioperl_env", default="perl-bioperl-core", help="Conda environment for BioPerl tools (e.g., bp_genbank2gff3.pl)")
 
     parser = argparse.ArgumentParser(description="Utilities & Pipeline for SnpEff: Build database and run batch annotation.")
     subparsers = parser.add_subparsers(dest="command", required=True, help="Sub-commands")
@@ -191,23 +183,42 @@ def parse_args(sys_args: Optional[List[str]] = None) -> argparse.Namespace:
 # ==============================================================================
 def run_command(
     cmd: List[str], 
-    env_name: str = "snippy", 
+    env_name: str = "snpeff", 
     check: bool = True, 
-    stdout: Optional[IO] = None
+    stdout: Optional[IO] = None,
+    log_file: Optional[str] = None
 ) -> subprocess.CompletedProcess:
-    """Run a command using conda run in the specified environment."""
+    """Run a command using conda run in the specified environment.
+
+    If log_file is given, the command's stderr (and stdout, unless `stdout` is
+    given) is written to that file instead of the console.
+    """
     env_flag = "-p" if (os.path.isabs(env_name) or env_name.startswith("./") or env_name.startswith("../")) else "-n"
     full_cmd = ["conda", "run", "--no-capture-output", env_flag, env_name] + cmd
 
-    if not stdout:
-        logger.info(f"Running: {' '.join(full_cmd)}")
-        result = subprocess.run(full_cmd, capture_output=False, text=True)
-    else:
-        logger.info(f"Running: {' '.join(full_cmd)} > {stdout.name if hasattr(stdout, 'name') else 'PIPE'}")
+    msg = f"Running: {' '.join(full_cmd)}"
+    if stdout:
+        msg += f" > {stdout.name if hasattr(stdout, 'name') else 'PIPE'}"
+    if log_file:
+        msg += f" (log: {log_file})"
+    logger.info(msg)
+
+    if log_file:
+        with open(log_file, "w") as log_f:
+            result = subprocess.run(
+                full_cmd,
+                stdout=stdout if stdout else log_f,
+                stderr=log_f,
+                text=True,
+            )
+    elif stdout:
         result = subprocess.run(full_cmd, stdout=stdout)
+    else:
+        result = subprocess.run(full_cmd, capture_output=False, text=True)
 
     if check and result.returncode != 0:
-        raise RuntimeError(f"Command failed (exit code {result.returncode}): {' '.join(full_cmd)}")
+        detail = f" See log file: {log_file}" if log_file else ""
+        raise RuntimeError(f"Command failed (exit code {result.returncode}): {' '.join(full_cmd)}.{detail}")
     return result
 
 
@@ -371,7 +382,7 @@ def adapt_annotation_for_db(annotation_file: str, output_file: str, mapping: Dic
     is_gbk = ext in [".gbk", ".gb", ".genbank", ".gbff"]
 
     if is_gbk:
-        def _write_gbk_record(lines: List[str], f_out: IO[str], mapping: Dict[str, str]) -> None:
+        def _write_gbk_record(lines: List[str], f_out: IO[str]) -> None:
             locus_val = None
             version_val = None
             for l in lines:
@@ -390,7 +401,6 @@ def adapt_annotation_for_db(annotation_file: str, output_file: str, mapping: Dic
             elif locus_val and locus_val in mapping:
                 target = mapping[locus_val]
 
-
             for l in lines:
                 if target:
                     if l.startswith("LOCUS"):
@@ -407,10 +417,10 @@ def adapt_annotation_for_db(annotation_file: str, output_file: str, mapping: Dic
             for line in f_in:
                 rec_lines.append(line)
                 if line.startswith("//"):
-                    _write_gbk_record(rec_lines, f_out, mapping)
+                    _write_gbk_record(rec_lines, f_out)
                     rec_lines = []
             if rec_lines:
-                _write_gbk_record(rec_lines, f_out, mapping)
+                _write_gbk_record(rec_lines, f_out)
 
     else:
         # GFF3 or GTF
@@ -456,207 +466,341 @@ def get_vcf_chromosomes(vcf_file: str) -> List[str]:
     return chromosomes
 
 
-def rename_chromosomes_bcftools(
-    input_vcf: str, 
-    output_vcf: str, 
-    chr_map_path: str, 
-    env_name: str = "snippy"
-) -> None:
-    """Rename chromosomes in VCF using bcftools annotate --rename-chrs."""
-    if not os.path.exists(chr_map_path):
-        logger.warning(f"Chromosome map file not found: {chr_map_path}")
-        shutil.copy(input_vcf, output_vcf)
-        return
 
-    cmd = ["bcftools", "annotate", "--no-version", "--rename-chrs", chr_map_path, input_vcf, "-o", output_vcf]
-    run_command(cmd, env_name=env_name, check=True)
+@dataclass
+class FeatureInfo:
+    ftype: str = ""
+    strand: str = "+"
+    locus_tag: str = ""
+    gene: str = ""
+    product: str = ""
+    chrom: str = ""
+    start: int = 0
+    end: int = 0
+
+
+def parse_annotation_features(
+    annotation_file: str
+) -> Tuple[Dict[str, FeatureInfo], Dict[str, FeatureInfo], Dict[str, List[FeatureInfo]]]:
+    """
+    Parse GenBank, GFF3, or GTF annotation file to extract feature attributes.
+    Returns:
+      features_by_locus: dict of locus_tag -> FeatureInfo
+      features_by_gene: dict of gene_name -> FeatureInfo
+      intervals_by_chrom: dict of chrom -> list of FeatureInfo
+    """
+    features_by_locus: Dict[str, FeatureInfo] = {}
+    features_by_gene: Dict[str, FeatureInfo] = {}
+    intervals_by_chrom: Dict[str, List[FeatureInfo]] = {}
+
+    if not annotation_file or not os.path.exists(annotation_file):
+        return features_by_locus, features_by_gene, intervals_by_chrom
+
+    ext = os.path.splitext(annotation_file)[1].lower()
+    is_gbk = ext in [".gbk", ".gb", ".genbank", ".gbff"]
+
+    if is_gbk:
+        _parse_genbank_features(annotation_file, features_by_locus, features_by_gene, intervals_by_chrom)
+    else:
+        _parse_gff_or_gtf_features(annotation_file, features_by_locus, features_by_gene, intervals_by_chrom)
+
+    return features_by_locus, features_by_gene, intervals_by_chrom
+
+
+def _parse_genbank_features(
+    filepath: str,
+    features_by_locus: Dict[str, FeatureInfo],
+    features_by_gene: Dict[str, FeatureInfo],
+    intervals_by_chrom: Dict[str, List[FeatureInfo]]
+) -> None:
+    current_chrom = ""
+    in_features = False
+    current_feat: Optional[FeatureInfo] = None
+    current_qual_key: Optional[str] = None
+    current_qual_val: List[str] = []
+
+    def commit_qual(feat: FeatureInfo, key: str, val: str):
+        val = val.strip().strip('"')
+        if key == "locus_tag":
+            feat.locus_tag = val
+        elif key == "gene":
+            feat.gene = val
+        elif key == "product":
+            feat.product = val
+        elif key == "note" and not feat.product:
+            feat.product = val
+
+    def commit_feat(feat: Optional[FeatureInfo]):
+        if not feat or feat.ftype.lower() in ["source", "region"]:
+            return
+        if feat.locus_tag:
+            if feat.locus_tag not in features_by_locus or feat.ftype == "CDS":
+                features_by_locus[feat.locus_tag] = feat
+        if feat.gene:
+            if feat.gene not in features_by_gene or feat.ftype == "CDS":
+                features_by_gene[feat.gene] = feat
+        if feat.chrom:
+            intervals_by_chrom.setdefault(feat.chrom, []).append(feat)
+
+    try:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                if line.startswith("LOCUS"):
+                    parts = line.split()
+                    if len(parts) > 1:
+                        current_chrom = parts[1]
+                    in_features = False
+                elif line.startswith("VERSION"):
+                    parts = line.split()
+                    if len(parts) > 1 and parts[1] != ".":
+                        current_chrom = parts[1]
+                elif line.startswith("FEATURES"):
+                    in_features = True
+                    current_feat = None
+                elif line.startswith("ORIGIN") or line.startswith("//"):
+                    if current_feat:
+                        if current_qual_key:
+                            commit_qual(current_feat, current_qual_key, " ".join(current_qual_val))
+                            current_qual_key = None
+                        commit_feat(current_feat)
+                        current_feat = None
+                    in_features = False
+                elif in_features:
+                    if line.startswith("     ") and not line.startswith("      "):
+                        if current_feat:
+                            if current_qual_key:
+                                commit_qual(current_feat, current_qual_key, " ".join(current_qual_val))
+                                current_qual_key = None
+                            commit_feat(current_feat)
+
+                        parts = line.strip().split(None, 1)
+                        ftype = parts[0]
+                        loc = parts[1] if len(parts) > 1 else ""
+                        strand = "-" if "complement" in loc else "+"
+                        coords = [int(n) for n in re.findall(r"\d+", loc)]
+                        start = min(coords) if coords else 0
+                        end = max(coords) if coords else 0
+                        current_feat = FeatureInfo(
+                            ftype=ftype, strand=strand, chrom=current_chrom, start=start, end=end
+                        )
+                    elif current_feat and "/" in line:
+                        if current_qual_key:
+                            commit_qual(current_feat, current_qual_key, " ".join(current_qual_val))
+                        m = re.search(r"/([a-zA-Z0-9_]+)(?:=(.*))?", line.strip())
+                        if m:
+                            current_qual_key = m.group(1)
+                            val = m.group(2) if m.group(2) is not None else ""
+                            current_qual_val = [val]
+                    elif current_feat and current_qual_key:
+                        current_qual_val.append(line.strip())
+
+        if current_feat:
+            if current_qual_key:
+                commit_qual(current_feat, current_qual_key, " ".join(current_qual_val))
+            commit_feat(current_feat)
+    except Exception as e:
+        logger.warning(f"Error parsing GenBank file '{filepath}': {e}")
+
+
+def _parse_gff_or_gtf_features(
+    filepath: str,
+    features_by_locus: Dict[str, FeatureInfo],
+    features_by_gene: Dict[str, FeatureInfo],
+    intervals_by_chrom: Dict[str, List[FeatureInfo]]
+) -> None:
+    try:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                if line.startswith("#"):
+                    continue
+                parts = line.strip().split("\t")
+                if len(parts) < 9:
+                    continue
+                chrom, _, ftype, start_str, end_str, _, strand, _, attr_str = parts[:9]
+                if ftype.lower() in ["region", "source"]:
+                    continue
+                try:
+                    start = int(start_str)
+                    end = int(end_str)
+                except ValueError:
+                    continue
+
+                attr_dict = {}
+                for item in attr_str.strip().split(";"):
+                    item = item.strip()
+                    if not item:
+                        continue
+                    if "=" in item:
+                        k, v = item.split("=", 1)
+                        attr_dict[k.strip()] = v.strip().strip('"')
+                    else:
+                        m = re.match(r'^(\S+)\s+(.+)$', item)
+                        if m:
+                            k = m.group(1).strip()
+                            v = m.group(2).strip().strip('"')
+                            attr_dict[k] = v
+
+                locus_tag = attr_dict.get("locus_tag", "")
+                gene = attr_dict.get("gene", "") or attr_dict.get("gene_name", "") or attr_dict.get("Name", "")
+                product = attr_dict.get("product", "") or attr_dict.get("description", "")
+                if not locus_tag:
+                    locus_tag = attr_dict.get("gene_id", "") or attr_dict.get("ID", "")
+                if not gene:
+                    gene = attr_dict.get("gene_id", "")
+
+                feat = FeatureInfo(
+                    ftype=ftype,
+                    strand=strand if strand in ["+", "-"] else "+",
+                    locus_tag=locus_tag,
+                    gene=gene,
+                    product=product,
+                    chrom=chrom,
+                    start=start,
+                    end=end
+                )
+
+                if locus_tag:
+                    if locus_tag not in features_by_locus or ftype == "CDS":
+                        features_by_locus[locus_tag] = feat
+                if gene:
+                    if gene not in features_by_gene or ftype == "CDS":
+                        features_by_gene[gene] = feat
+                intervals_by_chrom.setdefault(chrom, []).append(feat)
+    except Exception as e:
+        logger.warning(f"Error parsing GFF/GTF file '{filepath}': {e}")
 
 
 def generate_snippy_tab(
     vcf_path: str,
     output_tab_path: str,
-    annotation_file: str,
-    ref_fa: str,
-    env_name: str = "snippy",
-    bioperl_env: str = "perl-bioperl-core"
+    annotation_file: str
 ) -> None:
-    """Generate Snippy-style snps.tab table using bp_genbank2gff3 and snippy-vcf_to_tab."""
+    """
+    Generate Snippy-style snps.tab table from annotated VCF and reference annotation.
+    Pure Python implementation supporting accurate upstream/downstream gene annotations.
+    """
     if not vcf_path or not os.path.exists(vcf_path):
         return
 
-    ext = os.path.splitext(annotation_file)[1].lower() if annotation_file else ""
-    is_gbk = ext in [".gbk", ".gb", ".genbank", ".gbff"]
+    features_by_locus, features_by_gene, intervals_by_chrom = parse_annotation_features(annotation_file)
 
-    # Use a persistent debug directory in output folder for verification
-    out_dir = os.path.dirname(output_tab_path)
-    debug_dir = os.path.join(out_dir, "debug_gff_files")
-    os.makedirs(debug_dir, exist_ok=True)
+    # Pre-sort intervals and pre-extract start coordinates for fast binary search
+    sorted_chrom_feats: Dict[str, List[FeatureInfo]] = {}
+    sorted_chrom_starts: Dict[str, List[int]] = {}
+    for chrom, feats in intervals_by_chrom.items():
+        sorted_feats = sorted(feats, key=lambda f: f.start)
+        sorted_chrom_feats[chrom] = sorted_feats
+        sorted_chrom_starts[chrom] = [f.start for f in sorted_feats]
 
-    ref_gff = annotation_file if not is_gbk else None
-    target_vcf = vcf_path
-
-    if is_gbk and annotation_file and os.path.exists(annotation_file):
-        # Convert GBK to GFF3 using bp_genbank2gff3.pl (perl-bioperl-core) or bp_genbank2gff3
-        #    -noinfer: don't infer exon/mRNA subfeatures (L1022: passed to unflatten_seq)
-        #    --filter gene: remove gene features from output (L1049: sub filter)
-        #    --filter exon: remove exon features from output
-        derived_gff = os.path.join(debug_dir, "derived_ref.gff")
-        bp_cmd = ["perl", "-S", "bp_genbank2gff3.pl", "-noinfer", "--filter", "gene", "--filter", "exon", "-out", "stdout", annotation_file]
-        try:
-            with open(derived_gff, "w") as out_gff_f:
-                result = run_command(bp_cmd, env_name=bioperl_env, stdout=out_gff_f, check=False)
-                if result.returncode != 0:
-                    fallback_cmd = ["perl", "-S", "bp_genbank2gff3", "-noinfer", "--filter", "gene", "--filter", "exon", "-out", "stdout", annotation_file]
-                    out_gff_f.seek(0)
-                    out_gff_f.truncate(0)
-                    run_command(fallback_cmd, env_name=bioperl_env, stdout=out_gff_f, check=False)
-            if os.path.exists(derived_gff) and os.path.getsize(derived_gff) > 0:
-                ref_gff = derived_gff
-        except Exception as e:
-            logger.warning(f"Could not convert GBK to GFF3: {e}")
-
-    # Clean FASTA/GFF/VCF:
-    # 1. Filter out GFF features that do not exist in the reference FASTA file
-    # 2. Auto-map VCF CHROM names to reference FASTA sequence IDs if they differ.
-    valid_seq_ids = []
-    if ref_fa and os.path.exists(ref_fa):
-        clean_fa = os.path.join(debug_dir, "clean_ref.fa")
-        try:
-            with open(ref_fa, "r") as f_in, open(clean_fa, "w") as f_out:
-                for line in f_in:
-                    if line.startswith(">"):
-                        seq_id = line.split()[0][1:]
-                        if seq_id not in valid_seq_ids:
-                            valid_seq_ids.append(seq_id)
-                        f_out.write(f">{seq_id}\n")
-                    else:
-                        f_out.write(line)
-            ref_fa = clean_fa
-        except Exception as e:
-            logger.warning(f"Could not prepare cleaned FASTA for Snippy tab: {e}")
-
-    valid_seq_set = set(valid_seq_ids)
-
-    if ref_gff and os.path.exists(ref_gff):
-        clean_gff = os.path.join(debug_dir, "clean_ref.gff")
-        try:
-            with open(ref_gff, "r") as f_in, open(clean_gff, "w") as f_out:
-                for line in f_in:
-                    if line.startswith("#"):
-                        f_out.write(line)
-                        continue
-                    parts = line.split("\t")
-                    if len(parts) < 9:
-                        f_out.write(line)
-                        continue
-                    seq_id = parts[0]
-                    ftype = parts[2]
-                    # Filter out sequence IDs absent in FASTA
-                    if valid_seq_set and seq_id not in valid_seq_set:
-                        continue
-                    
-                    # Parse attributes supporting both GFF3 (key=value) and GTF (key "value")
-                    raw_attrs = parts[8].strip().split(";")
-                    attr_dict = {}
-                    attr_order = []
-                    for item in raw_attrs:
-                        item = item.strip()
-                        if not item:
-                            continue
-                        if "=" in item:
-                            k, v = item.split("=", 1)
-                            k = k.strip()
-                            v = v.strip()
-                            attr_dict[k] = v
-                            if k not in attr_order:
-                                attr_order.append(k)
-                        else:
-                            m = re.match(r'^(\S+)\s+(.+)$', item)
-                            if m:
-                                k = m.group(1).strip()
-                                val_part = m.group(2).strip()
-                                vals = re.findall(r'"([^"]*)"', val_part)
-                                v = ",".join(vals) if vals else val_part.strip('"')
-                                attr_dict[k] = v
-                                if k not in attr_order:
-                                    attr_order.append(k)
-
-                    # For CDS features, ensure 'gene' and 'locus_tag' attributes exist
-                    if ftype.upper() == "CDS":
-                        if "gene" not in attr_dict or not attr_dict["gene"]:
-                            for candidate in ["Name", "gene_name", "gene_id"]:
-                                if candidate in attr_dict and attr_dict[candidate]:
-                                    attr_dict["gene"] = attr_dict[candidate]
-                                    if "gene" not in attr_order:
-                                        attr_order.append("gene")
-                                    break
-                        if "locus_tag" not in attr_dict or not attr_dict["locus_tag"]:
-                            for candidate in ["gene_id", "transcript_id", "Name"]:
-                                if candidate in attr_dict and attr_dict[candidate]:
-                                    attr_dict["locus_tag"] = attr_dict[candidate]
-                                    if "locus_tag" not in attr_order:
-                                        attr_order.append("locus_tag")
-                                    break
-
-                    # Reconstruct attributes string in GFF3 format (key=value) so snippy-vcf_to_tab can parse it
-                    if attr_order:
-                        new_attr_str = ";".join([f"{k}={attr_dict[k]}" for k in attr_order])
-                        parts[8] = new_attr_str + "\n"
-                        line = "\t".join(parts)
-
-                    f_out.write(line)
-            ref_gff = clean_gff
-        except Exception as e:
-            logger.warning(f"Could not prepare cleaned GFF for Snippy tab: {e}")
-
-    if vcf_path and os.path.exists(vcf_path):
-        clean_vcf = os.path.join(debug_dir, "clean_var.vcf")
-        
-        # Determine target reference CHROM name for single-chromosome genomes
-        target_ref_chr = valid_seq_ids[0] if len(valid_seq_ids) == 1 else None
-
-        try:
-            with open(vcf_path, "r") as f_in, open(clean_vcf, "w") as f_out:
-                for line in f_in:
-                    if line.startswith("#"):
-                        f_out.write(line)
-                        continue
-                    parts = line.split("\t")
-                    if len(parts) < 8:
-                        f_out.write(line)
-                        continue
-                    vcf_chr = parts[0]
-                    # Remap CHROM to reference ID if single chromosome and name differs
-                    if target_ref_chr and vcf_chr not in valid_seq_set:
-                        parts[0] = target_ref_chr
-                    f_out.write("\t".join(parts))
-            target_vcf = clean_vcf
-        except Exception as e:
-            logger.warning(f"Could not prepare cleaned VCF for Snippy tab: {e}")
-
-    # Check if required FASTA and GFF3 reference files were successfully prepared
-    if not ref_fa or not ref_gff:
-        strain_name = os.path.basename(output_tab_path).replace(".snps.tab", "")
-        logger.warning(
-            f"Could not prepare FASTA/GFF3 for Snippy tab table for strain '{strain_name}'. Skipping."
-        )
-        return
-
-    # Use perl -X to suppress uninitialized value warnings from snippy-vcf_to_tab
-    cmd = ["perl", "-X", "-S", "snippy-vcf_to_tab"]
-    if ref_fa:
-        cmd += ["--ref", ref_fa]
-    if ref_gff:
-        cmd += ["--gff", ref_gff]
-    cmd += ["--vcf", target_vcf]
+    headers = [
+        "CHROM", "POS", "TYPE", "REF", "ALT",
+        "FTYPE", "STRAND", "NT_POS", "AA_POS", "EFFECT",
+        "LOCUS_TAG", "GENE", "PRODUCT"
+    ]
 
     try:
-        with open(output_tab_path, "w") as out_f:
-            run_command(cmd, env_name=env_name, check=False, stdout=out_f)
+        with open(vcf_path, "r", encoding="utf-8", errors="replace") as vcf_in, open(output_tab_path, "w", encoding="utf-8") as out:
+            out.write("\t".join(headers) + "\n")
+            for line in vcf_in:
+                if line.startswith("#"):
+                    continue
+                cols = line.strip().split("\t")
+                if len(cols) < 8:
+                    continue
+                chrom = cols[0]
+                try:
+                    pos = int(cols[1])
+                except ValueError:
+                    continue
+                ref = cols[3]
+                alt = cols[4]
+                info_str = cols[7]
+
+                info_tags = {}
+                for item in info_str.split(";"):
+                    if "=" in item:
+                        k, v = item.split("=", 1)
+                        info_tags[k] = v
+                    else:
+                        info_tags[item] = True
+
+                vcf_type = info_tags.get("TYPE", "")
+
+                # Parse SnpEff ANN field
+                ann_raw = info_tags.get("ANN", "")
+                first_ann = ann_raw.split(",")[0] if ann_raw else ""
+                eff = first_ann.split("|") if first_ann else []
+
+                effect_str = ""
+                nt_pos = ""
+                aa_pos = ""
+                ann_gene = ""
+                ann_locus = ""
+
+                if eff and len(eff) > 1:
+                    annotation = eff[1] if len(eff) > 1 else ""
+                    ann_gene = eff[3] if len(eff) > 3 else ""
+                    ann_locus = eff[4] if len(eff) > 4 else ""
+                    hgvs_c = eff[9] if len(eff) > 9 else ""
+                    hgvs_p = eff[10] if len(eff) > 10 else ""
+                    nt_pos = eff[11] if len(eff) > 11 else ""
+                    aa_pos = eff[13] if len(eff) > 13 else ""
+
+                    # Replicate Perl: join(' ', map { defined($_) ? $_ : '' } @eff[1,9,10] )
+                    parts = [annotation, hgvs_c, hgvs_p]
+                    effect_str = " ".join(parts)
+                elif not ann_raw:
+                    effect_str = "variant did not have ANN annotation"
+
+                # Feature lookup:
+                # 1. Check if variant position actually overlaps an annotated feature (e.g. CDS)
+                overlapping_feat: Optional[FeatureInfo] = None
+                chrom_feats = sorted_chrom_feats.get(chrom, [])
+                if chrom_feats:
+                    starts = sorted_chrom_starts[chrom]
+                    idx = bisect.bisect_right(starts, pos)
+                    for f in reversed(chrom_feats[:idx]):
+                        if f.end >= pos:
+                            overlapping_feat = f
+                            if f.ftype == "CDS":
+                                break
+                        elif pos - f.end > 50000:
+                            break
+
+                # 2. Lookup target gene feature for annotation metadata (locus_tag, gene, product, strand)
+                target_feat: Optional[FeatureInfo] = None
+                if ann_locus and ann_locus in features_by_locus:
+                    target_feat = features_by_locus[ann_locus]
+                elif ann_gene and ann_gene in features_by_gene:
+                    target_feat = features_by_gene[ann_gene]
+                elif overlapping_feat:
+                    target_feat = overlapping_feat
+
+                # FTYPE: only set if variant is directly inside an annotated feature (e.g. CDS)
+                # Upstream, downstream, and intergenic variants remain empty.
+                ftype = overlapping_feat.ftype if overlapping_feat else ""
+                strand = target_feat.strand if target_feat else (overlapping_feat.strand if overlapping_feat else "+")
+                locus_tag = target_feat.locus_tag if target_feat else ann_locus
+                gene = target_feat.gene if target_feat else ann_gene
+                product = target_feat.product if target_feat else ""
+
+                if not locus_tag:
+                    locus_tag = ann_locus
+                if not gene:
+                    gene = ann_gene
+
+                row = [
+                    chrom, str(pos), vcf_type, ref, alt,
+                    ftype, strand, nt_pos, aa_pos, effect_str,
+                    locus_tag, gene, product
+                ]
+                out.write("\t".join(row) + "\n")
+
         if os.path.exists(output_tab_path) and os.path.getsize(output_tab_path) > 0:
             logger.info(f"Successfully created Snippy tab table: {output_tab_path}")
     except Exception as e:
         logger.warning(f"Could not generate Snippy tab table: {e}")
+
 
 
 # ==============================================================================
@@ -752,14 +896,14 @@ def build_custom_db(config: DbBuildConfig) -> None:
         "-v", db.db_name
     ]
     
-    run_command(build_cmd, env_name=env.snpeff_env)
-    logger.info(f"Database build processed for {db.db_name}")
+    build_log = os.path.join(db.db_dir, f"{db.db_name}.db_build.log")
+    run_command(build_cmd, env_name=env.snpeff_env, log_file=build_log)
+    logger.info(f"Database build processed for {db.db_name} (SnpEff log: {build_log})")
 
 
 def run_annotation(config: AnnotationConfig) -> None:
     """Executes batch SnpEff annotation and Snippy tab table generation for strains."""
     db = config.db
-    env = config.env
 
     if not os.path.exists(db.db_dir):
         raise FileNotFoundError(f"Database directory not found: {db.db_dir}. Please run db-build first.")
@@ -767,9 +911,8 @@ def run_annotation(config: AnnotationConfig) -> None:
     if not os.path.exists(db.data_dir):
         raise FileNotFoundError(f"Database directory not found: {db.data_dir}. Please run db-build first.")
 
-    ref_fa = db.sequences_fa
-    if not os.path.exists(ref_fa):
-        raise FileNotFoundError(f"Reference FASTA not found in database: {ref_fa}")
+    if not os.path.exists(db.sequences_fa):
+        raise FileNotFoundError(f"Reference FASTA not found in database: {db.sequences_fa}")
 
     ann_file = db.find_annotation_file()
     if not ann_file:
@@ -795,7 +938,7 @@ def run_annotation(config: AnnotationConfig) -> None:
         logger.info(f"Reference annotation chromosomes: {ann_chromosomes}")
 
     for strain in strains:
-        _process_single_strain(strain, config, ann_file, ref_fa, config_path, ann_chromosomes)
+        _process_single_strain(strain, config, ann_file, config_path, ann_chromosomes)
 
     logger.info("Batch processing completed.")
 
@@ -804,7 +947,6 @@ def _process_single_strain(
     strain: str, 
     config: AnnotationConfig, 
     ann_file: str, 
-    ref_fa: str, 
     config_path: str, 
     ann_chromosomes: List[str]
 ) -> None:
@@ -845,10 +987,12 @@ def _process_single_strain(
         input_vcf
     ]
 
+    snpeff_log = os.path.join(config.output_dir, f"{strain}.snpeff.log")
     with open(output_vcf, "w") as out_f:
-        run_command(snpeff_cmd, env_name=env.snpeff_env, stdout=out_f)
+        run_command(snpeff_cmd, env_name=env.snpeff_env, stdout=out_f, log_file=snpeff_log)
     logger.info(f"Successfully created: {output_vcf}")
     logger.info(f"Summary report: {stats_file}")
+    logger.info(f"SnpEff log: {snpeff_log}")
 
     # Clean up default html report generated in current working directory
     if os.path.exists("snpEff_summary.html"):
@@ -857,12 +1001,8 @@ def _process_single_strain(
         except OSError:
             pass
 
-    # Generate Snippy snps.tab table using snippy_env and bioperl_env
-    generate_snippy_tab(
-        output_vcf, output_tab, ann_file, ref_fa,
-        env_name=env.snippy_env,
-        bioperl_env=env.bioperl_env
-    )
+    # Generate Snippy-style snps.tab table
+    generate_snippy_tab(output_vcf, output_tab, ann_file)
 
 
 # ==============================================================================

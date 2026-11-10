@@ -6,7 +6,7 @@ import subprocess
 import shutil
 import tempfile
 import datetime
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 from unittest.mock import patch
 
 import snpeff_pipeline
@@ -24,7 +24,7 @@ class TestParseArgs(unittest.TestCase):
     def test_run_subcommand(self):
         cmd = [
             "run", "ref.fasta", "ref.gbk", "./input_dir", "strains.txt", "./output_dir",
-            "--db_dir", "./my_db_dir", "--snippy_env", "my_snippy_env", "--codon_table", "[Bacteria]"
+            "--db_dir", "./my_db_dir", "--snpeff_env", "my_snpeff_env", "--codon_table", "[Bacteria]"
         ]
         args = snpeff_pipeline.parse_args(cmd)
         self.assertEqual(args.command, "run")
@@ -34,7 +34,7 @@ class TestParseArgs(unittest.TestCase):
         self.assertEqual(args.strain_list, "strains.txt")
         self.assertEqual(args.output_dir, "./output_dir")
         self.assertEqual(args.db_dir, "./my_db_dir")
-        self.assertEqual(args.snippy_env, "my_snippy_env")
+        self.assertEqual(args.snpeff_env, "my_snpeff_env")
         self.assertEqual(args.codon_table, "[Bacteria]")
         self.assertEqual(args.ud, DEFAULT_UD)
 
@@ -46,7 +46,7 @@ class TestParseArgs(unittest.TestCase):
         self.assertEqual(args.strain_list, "strains.txt")
         self.assertEqual(args.output_dir, "./output_dir")
         self.assertEqual(args.db_dir, "./my_db_dir")
-        self.assertEqual(args.snippy_env, "snippy")
+        self.assertEqual(args.snpeff_env, "snpeff")
         self.assertEqual(args.ud, DEFAULT_UD)
 
     def test_ud_argument(self):
@@ -362,22 +362,78 @@ class TestGenerateSnippyTab(unittest.TestCase):
             f.write("##fileformat=VCFv4.2\n")
         self.out_tab = os.path.join(self.temp_dir, "test.snps.tab")
         self.ann_file = os.path.join(self.temp_dir, "genes.gbk")
-        self.ref_fa = os.path.join(self.temp_dir, "sequences.fa")
         with open(self.ann_file, "w") as f:
             f.write("LOCUS test 100 bp\n")
-        with open(self.ref_fa, "w") as f:
-            f.write(">test\nATGC\n")
 
     def tearDown(self):
         shutil.rmtree(self.temp_dir)
 
-    @patch("snpeff_pipeline.run_command")
-    def test_generate_snippy_tab(self, mock_run_command):
+    def test_generate_snippy_tab_header_and_file_creation(self):
+        """Verify tab file creation with proper headers."""
         snpeff_pipeline.generate_snippy_tab(
-            self.vcf_file, self.out_tab, self.ann_file, self.ref_fa,
-            env_name="snippy"
+            self.vcf_file, self.out_tab, self.ann_file
         )
-        self.assertGreaterEqual(mock_run_command.call_count, 1)
+        self.assertTrue(os.path.exists(self.out_tab))
+        with open(self.out_tab) as f:
+            header = f.readline().strip()
+        expected_header = "CHROM\tPOS\tTYPE\tREF\tALT\tFTYPE\tSTRAND\tNT_POS\tAA_POS\tEFFECT\tLOCUS_TAG\tGENE\tPRODUCT"
+        self.assertEqual(header, expected_header)
+
+    def test_generate_snippy_tab_annotates_upstream_and_cds(self):
+        """Verify that upstream variants retain LOCUS_TAG, GENE, and PRODUCT annotations, with empty FTYPE."""
+        gbk_content = (
+            "LOCUS       chr1 1000 bp\n"
+            "FEATURES             Location/Qualifiers\n"
+            "     CDS             200..500\n"
+            "                     /gene=\"testA\"\n"
+            "                     /locus_tag=\"TAG_001\"\n"
+            "                     /product=\"test protein\"\n"
+            "//\n"
+        )
+        with open(self.ann_file, "w") as f:
+            f.write(gbk_content)
+
+        vcf_content = (
+            "##fileformat=VCFv4.2\n"
+            "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\n"
+            "chr1\t50\t.\tC\tG\t.\t.\tANN=G|upstream_gene_variant|MODIFIER|testA|TAG_001|transcript|TAG_001|protein_coding||c.-150C>G|||||150|\n"
+            "chr1\t250\t.\tA\tT\t.\t.\tANN=T|missense_variant|MODERATE|testA|TAG_001|transcript|TAG_001|protein_coding||c.51A>T|p.Lys17Asn|51/301|17/100|||\n"
+        )
+        with open(self.vcf_file, "w") as f:
+            f.write(vcf_content)
+
+        snpeff_pipeline.generate_snippy_tab(
+            self.vcf_file, self.out_tab, self.ann_file
+        )
+        self.assertTrue(os.path.exists(self.out_tab))
+        with open(self.out_tab) as f:
+            lines = [l.strip().split("\t") for l in f if l.strip()]
+
+        # Header + 2 variant rows
+        self.assertEqual(len(lines), 3)
+
+        # Row 1: upstream_gene_variant (FTYPE is empty, has TAG_001, testA, test protein)
+        upstream_row = lines[1]
+        self.assertEqual(upstream_row[0], "chr1")
+        self.assertEqual(upstream_row[1], "50")
+        self.assertEqual(upstream_row[5], "")  # FTYPE is empty for non-overlapping variant
+        self.assertEqual(upstream_row[6], "+")  # STRAND from target feature
+        self.assertIn("upstream_gene_variant", upstream_row[9])
+        self.assertEqual(upstream_row[10], "TAG_001")
+        self.assertEqual(upstream_row[11], "testA")
+        self.assertEqual(upstream_row[12], "test protein")
+
+        # Row 2: missense_variant (FTYPE is CDS)
+        cds_row = lines[2]
+        self.assertEqual(cds_row[0], "chr1")
+        self.assertEqual(cds_row[1], "250")
+        self.assertEqual(cds_row[5], "CDS")  # FTYPE is CDS for variant within CDS
+        self.assertEqual(cds_row[6], "+")
+        self.assertIn("missense_variant", cds_row[9])
+        self.assertEqual(cds_row[10], "TAG_001")
+        self.assertEqual(cds_row[11], "testA")
+        self.assertEqual(cds_row[12], "test protein")
+
 
 
 class TestHandleRun(unittest.TestCase):
@@ -458,7 +514,7 @@ class TestE2ESubprocessPipeline(unittest.TestCase):
     to allow comparison between previous and current test runs.
     """
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    PIPELINE_SCRIPT = os.path.join(BASE_DIR, "snpeff_pipeline.py")
+    PIPELINE_SCRIPT = os.path.abspath(snpeff_pipeline.__file__)
     TEST_DATA_DIR = os.path.join(BASE_DIR, "test_data")
     TEST_OUTPUT_BASE = os.path.join(BASE_DIR, "test_output")
 
@@ -484,7 +540,6 @@ class TestE2ESubprocessPipeline(unittest.TestCase):
         cls.strain_single = os.path.join(cls.TEST_DATA_DIR, "strain_list_single.txt")
         cls.strain_multi = os.path.join(cls.TEST_DATA_DIR, "strain_list_multi.txt")
         cls.strain_missing = os.path.join(cls.TEST_DATA_DIR, "strain_list_missing.txt")
-        cls.chr_map = os.path.join(cls.TEST_DATA_DIR, "chr_map.txt")
 
         cls.expected = os.path.join(cls.TEST_DATA_DIR, "expected")
 
@@ -827,3 +882,6 @@ class TestE2ESubprocessPipeline(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+

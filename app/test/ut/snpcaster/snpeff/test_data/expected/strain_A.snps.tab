@@ -1,173 +1,173 @@
-CHROM	POS	TYPE	REF	ALT	EVIDENCE	FTYPE	STRAND	NT_POS	AA_POS	EFFECT	LOCUS_TAG	GENE	PRODUCT
-BA000007.3	58		C	G	G:0 C:0	region	+			upstream_gene_variant c.-132C>G 			
-BA000007.3	64		C	T	T:0 C:0	region	+			upstream_gene_variant c.-126C>T 			
-BA000007.3	410		G	T	T:0 G:0	CDS	+	57/2463	19/820	synonymous_variant c.57G>T p.Arg19Arg	ECs_0002	thrA	aspartokinase I
-BA000007.3	576		C	T	T:0 C:0	CDS	+	223/2463	75/820	synonymous_variant c.223C>T p.Leu75Leu	ECs_0002	thrA	aspartokinase I
-BA000007.3	605		A	G	G:0 A:0	CDS	+	252/2463	84/820	synonymous_variant c.252A>G p.Gly84Gly	ECs_0002	thrA	aspartokinase I
-BA000007.3	638		C	T	T:0 C:0	CDS	+	285/2463	95/820	synonymous_variant c.285C>T p.Asp95Asp	ECs_0002	thrA	aspartokinase I
-BA000007.3	686		A	G	G:0 A:0	CDS	+	333/2463	111/820	synonymous_variant c.333A>G p.Leu111Leu	ECs_0002	thrA	aspartokinase I
-BA000007.3	707		T	C	C:0 T:0	CDS	+	354/2463	118/820	synonymous_variant c.354T>C p.Ile118Ile	ECs_0002	thrA	aspartokinase I
-BA000007.3	764		A	G	G:0 A:0	CDS	+	411/2463	137/820	synonymous_variant c.411A>G p.Val137Val	ECs_0002	thrA	aspartokinase I
-BA000007.3	776		C	T	T:0 C:0	CDS	+	423/2463	141/820	synonymous_variant c.423C>T p.Arg141Arg	ECs_0002	thrA	aspartokinase I
-BA000007.3	815		G	A	A:0 G:0	CDS	+	462/2463	154/820	synonymous_variant c.462G>A p.Leu154Leu	ECs_0002	thrA	aspartokinase I
-BA000007.3	845		T	C	C:0 T:0	CDS	+	492/2463	164/820	synonymous_variant c.492T>C p.Thr164Thr	ECs_0002	thrA	aspartokinase I
-BA000007.3	857		A	T	T:0 A:0	CDS	+	504/2463	168/820	synonymous_variant c.504A>T p.Ala168Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	920		T	C	C:0 T:0	CDS	+	567/2463	189/820	synonymous_variant c.567T>C p.Gly189Gly	ECs_0002	thrA	aspartokinase I
-BA000007.3	1049		A	C	C:0 A:0	CDS	+	696/2463	232/820	synonymous_variant c.696A>C p.Val232Val	ECs_0002	thrA	aspartokinase I
-BA000007.3	1094		A	G	G:0 A:0	CDS	+	741/2463	247/820	synonymous_variant c.741A>G p.Lys247Lys	ECs_0002	thrA	aspartokinase I
-BA000007.3	1223		T	A	A:0 T:0	CDS	+	870/2463	290/820	synonymous_variant c.870T>A p.Ala290Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	1295		T	C	C:0 T:0	CDS	+	942/2463	314/820	synonymous_variant c.942T>C p.Asn314Asn	ECs_0002	thrA	aspartokinase I
-BA000007.3	1364		T	C	C:0 T:0	CDS	+	1011/2463	337/820	synonymous_variant c.1011T>C p.Ala337Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	1367		A	G	G:0 A:0	CDS	+	1014/2463	338/820	synonymous_variant c.1014A>G p.Ala338Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	1460		A	G	G:0 A:0	CDS	+	1107/2463	369/820	synonymous_variant c.1107A>G p.Arg369Arg	ECs_0002	thrA	aspartokinase I
-BA000007.3	1640		T	C	C:0 T:0	CDS	+	1287/2463	429/820	synonymous_variant c.1287T>C p.Ala429Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	1824		T	C	C:0 T:0	CDS	+	1471/2463	491/820	synonymous_variant c.1471T>C p.Leu491Leu	ECs_0002	thrA	aspartokinase I
-BA000007.3	1865		T	C	C:0 T:0	CDS	+	1512/2463	504/820	synonymous_variant c.1512T>C p.Ala504Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	1877		T	A	A:0 T:0	CDS	+	1524/2463	508/820	synonymous_variant c.1524T>A p.Ala508Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	2055		C	T	T:0 C:0	CDS	+	1702/2463	568/820	synonymous_variant c.1702C>T p.Leu568Leu	ECs_0002	thrA	aspartokinase I
-BA000007.3	2141		T	G	G:0 T:0	CDS	+	1788/2463	596/820	synonymous_variant c.1788T>G p.Ala596Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	2327		G	T	T:0 G:0	CDS	+	1974/2463	658/820	synonymous_variant c.1974G>T p.Thr658Thr	ECs_0002	thrA	aspartokinase I
-BA000007.3	2399		A	G	G:0 A:0	CDS	+	2046/2463	682/820	synonymous_variant c.2046A>G p.Lys682Lys	ECs_0002	thrA	aspartokinase I
-BA000007.3	2405		A	G	G:0 A:0	CDS	+	2052/2463	684/820	synonymous_variant c.2052A>G p.Leu684Leu	ECs_0002	thrA	aspartokinase I
-BA000007.3	2612		C	T	T:0 C:0	CDS	+	2259/2463	753/820	synonymous_variant c.2259C>T p.Gly753Gly	ECs_0002	thrA	aspartokinase I
-BA000007.3	2614		T	C	C:0 T:0	CDS	+	2261/2463	754/820	missense_variant c.2261T>C p.Val754Ala	ECs_0002	thrA	aspartokinase I
-BA000007.3	2759		C	A	A:0 C:0	CDS	+	2406/2463	802/820	synonymous_variant c.2406C>A p.Thr802Thr	ECs_0002	thrA	aspartokinase I
-BA000007.3	2895		C	T	T:0 C:0	CDS	+	78/933	26/310	synonymous_variant c.78C>T p.Pro26Pro	ECs_0003	thrB	homoserine kinase
-BA000007.3	2935		T	G	G:0 T:0	CDS	+	118/933	40/310	missense_variant c.118T>G p.Ser40Ala	ECs_0003	thrB	homoserine kinase
-BA000007.3	3045		G	T	T:0 G:0	CDS	+	228/933	76/310	synonymous_variant c.228G>T p.Leu76Leu	ECs_0003	thrB	homoserine kinase
-BA000007.3	3090		G	A	A:0 G:0	CDS	+	273/933	91/310	synonymous_variant c.273G>A p.Pro91Pro	ECs_0003	thrB	homoserine kinase
-BA000007.3	3135		T	G	G:0 T:0	CDS	+	318/933	106/310	synonymous_variant c.318T>G p.Ala106Ala	ECs_0003	thrB	homoserine kinase
-BA000007.3	3159		C	T	T:0 C:0	CDS	+	342/933	114/310	synonymous_variant c.342C>T p.Cys114Cys	ECs_0003	thrB	homoserine kinase
-BA000007.3	3180		C	T	T:0 C:0	CDS	+	363/933	121/310	synonymous_variant c.363C>T p.Thr121Thr	ECs_0003	thrB	homoserine kinase
-BA000007.3	3379		C	A	A:0 C:0	CDS	+	562/933	188/310	synonymous_variant c.562C>A p.Arg188Arg	ECs_0003	thrB	homoserine kinase
-BA000007.3	3435		C	T	T:0 C:0	CDS	+	618/933	206/310	synonymous_variant c.618C>T p.His206His	ECs_0003	thrB	homoserine kinase
-BA000007.3	3436		T	C	C:0 T:0	CDS	+	619/933	207/310	synonymous_variant c.619T>C p.Leu207Leu	ECs_0003	thrB	homoserine kinase
-BA000007.3	3441		A	T	T:0 A:0	CDS	+	624/933	208/310	synonymous_variant c.624A>T p.Ala208Ala	ECs_0003	thrB	homoserine kinase
-BA000007.3	3510		A	T	T:0 A:0	CDS	+	693/933	231/310	synonymous_variant c.693A>T p.Ala231Ala	ECs_0003	thrB	homoserine kinase
-BA000007.3	3618		T	C	C:0 T:0	CDS	+	801/933	267/310	synonymous_variant c.801T>C p.Phe267Phe	ECs_0003	thrB	homoserine kinase
-BA000007.3	3624		G	A	A:0 G:0	CDS	+	807/933	269/310	synonymous_variant c.807G>A p.Leu269Leu	ECs_0003	thrB	homoserine kinase
-BA000007.3	3768		T	G	G:0 T:0	CDS	+	18/1287	6/428	synonymous_variant c.18T>G p.Leu6Leu	ECs_0004	thrC	L-threonine synthase
-BA000007.3	3780		T	C	C:0 T:0	CDS	+	30/1287	10/428	synonymous_variant c.30T>C p.Asn10Asn	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4218		T	C	C:0 T:0	CDS	+	468/1287	156/428	synonymous_variant c.468T>C p.Leu156Leu	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4398		T	C	C:0 T:0	CDS	+	648/1287	216/428	synonymous_variant c.648T>C p.Ile216Ile	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4404		G	T	T:0 G:0	CDS	+	654/1287	218/428	synonymous_variant c.654G>T p.Arg218Arg	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4602		T	C	C:0 T:0	CDS	+	852/1287	284/428	synonymous_variant c.852T>C p.His284His	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4737		C	A	A:0 C:0	CDS	+	987/1287	329/428	synonymous_variant c.987C>A p.Ala329Ala	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4797		T	C	C:0 T:0	CDS	+	1047/1287	349/428	synonymous_variant c.1047T>C p.Thr349Thr	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4962		C	T	T:0 C:0	CDS	+	1212/1287	404/428	synonymous_variant c.1212C>T p.Ala404Ala	ECs_0004	thrC	L-threonine synthase
-BA000007.3	4980		G	A	A:0 G:0	CDS	+	1230/1287	410/428	synonymous_variant c.1230G>A p.Ser410Ser	ECs_0004	thrC	L-threonine synthase
-BA000007.3	5038		C	A	A:0 C:0	region	+			upstream_gene_variant c.-213C>A 			
-BA000007.3	5094		G	A	A:0 G:0	region	+			upstream_gene_variant c.-157G>A 			
-BA000007.3	5103		A	T	T:0 A:0	region	+			upstream_gene_variant c.-148A>T 			
-BA000007.3	5112		G	A	A:0 G:0	region	+			upstream_gene_variant c.-139G>A 			
-BA000007.3	5188		C	T	T:0 C:0	region	+			upstream_gene_variant c.-63C>T 			
-BA000007.3	5191		C	T	T:0 C:0	region	+			upstream_gene_variant c.-60C>T 			
-BA000007.3	5311		A	G	G:0 A:0	CDS	+	61/297	21/98	missense_variant c.61A>G p.Thr21Ala	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5313		G	A	A:0 G:0	CDS	+	63/297	21/98	synonymous_variant c.63G>A p.Thr21Thr	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5376		C	T	T:0 C:0	CDS	+	126/297	42/98	synonymous_variant c.126C>T p.Arg42Arg	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5379		T	C	C:0 T:0	CDS	+	129/297	43/98	synonymous_variant c.129T>C p.Gly43Gly	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5394		C	A	A:0 C:0	CDS	+	144/297	48/98	synonymous_variant c.144C>A p.Gly48Gly	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5484		T	C	C:0 T:0	CDS	+	234/297	78/98	synonymous_variant c.234T>C p.Arg78Arg	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5501		A	C	C:0 A:0	CDS	+	251/297	84/98	missense_variant c.251A>C p.His84Pro	ECs_0005	yaaX	hypothetical protein
-BA000007.3	5595		C	T	T:0 C:0	region	+			downstream_gene_variant c.*48C>T 			
-BA000007.3	5694		A	G	G:0 A:0	region	+			downstream_gene_variant c.*147A>G 			
-BA000007.3	5748		A	C	C:0 A:0	CDS	-	729/777	243/258	synonymous_variant c.729T>G p.Ala243Ala	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	5823		G	A	A:0 G:0	CDS	-	654/777	218/258	synonymous_variant c.654C>T p.Phe218Phe	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6123		G	C	C:0 G:0	CDS	-	354/777	118/258	synonymous_variant c.354C>G p.Leu118Leu	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6306		T	C	C:0 T:0	CDS	-	171/777	57/258	synonymous_variant c.171A>G p.Ala57Ala	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6324		A	G	G:0 A:0	CDS	-	153/777	51/258	synonymous_variant c.153T>C p.Arg51Arg	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6333		C	T	T:0 C:0	CDS	-	144/777	48/258	synonymous_variant c.144G>A p.Thr48Thr	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6408		T	C	C:0 T:0	CDS	-	69/777	23/258	synonymous_variant c.69A>G p.Thr23Thr	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6414		T	G	G:0 T:0	CDS	-	63/777	21/258	synonymous_variant c.63A>C p.Arg21Arg	ECs_0006	yaaA	peroxide resistance protein
-BA000007.3	6577		C	G	G:0 C:0	CDS	-	1400/1431	467/476	missense_variant c.1400G>C p.Arg467Pro	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	6696		T	A	A:0 T:0	CDS	-	1281/1431	427/476	synonymous_variant c.1281A>T p.Ile427Ile	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	6702		A	G	G:0 A:0	CDS	-	1275/1431	425/476	synonymous_variant c.1275T>C p.Thr425Thr	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	6765		A	G	G:0 A:0	CDS	-	1212/1431	404/476	synonymous_variant c.1212T>C p.Ser404Ser	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	6927		T	C	C:0 T:0	CDS	-	1050/1431	350/476	synonymous_variant c.1050A>G p.Glu350Glu	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7006		C	T	T:0 C:0	CDS	-	971/1431	324/476	missense_variant c.971G>A p.Gly324Asp	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7089		T	C	C:0 T:0	CDS	-	888/1431	296/476	synonymous_variant c.888A>G p.Gly296Gly	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7149		C	A	A:0 C:0	CDS	-	828/1431	276/476	synonymous_variant c.828G>T p.Gly276Gly	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7319		G	T	T:0 G:0	CDS	-	658/1431	220/476	missense_variant c.658C>A p.Leu220Met	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7329		T	C	C:0 T:0	CDS	-	648/1431	216/476	synonymous_variant c.648A>G p.Val216Val	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7365		C	T	T:0 C:0	CDS	-	612/1431	204/476	missense_variant c.612G>A p.Met204Ile	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7396		A	G	G:0 A:0	CDS	-	581/1431	194/476	missense_variant c.581T>C p.Ile194Thr	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7422		A	G	G:0 A:0	CDS	-	555/1431	185/476	synonymous_variant c.555T>C p.Leu185Leu	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7470		A	G	G:0 A:0	CDS	-	507/1431	169/476	synonymous_variant c.507T>C p.Ala169Ala	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7482		A	G	G:0 A:0	CDS	-	495/1431	165/476	synonymous_variant c.495T>C p.Ala165Ala	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7488		T	C	C:0 T:0	CDS	-	489/1431	163/476	synonymous_variant c.489A>G p.Ala163Ala	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7557		G	A	A:0 G:0	CDS	-	420/1431	140/476	synonymous_variant c.420C>T p.Arg140Arg	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7596		G	T	T:0 G:0	CDS	-	381/1431	127/476	synonymous_variant c.381C>A p.Gly127Gly	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	7608		C	T	T:0 C:0	CDS	-	369/1431	123/476	synonymous_variant c.369G>A p.Gly123Gly	ECs_0007	yaaJ	amino acid carrier protein
-BA000007.3	8096		T	A	A:0 T:0	region	+			upstream_gene_variant c.-120A>T 			
-BA000007.3	8476		T	C	C:0 T:0	CDS	+	222/954	74/317	synonymous_variant c.222T>C p.Thr74Thr	ECs_0008	talB	transaldolase B
-BA000007.3	8569		A	T	T:0 A:0	CDS	+	315/954	105/317	synonymous_variant c.315A>T p.Thr105Thr	ECs_0008	talB	transaldolase B
-BA000007.3	8620		A	T	T:0 A:0	CDS	+	366/954	122/317	synonymous_variant c.366A>T p.Ala122Ala	ECs_0008	talB	transaldolase B
-BA000007.3	8683		G	A	A:0 G:0	CDS	+	429/954	143/317	synonymous_variant c.429G>A p.Ala143Ala	ECs_0008	talB	transaldolase B
-BA000007.3	8704		T	C	C:0 T:0	CDS	+	450/954	150/317	synonymous_variant c.450T>C p.Gly150Gly	ECs_0008	talB	transaldolase B
-BA000007.3	9019		C	T	T:0 C:0	CDS	+	765/954	255/317	synonymous_variant c.765C>T p.Ser255Ser	ECs_0008	talB	transaldolase B
-BA000007.3	9394		T	C	C:0 T:0	CDS	+	72/588	24/195	synonymous_variant c.72T>C p.Gly24Gly	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9505		G	A	A:0 G:0	CDS	+	183/588	61/195	synonymous_variant c.183G>A p.Leu61Leu	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9640		C	A	A:0 C:0	CDS	+	318/588	106/195	synonymous_variant c.318C>A p.Ile106Ile	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9682		G	T	T:0 G:0	CDS	+	360/588	120/195	synonymous_variant c.360G>T p.Val120Val	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9771		A	C	C:0 A:0	CDS	+	449/588	150/195	missense_variant c.449A>C p.Glu150Ala	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9856		A	G	G:0 A:0	CDS	+	534/588	178/195	synonymous_variant c.534A>G p.Pro178Pro	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9868		T	A	A:0 T:0	CDS	+	546/588	182/195	synonymous_variant c.546T>A p.Ala182Ala	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9896		G	A	A:0 G:0	CDS	+	574/588	192/195	missense_variant c.574G>A p.Asp192Asn	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
-BA000007.3	9940		G	A	A:0 G:0	region	+			downstream_gene_variant c.*30G>A 			
-BA000007.3	10041		A	C	C:0 A:0	CDS	-	471/567	157/188	synonymous_variant c.471T>G p.Gly157Gly	ECs_0010	satP	succinate-acetate transporter
-BA000007.3	10425		T	C	C:0 T:0	CDS	-	87/567	29/188	synonymous_variant c.87A>G p.Val29Val	ECs_0010	satP	succinate-acetate transporter
-BA000007.3	10734		A	C	C:0 A:0	CDS	-	640/714	214/237	missense_variant c.640T>G p.Ser214Ala	ECs_0012	yaaW	hypothetical protein
-BA000007.3	10771		G	A	A:0 G:0	CDS	-	603/714	201/237	synonymous_variant c.603C>T p.Gly201Gly	ECs_0012	yaaW	hypothetical protein
-BA000007.3	10872		G	A	A:0 G:0	CDS	-	502/714	168/237	synonymous_variant c.502C>T p.Leu168Leu	ECs_0012	yaaW	hypothetical protein
-BA000007.3	10945		G	C	C:0 G:0	CDS	-	429/714	143/237	synonymous_variant c.429C>G p.Ala143Ala	ECs_0012	yaaW	hypothetical protein
-BA000007.3	10972		C	T	T:0 C:0	CDS	-	402/714	134/237	synonymous_variant c.402G>A p.Lys134Lys	ECs_0012	yaaW	hypothetical protein
-BA000007.3	10990		T	A	A:0 T:0	CDS	-	384/714	128/237	missense_variant c.384A>T p.Lys128Asn	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11002		A	G	G:0 A:0	CDS	-	372/714	124/237	synonymous_variant c.372T>C p.Asn124Asn	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11038		T	C	C:0 T:0	CDS	-	336/714	112/237	synonymous_variant c.336A>G p.Glu112Glu	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11212		T	C	C:0 T:0	CDS	-	162/714	54/237	synonymous_variant c.162A>G p.Gly54Gly	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11292		G	A	A:0 G:0	CDS	-	82/714	28/237	synonymous_variant c.82C>T p.Leu28Leu	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11293		C	T	T:0 C:0	CDS	-	81/714	27/237	synonymous_variant c.81G>A p.Arg27Arg	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11308		T	C	C:0 T:0	CDS	-	66/714	22/237	synonymous_variant c.66A>G p.Leu22Leu	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11323		A	G	G:0 A:0	CDS	-	51/714	17/237	synonymous_variant c.51T>C p.Cys17Cys	ECs_0012	yaaW	hypothetical protein
-BA000007.3	11648		C	A	A:0 C:0	CDS	-	156/405	52/134	synonymous_variant c.156G>T p.Val52Val	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11654		G	T	T:0 G:0	CDS	-	150/405	50/134	synonymous_variant c.150C>A p.Arg50Arg	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11657		A	G	G:0 A:0	CDS	-	147/405	49/134	synonymous_variant c.147T>C p.Cys49Cys	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11682		G	T	T:0 G:0	CDS	-	122/405	41/134	missense_variant c.122C>A p.Ala41Asp	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11699		C	T	T:0 C:0	CDS	-	105/405	35/134	synonymous_variant c.105G>A p.Pro35Pro	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11705		T	C	C:0 T:0	CDS	-	99/405	33/134	synonymous_variant c.99A>G p.Ala33Ala	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11722		G	T	T:0 G:0	CDS	-	82/405	28/134	missense_variant c.82C>A p.Leu28Ile	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11762		G	A	A:0 G:0	CDS	-	42/405	14/134	synonymous_variant c.42C>T p.Ser14Ser	ECs_0013	yaaI	hypothetical protein
-BA000007.3	11822		A	G	G:0 A:0	region	+			upstream_gene_variant c.-19T>C 			
-BA000007.3	11838		A	G	G:0 A:0	region	+			upstream_gene_variant c.-35T>C 			
-BA000007.3	11878		C	T	T:0 C:0	region	+			upstream_gene_variant c.-75G>A 			
-BA000007.3	11879		A	G	G:0 A:0	region	+			upstream_gene_variant c.-76T>C 			
-BA000007.3	11886		C	G	G:0 C:0	region	+			upstream_gene_variant c.-83G>C 			
-BA000007.3	11917		A	G	G:0 A:0	region	+			upstream_gene_variant c.-114T>C 			
-BA000007.3	11918		C	T	T:0 C:0	region	+			upstream_gene_variant c.-115G>A 			
-BA000007.3	11923		A	G	G:0 A:0	region	+			upstream_gene_variant c.-120T>C 			
-BA000007.3	11961		A	G	G:0 A:0	region	+			upstream_gene_variant c.-158T>C 			
-BA000007.3	11965		T	C	C:0 T:0	region	+			upstream_gene_variant c.-162A>G 			
-BA000007.3	11980		C	T	T:0 C:0	region	+			upstream_gene_variant c.-177G>A 			
-BA000007.3	12254		T	C	C:0 T:0	CDS	+	75/1917	25/638	synonymous_variant c.75T>C p.Arg25Arg	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	12524		T	C	C:0 T:0	CDS	+	345/1917	115/638	synonymous_variant c.345T>C p.Ile115Ile	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	12599		C	T	T:0 C:0	CDS	+	420/1917	140/638	synonymous_variant c.420C>T p.Ile140Ile	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	12602		C	T	T:0 C:0	CDS	+	423/1917	141/638	synonymous_variant c.423C>T p.Thr141Thr	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	12762		T	C	C:0 T:0	CDS	+	583/1917	195/638	synonymous_variant c.583T>C p.Leu195Leu	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13046		C	T	T:0 C:0	CDS	+	867/1917	289/638	synonymous_variant c.867C>T p.Asp289Asp	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13118		T	A	A:0 T:0	CDS	+	939/1917	313/638	synonymous_variant c.939T>A p.Val313Val	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13130		C	T	T:0 C:0	CDS	+	951/1917	317/638	synonymous_variant c.951C>T p.Ile317Ile	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13148		G	A	A:0 G:0	CDS	+	969/1917	323/638	synonymous_variant c.969G>A p.Ala323Ala	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13337		A	G	G:0 A:0	CDS	+	1158/1917	386/638	synonymous_variant c.1158A>G p.Val386Val	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13358		T	C	C:0 T:0	CDS	+	1179/1917	393/638	synonymous_variant c.1179T>C p.Asp393Asp	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13529		C	T	T:0 C:0	CDS	+	1350/1917	450/638	synonymous_variant c.1350C>T p.Asp450Asp	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13736		C	A	A:0 C:0	CDS	+	1557/1917	519/638	synonymous_variant c.1557C>A p.Ala519Ala	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13883		G	A	A:0 G:0	CDS	+	1704/1917	568/638	synonymous_variant c.1704G>A p.Ala568Ala	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	13949		A	G	G:0 A:0	CDS	+	1770/1917	590/638	synonymous_variant c.1770A>G p.Glu590Glu	ECs_0014	dnaK	chaperone Hsp70
-BA000007.3	14415		T	C	C:0 T:0	CDS	+	231/1131	77/376	synonymous_variant c.231T>C p.Gly77Gly	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	14703		C	T	T:0 C:0	CDS	+	519/1131	173/376	synonymous_variant c.519C>T p.Arg173Arg	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	14763		C	T	T:0 C:0	CDS	+	579/1131	193/376	synonymous_variant c.579C>T p.Ile193Ile	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	14889		T	C	C:0 T:0	CDS	+	705/1131	235/376	synonymous_variant c.705T>C p.Gly235Gly	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	14892		A	G	G:0 A:0	CDS	+	708/1131	236/376	synonymous_variant c.708A>G p.Glu236Glu	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	14895		C	T	T:0 C:0	CDS	+	711/1131	237/376	synonymous_variant c.711C>T p.His237His	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	15018		T	C	C:0 T:0	CDS	+	834/1131	278/376	synonymous_variant c.834T>C p.Gly278Gly	ECs_0015	dnaJ	chaperone Hsp40
-BA000007.3	15090		A	T	T:0 A:0	CDS	+	906/1131	302/376	synonymous_variant c.906A>T p.Leu302Leu	ECs_0015	dnaJ	chaperone Hsp40
+CHROM	POS	TYPE	REF	ALT	FTYPE	STRAND	NT_POS	AA_POS	EFFECT	LOCUS_TAG	GENE	PRODUCT
+BA000007.3	58		C	G		+			upstream_gene_variant c.-132C>G 	ECs_0001	thrL	thr operon leader peptide
+BA000007.3	64		C	T		+			upstream_gene_variant c.-126C>T 	ECs_0001	thrL	thr operon leader peptide
+BA000007.3	410		G	T	CDS	+	57/2463	19/820	synonymous_variant c.57G>T p.Arg19Arg	ECs_0002	thrA	aspartokinase I
+BA000007.3	576		C	T	CDS	+	223/2463	75/820	synonymous_variant c.223C>T p.Leu75Leu	ECs_0002	thrA	aspartokinase I
+BA000007.3	605		A	G	CDS	+	252/2463	84/820	synonymous_variant c.252A>G p.Gly84Gly	ECs_0002	thrA	aspartokinase I
+BA000007.3	638		C	T	CDS	+	285/2463	95/820	synonymous_variant c.285C>T p.Asp95Asp	ECs_0002	thrA	aspartokinase I
+BA000007.3	686		A	G	CDS	+	333/2463	111/820	synonymous_variant c.333A>G p.Leu111Leu	ECs_0002	thrA	aspartokinase I
+BA000007.3	707		T	C	CDS	+	354/2463	118/820	synonymous_variant c.354T>C p.Ile118Ile	ECs_0002	thrA	aspartokinase I
+BA000007.3	764		A	G	CDS	+	411/2463	137/820	synonymous_variant c.411A>G p.Val137Val	ECs_0002	thrA	aspartokinase I
+BA000007.3	776		C	T	CDS	+	423/2463	141/820	synonymous_variant c.423C>T p.Arg141Arg	ECs_0002	thrA	aspartokinase I
+BA000007.3	815		G	A	CDS	+	462/2463	154/820	synonymous_variant c.462G>A p.Leu154Leu	ECs_0002	thrA	aspartokinase I
+BA000007.3	845		T	C	CDS	+	492/2463	164/820	synonymous_variant c.492T>C p.Thr164Thr	ECs_0002	thrA	aspartokinase I
+BA000007.3	857		A	T	CDS	+	504/2463	168/820	synonymous_variant c.504A>T p.Ala168Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	920		T	C	CDS	+	567/2463	189/820	synonymous_variant c.567T>C p.Gly189Gly	ECs_0002	thrA	aspartokinase I
+BA000007.3	1049		A	C	CDS	+	696/2463	232/820	synonymous_variant c.696A>C p.Val232Val	ECs_0002	thrA	aspartokinase I
+BA000007.3	1094		A	G	CDS	+	741/2463	247/820	synonymous_variant c.741A>G p.Lys247Lys	ECs_0002	thrA	aspartokinase I
+BA000007.3	1223		T	A	CDS	+	870/2463	290/820	synonymous_variant c.870T>A p.Ala290Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	1295		T	C	CDS	+	942/2463	314/820	synonymous_variant c.942T>C p.Asn314Asn	ECs_0002	thrA	aspartokinase I
+BA000007.3	1364		T	C	CDS	+	1011/2463	337/820	synonymous_variant c.1011T>C p.Ala337Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	1367		A	G	CDS	+	1014/2463	338/820	synonymous_variant c.1014A>G p.Ala338Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	1460		A	G	CDS	+	1107/2463	369/820	synonymous_variant c.1107A>G p.Arg369Arg	ECs_0002	thrA	aspartokinase I
+BA000007.3	1640		T	C	CDS	+	1287/2463	429/820	synonymous_variant c.1287T>C p.Ala429Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	1824		T	C	CDS	+	1471/2463	491/820	synonymous_variant c.1471T>C p.Leu491Leu	ECs_0002	thrA	aspartokinase I
+BA000007.3	1865		T	C	CDS	+	1512/2463	504/820	synonymous_variant c.1512T>C p.Ala504Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	1877		T	A	CDS	+	1524/2463	508/820	synonymous_variant c.1524T>A p.Ala508Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	2055		C	T	CDS	+	1702/2463	568/820	synonymous_variant c.1702C>T p.Leu568Leu	ECs_0002	thrA	aspartokinase I
+BA000007.3	2141		T	G	CDS	+	1788/2463	596/820	synonymous_variant c.1788T>G p.Ala596Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	2327		G	T	CDS	+	1974/2463	658/820	synonymous_variant c.1974G>T p.Thr658Thr	ECs_0002	thrA	aspartokinase I
+BA000007.3	2399		A	G	CDS	+	2046/2463	682/820	synonymous_variant c.2046A>G p.Lys682Lys	ECs_0002	thrA	aspartokinase I
+BA000007.3	2405		A	G	CDS	+	2052/2463	684/820	synonymous_variant c.2052A>G p.Leu684Leu	ECs_0002	thrA	aspartokinase I
+BA000007.3	2612		C	T	CDS	+	2259/2463	753/820	synonymous_variant c.2259C>T p.Gly753Gly	ECs_0002	thrA	aspartokinase I
+BA000007.3	2614		T	C	CDS	+	2261/2463	754/820	missense_variant c.2261T>C p.Val754Ala	ECs_0002	thrA	aspartokinase I
+BA000007.3	2759		C	A	CDS	+	2406/2463	802/820	synonymous_variant c.2406C>A p.Thr802Thr	ECs_0002	thrA	aspartokinase I
+BA000007.3	2895		C	T	CDS	+	78/933	26/310	synonymous_variant c.78C>T p.Pro26Pro	ECs_0003	thrB	homoserine kinase
+BA000007.3	2935		T	G	CDS	+	118/933	40/310	missense_variant c.118T>G p.Ser40Ala	ECs_0003	thrB	homoserine kinase
+BA000007.3	3045		G	T	CDS	+	228/933	76/310	synonymous_variant c.228G>T p.Leu76Leu	ECs_0003	thrB	homoserine kinase
+BA000007.3	3090		G	A	CDS	+	273/933	91/310	synonymous_variant c.273G>A p.Pro91Pro	ECs_0003	thrB	homoserine kinase
+BA000007.3	3135		T	G	CDS	+	318/933	106/310	synonymous_variant c.318T>G p.Ala106Ala	ECs_0003	thrB	homoserine kinase
+BA000007.3	3159		C	T	CDS	+	342/933	114/310	synonymous_variant c.342C>T p.Cys114Cys	ECs_0003	thrB	homoserine kinase
+BA000007.3	3180		C	T	CDS	+	363/933	121/310	synonymous_variant c.363C>T p.Thr121Thr	ECs_0003	thrB	homoserine kinase
+BA000007.3	3379		C	A	CDS	+	562/933	188/310	synonymous_variant c.562C>A p.Arg188Arg	ECs_0003	thrB	homoserine kinase
+BA000007.3	3435		C	T	CDS	+	618/933	206/310	synonymous_variant c.618C>T p.His206His	ECs_0003	thrB	homoserine kinase
+BA000007.3	3436		T	C	CDS	+	619/933	207/310	synonymous_variant c.619T>C p.Leu207Leu	ECs_0003	thrB	homoserine kinase
+BA000007.3	3441		A	T	CDS	+	624/933	208/310	synonymous_variant c.624A>T p.Ala208Ala	ECs_0003	thrB	homoserine kinase
+BA000007.3	3510		A	T	CDS	+	693/933	231/310	synonymous_variant c.693A>T p.Ala231Ala	ECs_0003	thrB	homoserine kinase
+BA000007.3	3618		T	C	CDS	+	801/933	267/310	synonymous_variant c.801T>C p.Phe267Phe	ECs_0003	thrB	homoserine kinase
+BA000007.3	3624		G	A	CDS	+	807/933	269/310	synonymous_variant c.807G>A p.Leu269Leu	ECs_0003	thrB	homoserine kinase
+BA000007.3	3768		T	G	CDS	+	18/1287	6/428	synonymous_variant c.18T>G p.Leu6Leu	ECs_0004	thrC	L-threonine synthase
+BA000007.3	3780		T	C	CDS	+	30/1287	10/428	synonymous_variant c.30T>C p.Asn10Asn	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4218		T	C	CDS	+	468/1287	156/428	synonymous_variant c.468T>C p.Leu156Leu	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4398		T	C	CDS	+	648/1287	216/428	synonymous_variant c.648T>C p.Ile216Ile	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4404		G	T	CDS	+	654/1287	218/428	synonymous_variant c.654G>T p.Arg218Arg	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4602		T	C	CDS	+	852/1287	284/428	synonymous_variant c.852T>C p.His284His	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4737		C	A	CDS	+	987/1287	329/428	synonymous_variant c.987C>A p.Ala329Ala	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4797		T	C	CDS	+	1047/1287	349/428	synonymous_variant c.1047T>C p.Thr349Thr	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4962		C	T	CDS	+	1212/1287	404/428	synonymous_variant c.1212C>T p.Ala404Ala	ECs_0004	thrC	L-threonine synthase
+BA000007.3	4980		G	A	CDS	+	1230/1287	410/428	synonymous_variant c.1230G>A p.Ser410Ser	ECs_0004	thrC	L-threonine synthase
+BA000007.3	5038		C	A		+			upstream_gene_variant c.-213C>A 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5094		G	A		+			upstream_gene_variant c.-157G>A 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5103		A	T		+			upstream_gene_variant c.-148A>T 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5112		G	A		+			upstream_gene_variant c.-139G>A 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5188		C	T		+			upstream_gene_variant c.-63C>T 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5191		C	T		+			upstream_gene_variant c.-60C>T 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5311		A	G	CDS	+	61/297	21/98	missense_variant c.61A>G p.Thr21Ala	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5313		G	A	CDS	+	63/297	21/98	synonymous_variant c.63G>A p.Thr21Thr	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5376		C	T	CDS	+	126/297	42/98	synonymous_variant c.126C>T p.Arg42Arg	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5379		T	C	CDS	+	129/297	43/98	synonymous_variant c.129T>C p.Gly43Gly	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5394		C	A	CDS	+	144/297	48/98	synonymous_variant c.144C>A p.Gly48Gly	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5484		T	C	CDS	+	234/297	78/98	synonymous_variant c.234T>C p.Arg78Arg	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5501		A	C	CDS	+	251/297	84/98	missense_variant c.251A>C p.His84Pro	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5595		C	T		+			downstream_gene_variant c.*48C>T 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5694		A	G		+			downstream_gene_variant c.*147A>G 	ECs_0005	yaaX	hypothetical protein
+BA000007.3	5748		A	C	CDS	-	729/777	243/258	synonymous_variant c.729T>G p.Ala243Ala	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	5823		G	A	CDS	-	654/777	218/258	synonymous_variant c.654C>T p.Phe218Phe	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6123		G	C	CDS	-	354/777	118/258	synonymous_variant c.354C>G p.Leu118Leu	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6306		T	C	CDS	-	171/777	57/258	synonymous_variant c.171A>G p.Ala57Ala	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6324		A	G	CDS	-	153/777	51/258	synonymous_variant c.153T>C p.Arg51Arg	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6333		C	T	CDS	-	144/777	48/258	synonymous_variant c.144G>A p.Thr48Thr	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6408		T	C	CDS	-	69/777	23/258	synonymous_variant c.69A>G p.Thr23Thr	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6414		T	G	CDS	-	63/777	21/258	synonymous_variant c.63A>C p.Arg21Arg	ECs_0006	yaaA	peroxide resistance protein
+BA000007.3	6577		C	G	CDS	-	1400/1431	467/476	missense_variant c.1400G>C p.Arg467Pro	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	6696		T	A	CDS	-	1281/1431	427/476	synonymous_variant c.1281A>T p.Ile427Ile	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	6702		A	G	CDS	-	1275/1431	425/476	synonymous_variant c.1275T>C p.Thr425Thr	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	6765		A	G	CDS	-	1212/1431	404/476	synonymous_variant c.1212T>C p.Ser404Ser	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	6927		T	C	CDS	-	1050/1431	350/476	synonymous_variant c.1050A>G p.Glu350Glu	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7006		C	T	CDS	-	971/1431	324/476	missense_variant c.971G>A p.Gly324Asp	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7089		T	C	CDS	-	888/1431	296/476	synonymous_variant c.888A>G p.Gly296Gly	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7149		C	A	CDS	-	828/1431	276/476	synonymous_variant c.828G>T p.Gly276Gly	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7319		G	T	CDS	-	658/1431	220/476	missense_variant c.658C>A p.Leu220Met	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7329		T	C	CDS	-	648/1431	216/476	synonymous_variant c.648A>G p.Val216Val	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7365		C	T	CDS	-	612/1431	204/476	missense_variant c.612G>A p.Met204Ile	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7396		A	G	CDS	-	581/1431	194/476	missense_variant c.581T>C p.Ile194Thr	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7422		A	G	CDS	-	555/1431	185/476	synonymous_variant c.555T>C p.Leu185Leu	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7470		A	G	CDS	-	507/1431	169/476	synonymous_variant c.507T>C p.Ala169Ala	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7482		A	G	CDS	-	495/1431	165/476	synonymous_variant c.495T>C p.Ala165Ala	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7488		T	C	CDS	-	489/1431	163/476	synonymous_variant c.489A>G p.Ala163Ala	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7557		G	A	CDS	-	420/1431	140/476	synonymous_variant c.420C>T p.Arg140Arg	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7596		G	T	CDS	-	381/1431	127/476	synonymous_variant c.381C>A p.Gly127Gly	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	7608		C	T	CDS	-	369/1431	123/476	synonymous_variant c.369G>A p.Gly123Gly	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	8096		T	A		-			upstream_gene_variant c.-120A>T 	ECs_0007	yaaJ	amino acid carrier protein
+BA000007.3	8476		T	C	CDS	+	222/954	74/317	synonymous_variant c.222T>C p.Thr74Thr	ECs_0008	talB	transaldolase B
+BA000007.3	8569		A	T	CDS	+	315/954	105/317	synonymous_variant c.315A>T p.Thr105Thr	ECs_0008	talB	transaldolase B
+BA000007.3	8620		A	T	CDS	+	366/954	122/317	synonymous_variant c.366A>T p.Ala122Ala	ECs_0008	talB	transaldolase B
+BA000007.3	8683		G	A	CDS	+	429/954	143/317	synonymous_variant c.429G>A p.Ala143Ala	ECs_0008	talB	transaldolase B
+BA000007.3	8704		T	C	CDS	+	450/954	150/317	synonymous_variant c.450T>C p.Gly150Gly	ECs_0008	talB	transaldolase B
+BA000007.3	9019		C	T	CDS	+	765/954	255/317	synonymous_variant c.765C>T p.Ser255Ser	ECs_0008	talB	transaldolase B
+BA000007.3	9394		T	C	CDS	+	72/588	24/195	synonymous_variant c.72T>C p.Gly24Gly	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9505		G	A	CDS	+	183/588	61/195	synonymous_variant c.183G>A p.Leu61Leu	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9640		C	A	CDS	+	318/588	106/195	synonymous_variant c.318C>A p.Ile106Ile	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9682		G	T	CDS	+	360/588	120/195	synonymous_variant c.360G>T p.Val120Val	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9771		A	C	CDS	+	449/588	150/195	missense_variant c.449A>C p.Glu150Ala	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9856		A	G	CDS	+	534/588	178/195	synonymous_variant c.534A>G p.Pro178Pro	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9868		T	A	CDS	+	546/588	182/195	synonymous_variant c.546T>A p.Ala182Ala	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9896		G	A	CDS	+	574/588	192/195	missense_variant c.574G>A p.Asp192Asn	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	9940		G	A		+			downstream_gene_variant c.*30G>A 	ECs_0009	mog	molybdochelatase incorporating molybdenum into molybdopterin
+BA000007.3	10041		A	C	CDS	-	471/567	157/188	synonymous_variant c.471T>G p.Gly157Gly	ECs_0010	satP	succinate-acetate transporter
+BA000007.3	10425		T	C	CDS	-	87/567	29/188	synonymous_variant c.87A>G p.Val29Val	ECs_0010	satP	succinate-acetate transporter
+BA000007.3	10734		A	C	CDS	-	640/714	214/237	missense_variant c.640T>G p.Ser214Ala	ECs_0012	yaaW	hypothetical protein
+BA000007.3	10771		G	A	CDS	-	603/714	201/237	synonymous_variant c.603C>T p.Gly201Gly	ECs_0012	yaaW	hypothetical protein
+BA000007.3	10872		G	A	CDS	-	502/714	168/237	synonymous_variant c.502C>T p.Leu168Leu	ECs_0012	yaaW	hypothetical protein
+BA000007.3	10945		G	C	CDS	-	429/714	143/237	synonymous_variant c.429C>G p.Ala143Ala	ECs_0012	yaaW	hypothetical protein
+BA000007.3	10972		C	T	CDS	-	402/714	134/237	synonymous_variant c.402G>A p.Lys134Lys	ECs_0012	yaaW	hypothetical protein
+BA000007.3	10990		T	A	CDS	-	384/714	128/237	missense_variant c.384A>T p.Lys128Asn	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11002		A	G	CDS	-	372/714	124/237	synonymous_variant c.372T>C p.Asn124Asn	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11038		T	C	CDS	-	336/714	112/237	synonymous_variant c.336A>G p.Glu112Glu	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11212		T	C	CDS	-	162/714	54/237	synonymous_variant c.162A>G p.Gly54Gly	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11292		G	A	CDS	-	82/714	28/237	synonymous_variant c.82C>T p.Leu28Leu	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11293		C	T	CDS	-	81/714	27/237	synonymous_variant c.81G>A p.Arg27Arg	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11308		T	C	CDS	-	66/714	22/237	synonymous_variant c.66A>G p.Leu22Leu	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11323		A	G	CDS	-	51/714	17/237	synonymous_variant c.51T>C p.Cys17Cys	ECs_0012	yaaW	hypothetical protein
+BA000007.3	11648		C	A	CDS	-	156/405	52/134	synonymous_variant c.156G>T p.Val52Val	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11654		G	T	CDS	-	150/405	50/134	synonymous_variant c.150C>A p.Arg50Arg	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11657		A	G	CDS	-	147/405	49/134	synonymous_variant c.147T>C p.Cys49Cys	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11682		G	T	CDS	-	122/405	41/134	missense_variant c.122C>A p.Ala41Asp	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11699		C	T	CDS	-	105/405	35/134	synonymous_variant c.105G>A p.Pro35Pro	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11705		T	C	CDS	-	99/405	33/134	synonymous_variant c.99A>G p.Ala33Ala	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11722		G	T	CDS	-	82/405	28/134	missense_variant c.82C>A p.Leu28Ile	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11762		G	A	CDS	-	42/405	14/134	synonymous_variant c.42C>T p.Ser14Ser	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11822		A	G		-			upstream_gene_variant c.-19T>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11838		A	G		-			upstream_gene_variant c.-35T>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11878		C	T		-			upstream_gene_variant c.-75G>A 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11879		A	G		-			upstream_gene_variant c.-76T>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11886		C	G		-			upstream_gene_variant c.-83G>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11917		A	G		-			upstream_gene_variant c.-114T>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11918		C	T		-			upstream_gene_variant c.-115G>A 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11923		A	G		-			upstream_gene_variant c.-120T>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11961		A	G		-			upstream_gene_variant c.-158T>C 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11965		T	C		-			upstream_gene_variant c.-162A>G 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	11980		C	T		-			upstream_gene_variant c.-177G>A 	ECs_0013	yaaI	hypothetical protein
+BA000007.3	12254		T	C	CDS	+	75/1917	25/638	synonymous_variant c.75T>C p.Arg25Arg	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	12524		T	C	CDS	+	345/1917	115/638	synonymous_variant c.345T>C p.Ile115Ile	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	12599		C	T	CDS	+	420/1917	140/638	synonymous_variant c.420C>T p.Ile140Ile	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	12602		C	T	CDS	+	423/1917	141/638	synonymous_variant c.423C>T p.Thr141Thr	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	12762		T	C	CDS	+	583/1917	195/638	synonymous_variant c.583T>C p.Leu195Leu	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13046		C	T	CDS	+	867/1917	289/638	synonymous_variant c.867C>T p.Asp289Asp	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13118		T	A	CDS	+	939/1917	313/638	synonymous_variant c.939T>A p.Val313Val	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13130		C	T	CDS	+	951/1917	317/638	synonymous_variant c.951C>T p.Ile317Ile	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13148		G	A	CDS	+	969/1917	323/638	synonymous_variant c.969G>A p.Ala323Ala	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13337		A	G	CDS	+	1158/1917	386/638	synonymous_variant c.1158A>G p.Val386Val	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13358		T	C	CDS	+	1179/1917	393/638	synonymous_variant c.1179T>C p.Asp393Asp	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13529		C	T	CDS	+	1350/1917	450/638	synonymous_variant c.1350C>T p.Asp450Asp	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13736		C	A	CDS	+	1557/1917	519/638	synonymous_variant c.1557C>A p.Ala519Ala	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13883		G	A	CDS	+	1704/1917	568/638	synonymous_variant c.1704G>A p.Ala568Ala	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	13949		A	G	CDS	+	1770/1917	590/638	synonymous_variant c.1770A>G p.Glu590Glu	ECs_0014	dnaK	chaperone Hsp70
+BA000007.3	14415		T	C	CDS	+	231/1131	77/376	synonymous_variant c.231T>C p.Gly77Gly	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	14703		C	T	CDS	+	519/1131	173/376	synonymous_variant c.519C>T p.Arg173Arg	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	14763		C	T	CDS	+	579/1131	193/376	synonymous_variant c.579C>T p.Ile193Ile	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	14889		T	C	CDS	+	705/1131	235/376	synonymous_variant c.705T>C p.Gly235Gly	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	14892		A	G	CDS	+	708/1131	236/376	synonymous_variant c.708A>G p.Glu236Glu	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	14895		C	T	CDS	+	711/1131	237/376	synonymous_variant c.711C>T p.His237His	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	15018		T	C	CDS	+	834/1131	278/376	synonymous_variant c.834T>C p.Gly278Gly	ECs_0015	dnaJ	chaperone Hsp40
+BA000007.3	15090		A	T	CDS	+	906/1131	302/376	synonymous_variant c.906A>T p.Leu302Leu	ECs_0015	dnaJ	chaperone Hsp40
