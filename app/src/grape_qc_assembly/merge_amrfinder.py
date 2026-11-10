@@ -81,6 +81,7 @@ def load_amrfinder_files(input_dir: str, list_path: str) -> Tuple[str, List[Tupl
         tsv_path = None
         candidates = [
             f"{strain}_plus_out.tsv",
+            f"{strain}_out.tsv",
             f"{strain}.tsv"
         ]
         for c in candidates:
@@ -116,12 +117,13 @@ def generate_summary_tsv(strain_raw_pairs: List[Tuple[str, List[str]]], list_nam
         tsv_content = "".join(lines)
         try:
             df = pd.read_csv(io.StringIO(tsv_content), sep='\t', keep_default_na=False, na_values=[''])
-            if df.empty:
-                raise ValueError(f"TSV data for strain '{strain}' is empty")
         except pd.errors.EmptyDataError as e:
             raise ValueError(f"TSV data for strain '{strain}' is empty: {e}")
         except pd.errors.ParserError as e:
             raise ValueError(f"TSV data for strain '{strain}' is malformed: {e}")
+            
+        if df.empty:
+            print(f"[WARN] TSV data for strain '{strain}' is empty (no genes detected).", file=sys.stderr)
             
         # Normalize column names to lowercase/trimmed to handle variation
         df.columns = [c.strip().lower() for c in df.columns]
@@ -138,22 +140,29 @@ def generate_summary_tsv(strain_raw_pairs: List[Tuple[str, List[str]]], list_nam
         dfs.append(df)
         
     # Combine all data
-    combined_df = pd.concat(dfs, ignore_index=True)
+    if dfs:
+        combined_df = pd.concat(dfs, ignore_index=True)
+    else:
+        combined_df = pd.DataFrame(columns=['gene', 'scope', 'type', 'strain'])
     # Deduplicate genes per strain (presence-absence is binary)
     combined_df = combined_df.drop_duplicates(subset=['strain', 'gene'])
     
     # Deduplicate genes to find their unique group mapping
-    gene_info = combined_df[['gene', 'scope', 'type']].drop_duplicates(subset=['gene']).copy()
-    gene_info['group'] = gene_info.apply(
-        lambda row: get_group_name(row['scope'], row['type']), axis=1
-    )
-    
-    # Sort groups
-    unique_groups = gene_info[['group', 'scope', 'type']].drop_duplicates().copy()
-    unique_groups['sort_key'] = unique_groups.apply(
-        lambda row: get_sort_key(row['scope'], row['type']), axis=1
-    )
-    sorted_groups = unique_groups.sort_values(by='sort_key')['group'].tolist()
+    if not combined_df.empty:
+        gene_info = combined_df[['gene', 'scope', 'type']].drop_duplicates(subset=['gene']).copy()
+        gene_info['group'] = gene_info.apply(
+            lambda row: get_group_name(row['scope'], row['type']), axis=1
+        )
+        
+        # Sort groups
+        unique_groups = gene_info[['group', 'scope', 'type']].drop_duplicates().copy()
+        unique_groups['sort_key'] = unique_groups.apply(
+            lambda row: get_sort_key(row['scope'], row['type']), axis=1
+        )
+        sorted_groups = unique_groups.sort_values(by='sort_key')['group'].tolist()
+    else:
+        gene_info = pd.DataFrame(columns=['gene', 'scope', 'type', 'group'])
+        sorted_groups = []
     
     # Construct final column layout
     columns = ['Strain']

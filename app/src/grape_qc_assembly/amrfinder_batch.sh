@@ -118,7 +118,7 @@ echo "[INFO] Created log folder: $LOG_DIR"
 
 cleanup() {
   shopt -s nullglob
-  for f in *_out *_plus_out; do
+  for f in *_out.tsv *_plus_out.tsv *_out *_plus_out; do
     [[ -e "$f" ]] || continue
     mv -f "$f" "$TS_DIR/" 2>/dev/null || true
   done
