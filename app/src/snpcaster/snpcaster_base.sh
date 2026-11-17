@@ -287,8 +287,12 @@ function process_gubbins() {
   local THREAD=$1
   echo '========================= gubbins ==========================='
   source activate gubbins
-  run_gubbins.py --threads "${THREAD}" "${SNIPPY_OUTDIR}"/core.full.aln
+  local gubbins_rc=0
+  run_gubbins.py --threads "${THREAD}" "${SNIPPY_OUTDIR}"/core.full.aln || gubbins_rc=$?
   conda deactivate
+  if [ "${gubbins_rc}" -ne 0 ]; then
+    return "${gubbins_rc}"
+  fi
 
   mkdir "${GUBBINS_OUTDIR}"
   mv -v core.full.branch_base_reconstruction.embl \
@@ -366,6 +370,8 @@ function append_report_information() {
   echo "Before Gubbins : $(count_core_genome_length "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/"${FINAL_CORE_REGION_FILE_NAME}")" >> "${REPORT}"
   if [ "${WRITE_AFTER_GUBBINS}" -eq 1 ]; then
     echo "After Gubbins : $(count_core_genome_length "${RESULTS_WITH_GUBBINS_OUTDIR}"/core_summary_after_gubbins.tsv)" >> "${REPORT}"
+  elif [ "${WRITE_AFTER_GUBBINS}" -eq 2 ]; then
+    echo "After Gubbins : (Gubbins FAILED)" >> "${REPORT}"
   fi
 
   echo "" >> "${REPORT}"
@@ -379,8 +385,10 @@ function append_report_information() {
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking.csv)" >> "${REPORT}"
   fi
-  if [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
+  if [ "$WRITE_AFTER_GUBBINS" -eq 1 ]; then
     echo "After Gubbins : $(count_lines_without_header "${RESULTS_WITH_GUBBINS_OUTDIR}"/snp_position_after_gubbins.csv)" >> "${REPORT}"
+  elif [ "$WRITE_AFTER_GUBBINS" -eq 2 ]; then
+    echo "After Gubbins : (Gubbins FAILED)" >> "${REPORT}"
   fi
 
   echo "" >> "${REPORT}"
@@ -394,8 +402,10 @@ function append_report_information() {
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking_sample_only.csv)" >> "${REPORT}"
   fi
-  if [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
+  if [ "$WRITE_AFTER_GUBBINS" -eq 1 ]; then
     echo "After Gubbins : $(count_lines_without_header "${RESULTS_WITH_GUBBINS_OUTDIR}"/snp_position_after_gubbins_sample_only.csv)" >> "${REPORT}"
+  elif [ "$WRITE_AFTER_GUBBINS" -eq 2 ]; then
+    echo "After Gubbins : (Gubbins FAILED)" >> "${REPORT}"
   fi
 
   if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ] || [ "$WRITE_AFTER_MASKING" -gt 0 ] || [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
@@ -407,8 +417,10 @@ function append_report_information() {
     if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
       echo "Masked region: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/masked_region.csv)" >> "${REPORT}"
     fi
-    if [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
+    if [ "$WRITE_AFTER_GUBBINS" -eq 1 ]; then
       echo "Gubbins: $(count_lines_without_header "${RESULTS_WITH_GUBBINS_OUTDIR}"/recombination_region.csv)" >> "${REPORT}"
+    elif [ "$WRITE_AFTER_GUBBINS" -eq 2 ]; then
+      echo "Gubbins: (Gubbins FAILED)" >> "${REPORT}"
     fi
   fi
 }

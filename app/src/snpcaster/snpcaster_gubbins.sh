@@ -82,7 +82,10 @@ if ! check_gubbins_strain_count "${STRAIN_COUNT}"; then
   exit 1
 fi
 
-process_gubbins "${THREAD}"
+if ! process_gubbins "${THREAD}"; then
+  echo "Error: Gubbins execution failed." >&2
+  exit 1
+fi
 postprocess_gubbins "${THREAD}"
 
 REPORT=gubbins_report.txt

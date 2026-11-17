@@ -54,8 +54,10 @@ function create_report_header() {
   echo "Threads : ${THREAD}" >> "${REPORT}"
   echo "BactSNP allele-freq : ${ALLELE_FREQ}" >> "${REPORT}"
   echo "BactSNP jobs : ${JOBS}" >> "${REPORT}"
-  if [ $EXEC_GUBBINS -eq 1 ]; then
+  if [ "${GUBBINS_STATUS}" -eq 1 ]; then
     echo "Recombinogenic region detection (Gubbins) : ON" >> "${REPORT}"
+  elif [ "${GUBBINS_STATUS}" -eq 2 ]; then
+    echo "Recombinogenic region detection (Gubbins) : FAILED" >> "${REPORT}"
   else
     echo "Recombinogenic region detection (Gubbins) : OFF" >> "${REPORT}"
   fi
@@ -178,14 +180,19 @@ MASK_FILE_NAME=$(basename "${MASK_FILE}")
 process_bactsnp "${BACTSNP_LIST}" "${REF_FILE_NAME}" "${ALLELE_FREQ}" "${THREAD}" "${JOBS}"
 process_snippy "${LIST_FILE_NAME}" "${REF_FILE_NAME}"
 postprocess_snippy "${GAP}" "${THREAD}" "${MASK_FILE_NAME}"
+GUBBINS_STATUS="${EXEC_GUBBINS}"
 if [ "${EXEC_GUBBINS}" -eq 1 ]; then
-  process_gubbins "${THREAD}"
-  postprocess_gubbins "${THREAD}"
+  if process_gubbins "${THREAD}"; then
+    postprocess_gubbins "${THREAD}"
+  else
+    echo "WARNING: Gubbins execution failed. Continuing without Gubbins results."
+    GUBBINS_STATUS=2
+  fi
 fi
 
 REPORT=SNPcaster_report.txt
 create_report_header "${REPORT}"
-append_report_information "${REPORT}" 1 "${GAP}" "${using_mask_file}" "${EXEC_GUBBINS}"
+append_report_information "${REPORT}" 1 "${GAP}" "${using_mask_file}" "${GUBBINS_STATUS}"
 # remove unnecessary data
 if [ -f "${BACTSNP_SKIP_LIST}" ]; then
   for strain in $(cat "${BACTSNP_SKIP_LIST}"); do
@@ -202,7 +209,7 @@ fi
 
 rename_fasta_extension_in_directories "${SNIPPY_OUTDIR}" "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"
 
-if [ "${EXEC_GUBBINS}" -eq 1 ]; then
+if [ "${GUBBINS_STATUS}" -eq 1 ]; then
   rename_fasta_extension_in_directories "${GUBBINS_OUTDIR}" "${RESULTS_WITH_GUBBINS_OUTDIR}"
 fi
 
