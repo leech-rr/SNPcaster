@@ -1,7 +1,7 @@
 services:
   snpcaster:
     container_name: snpcaster-1.0.2a
-    image: snpcaster:1.0.2a
+    image: &snpcaster-image snpcaster:1.0.2a
     shm_size: '2gb'
     build:
       context: app
@@ -13,8 +13,41 @@ services:
         - APT_NO_CACHE=${APT_NO_CACHE:-1}
     init: true
     ports:
-      - "59829:8888"
+      - "${SNPCASTER_BIND_ADDR:-127.0.0.1}:${SNPCASTER_PORT:-59829}:8888"
     restart: always
     volumes:
       - ./project:/home/snpcaster/notebook/project
     command: jupyter-lab --allow-root --ip=* --port=8888 --no-browser --NotebookApp.token='' --notebook-dir=/home/snpcaster/notebook
+
+  # This service is used for Unit Testing (UT) with pytest using the main snpcaster image.
+  snpcaster-ut:
+    container_name: snpcaster-ut
+    image: *snpcaster-image
+    depends_on:
+      - snpcaster
+    shm_size: '2gb'
+    profiles: [ "test" ]
+    init: true
+    volumes:
+      - ./project:/home/snpcaster/notebook/project
+      - ./app/test:/usr/local/src/snpcaster/test
+    working_dir: /usr/local/src/snpcaster
+    environment:
+      - PATH=/home/snpcaster/.local/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - PYTHONPATH=/usr/local/src:/usr/local/src/snpcaster:/usr/local/src/snpcaster/grape_qc_assembly:/usr/local/src/snpcaster/snpcaster
+    command: bash -c "pip install -q pandas pytest pytest-mock pytest-cov && pytest test/ut -v"
+
+  # This service is used for Integration / Regression Testing (IT) using the main snpcaster image.
+  snpcaster-it:
+    container_name: snpcaster-it
+    image: *snpcaster-image
+    depends_on:
+      - snpcaster
+    shm_size: '2gb'
+    profiles: [ "test" ]
+    init: true
+    volumes:
+      - ./project:/home/snpcaster/notebook/project
+      - ./app/test:/usr/local/src/snpcaster/test
+    working_dir: /usr/local/src/snpcaster
+    command: bash -c "cd test/it && chmod +x run_it.sh && ./run_it.sh"

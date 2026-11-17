@@ -96,6 +96,7 @@ RUN ./conda_env_create.sh conda_env
 # # ----------    Set an entrypoint    ----------
 RUN apt-get update && apt-get -y install gosu
 COPY setup/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY setup/custom_setup.s[h] /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
