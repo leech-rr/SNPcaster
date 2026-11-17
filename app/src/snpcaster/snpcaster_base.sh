@@ -98,6 +98,18 @@ function count_core_genome_length() {
   echo "${core_genome_count}"
 }
 
+function copy_without_crlf() {
+  local src_file=$1
+  local dest_dir=$2
+  local dest_file="${dest_dir}/$(basename "${src_file}")"
+
+  cp -pv "${src_file}" "${dest_dir}"/ || return 1
+  if grep -q $'\r' "${dest_file}"; then
+    sed -i 's/\r$//' "${dest_file}" || return 1
+    echo "Converted CRLF to LF: ${dest_file}"
+  fi
+}
+
 function prepare4snpcaster() {
   local NOT_EXIST_LIST=missing_list
   local BACTSNP_LIST=$1
@@ -115,7 +127,7 @@ function prepare4snpcaster() {
   touch "${BACTSNP_LIST}"
   touch "${BACTSNP_SKIP_LIST}"
   local strain
-  for strain in $(cat "${LIST_FULL}"); do
+  for strain in $(tr -d '\r' < "${LIST_FULL}"); do
     # Skip if pre-executed SNP folder exists
     if [ -d "${strain}" ]; then
       cp -pvr "${strain}" "${OUTPUT_DIR}"/
@@ -124,7 +136,7 @@ function prepare4snpcaster() {
     fi
 
     # Find fastq file pair for the strain
-    local fastq_line=$(grep -P "^${strain}\t" "${FASTQ_LIST}" | tr -d '\n')
+    local fastq_line=$(grep -P "^${strain}\t" "${FASTQ_LIST}" | tr -d '\r\n')
 
     if [ -z "${fastq_line:-}" ]; then
       echo "${strain}" >> "${NOT_EXIST_LIST}"
@@ -166,10 +178,10 @@ function prepare4snpcaster() {
     exit 1
   fi
 
-  cp -pv "${LIST_FULL}" "${OUTPUT_DIR}"/ || exit 1
-  cp -pv "${REFERENCE_FILE}" "${OUTPUT_DIR}"/ || exit 1
+  copy_without_crlf "${LIST_FULL}" "${OUTPUT_DIR}" || exit 1
+  copy_without_crlf "${REFERENCE_FILE}" "${OUTPUT_DIR}" || exit 1
   if [ -n "${MASK_FILE}" ]; then
-    cp -pv "${MASK_FILE}" "${OUTPUT_DIR}"/ || exit 1
+    copy_without_crlf "${MASK_FILE}" "${OUTPUT_DIR}" || exit 1
   fi
   mv -v "${BACTSNP_LIST}" "${OUTPUT_DIR}"/
   mv -v "${BACTSNP_SKIP_LIST}" "${OUTPUT_DIR}"/
