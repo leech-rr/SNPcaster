@@ -139,6 +139,14 @@ if [ -n "${FASTQ_LIST:-}" ] && [ ! -r "${FASTQ_LIST}" ]; then
   exit 1
 fi
 
+if [ "${EXEC_GUBBINS}" -eq 1 ]; then
+  STRAIN_COUNT=$(count_strains_in_list "${LIST_FULL}") || exit 1
+  if ! check_gubbins_strain_count "${STRAIN_COUNT}"; then
+    _usage
+    exit 1
+  fi
+fi
+
 LIST_FILE_NAME=${LIST_FULL##*/}
 OUTPUT_DIR=snpcaster_$(date +%Y%m%d_%H%M%S)_${LIST_FILE_NAME}
 echo "MASK FILE: $MASK_FILE"

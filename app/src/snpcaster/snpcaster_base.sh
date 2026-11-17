@@ -49,6 +49,38 @@ function count_lines_without_header() {
   tail -n +$((header_lines + 1)) "${INPUT}" | wc -l
 }
 
+function count_strains_in_list() {
+  local list_file=$1
+  if [ ! -r "${list_file}" ]; then
+    echo "Error: Cannot find or read strain list file [${list_file}]." >&2
+    return 1
+  fi
+  awk '{sub(/\r$/, "")} NF > 0 {count++} END {print count+0}' "${list_file}"
+}
+
+function count_strains_in_snippy_core() {
+  local core_txt_file=$1
+  if [ ! -r "${core_txt_file}" ]; then
+    echo "Error: Cannot find or read Snippy core file [${core_txt_file}]." >&2
+    return 1
+  fi
+  awk '{sub(/\r$/, "")} NR > 1 && $1 != "Reference" && NF > 0 {count++} END {print count+0}' "${core_txt_file}"
+}
+
+function check_gubbins_strain_count() {
+  local strain_count=$1
+  local min_strains=3
+  if [ -z "${strain_count}" ] || ! [[ "${strain_count}" =~ ^[0-9]+$ ]]; then
+    echo "Error: Invalid strain count [${strain_count}]." >&2
+    return 1
+  fi
+  if [ "${strain_count}" -lt "${min_strains}" ]; then
+    echo "Error: Gubbins requires at least ${min_strains} strains, but only ${strain_count} strain(s) were found." >&2
+    return 1
+  fi
+  return 0
+}
+
 function count_core_genome_length() {
   local CORE_GENOME_TSV="$1"
   if [ ! -r "${CORE_GENOME_TSV}" ]; then
