@@ -18,44 +18,44 @@ ENV https_proxy=$HTTPS_PROXY
 
 # apt setting
 RUN if [ -n "${APT_PIPELINING}" ]; then \
-        if [ "${APT_PIPELINING}" -ge 0 ]; then \
-            echo "Acquire::http::Pipeline-Depth ${APT_PIPELINING};" >> "${APT_HTTP_SETTING_FILE}"; \
-        else \
-            echo "[Error] APT_PIPELINING [${APT_PIPELINING}] must be a non-negative integer. Exit..." >&2; \
-            exit 1; \
-        fi; \
+    if [ "${APT_PIPELINING}" -ge 0 ]; then \
+    echo "Acquire::http::Pipeline-Depth ${APT_PIPELINING};" >> "${APT_HTTP_SETTING_FILE}"; \
     else \
-        if [ -n "${HTTP_PROXY}" ] || [ -n "${HTTPS_PROXY}" ]; then \
-            echo "Acquire::http::Pipeline-Depth 0;" >> "${APT_HTTP_SETTING_FILE}"; \
-        fi; \
+    echo "[Error] APT_PIPELINING [${APT_PIPELINING}] must be a non-negative integer. Exit..." >&2; \
+    exit 1; \
+    fi; \
+    else \
+    if [ -n "${HTTP_PROXY}" ] || [ -n "${HTTPS_PROXY}" ]; then \
+    echo "Acquire::http::Pipeline-Depth 0;" >> "${APT_HTTP_SETTING_FILE}"; \
+    fi; \
     fi;
 
 RUN if [ "${APT_NO_CACHE}" -eq 0 ]; then \
-            echo "Acquire::http::No-Cache false;" >> "${APT_HTTP_SETTING_FILE}"; \
+    echo "Acquire::http::No-Cache false;" >> "${APT_HTTP_SETTING_FILE}"; \
     elif [ "${APT_NO_CACHE}" -eq 1 ]; then \
-        echo "Acquire::http::No-Cache true;" >> "${APT_HTTP_SETTING_FILE}"; \
+    echo "Acquire::http::No-Cache true;" >> "${APT_HTTP_SETTING_FILE}"; \
     else \
-        echo "[Error] APT_NO_CACHE [${APT_NO_CACHE}] must be 0 or 1. Exit..." >&2; \
-        exit 1; \
+    echo "[Error] APT_NO_CACHE [${APT_NO_CACHE}] must be 0 or 1. Exit..." >&2; \
+    exit 1; \
     fi;
 
 # apt install
 RUN apt-get update &&\
     apt-get -y install \
-	bc \
-	build-essential \
+    bc \
+    build-essential \
     make \
     cmake \
     wget \
     git \
-	default-jre \
+    default-jre \
     unzip \
-	sed \
+    sed \
     gawk \
     pigz \
     rename \
     rsync &&\
-	apt-get clean &&\
+    apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
 
 # install miniforge3
@@ -92,13 +92,14 @@ WORKDIR /usr/local/src/snpcaster/setup/conda
 RUN mamba env update -f=conda_env_base.yml
 RUN chmod +x /usr/local/src/snpcaster/setup/conda/conda_env_create.sh
 RUN ./conda_env_create.sh conda_env
-    
+
 # # ----------    Set an entrypoint    ----------
 RUN apt-get update && apt-get -y install gosu
 COPY setup/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY setup/custom_setup.s[h] /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-                
+
 # # ----------    Install grape & snpcaster   ----------
 ENV BAC1=/usr/local/src/snpcaster
 COPY src/ /usr/local/src/snpcaster/
@@ -107,6 +108,7 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
     ln -s /usr/local/src/snpcaster/grape_qc_assembly/grape_qc_assembly_reduced_tree.sh /usr/local/bin/grape_qc_assembly_reduced_tree.sh && \
     ln -s /usr/local/src/snpcaster/grape_qc_assembly/fasterq_dump.sh /usr/local/bin/fasterq_dump.sh && \
     ln -s /usr/local/src/snpcaster/grape_qc_assembly/amrfinder_batch.sh /usr/local/bin/amrfinder_batch.sh && \
+    ln -s /usr/local/src/snpcaster/grape_qc_assembly/merge_amrfinder.py /usr/local/bin/merge_amrfinder.py && \
     ln -s /usr/local/src/snpcaster/snpcaster/snpcaster.sh /usr/local/bin/snpcaster.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/snpclipper.sh /usr/local/bin/snpclipper.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/snpcaster_gubbins.sh /usr/local/bin/snpcaster_gubbins.sh && \
@@ -114,12 +116,14 @@ RUN ln -s /usr/local/src/snpcaster/grape_qc_assembly/find_strain_pairs.py /usr/l
     ln -s /usr/local/src/snpcaster/snpcaster/art_fq_generator.sh /usr/local/bin/art_fq_generator.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/n_combine.sh /usr/local/bin/n_combine.sh && \
     ln -s /usr/local/src/snpcaster/snpcaster/repeat_detect.sh /usr/local/bin/repeat_detect.sh && \
-    ln -s /usr/local/src/snpcaster/snpcaster/iqtree.sh /usr/local/bin/iqtree.sh
+    ln -s /usr/local/src/snpcaster/snpcaster/iqtree.sh /usr/local/bin/iqtree.sh && \
+    ln -s /usr/local/src/snpcaster/snpcaster/vcf_converter.py /usr/local/bin/vcf_converter.py && \
+    ln -s /usr/local/src/snpcaster/snpcaster/snpeff_pipeline.py /usr/local/bin/snpeff_pipeline.py
 
 # # ----------    Grant execution permission   ----------
 RUN find /usr/local/src -type f -exec chmod +x {} \;
 RUN find /usr/local/bin -type f -exec chmod +x {} \;
-    
+
 # # ----------    Create SNPcaster user   ----------
 RUN useradd -m -u 1001 snpcaster
 

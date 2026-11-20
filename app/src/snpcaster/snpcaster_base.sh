@@ -49,6 +49,38 @@ function count_lines_without_header() {
   tail -n +$((header_lines + 1)) "${INPUT}" | wc -l
 }
 
+function count_strains_in_list() {
+  local list_file=$1
+  if [ ! -r "${list_file}" ]; then
+    echo "Error: Cannot find or read strain list file [${list_file}]." >&2
+    return 1
+  fi
+  awk '{sub(/\r$/, "")} NF > 0 {count++} END {print count+0}' "${list_file}"
+}
+
+function count_strains_in_snippy_core() {
+  local core_txt_file=$1
+  if [ ! -r "${core_txt_file}" ]; then
+    echo "Error: Cannot find or read Snippy core file [${core_txt_file}]." >&2
+    return 1
+  fi
+  awk '{sub(/\r$/, "")} NR > 1 && $1 != "Reference" && NF > 0 {count++} END {print count+0}' "${core_txt_file}"
+}
+
+function check_gubbins_strain_count() {
+  local strain_count=$1
+  local min_strains=3
+  if [ -z "${strain_count}" ] || ! [[ "${strain_count}" =~ ^[0-9]+$ ]]; then
+    echo "Error: Invalid strain count [${strain_count}]." >&2
+    return 1
+  fi
+  if [ "${strain_count}" -lt "${min_strains}" ]; then
+    echo "Error: Gubbins requires at least ${min_strains} strains, but only ${strain_count} strain(s) were found." >&2
+    return 1
+  fi
+  return 0
+}
+
 function count_core_genome_length() {
   local CORE_GENOME_TSV="$1"
   if [ ! -r "${CORE_GENOME_TSV}" ]; then
@@ -64,6 +96,18 @@ function count_core_genome_length() {
     rm core_genome.txt
   fi
   echo "${core_genome_count}"
+}
+
+function copy_without_crlf() {
+  local src_file=$1
+  local dest_dir=$2
+  local dest_file="${dest_dir}/$(basename "${src_file}")"
+
+  cp -pv "${src_file}" "${dest_dir}"/ || return 1
+  if grep -q $'\r' "${dest_file}"; then
+    sed -i 's/\r$//' "${dest_file}" || return 1
+    echo "Converted CRLF to LF: ${dest_file}"
+  fi
 }
 
 function prepare4snpcaster() {
@@ -83,7 +127,7 @@ function prepare4snpcaster() {
   touch "${BACTSNP_LIST}"
   touch "${BACTSNP_SKIP_LIST}"
   local strain
-  for strain in $(cat "${LIST_FULL}"); do
+  for strain in $(tr -d '\r' < "${LIST_FULL}"); do
     # Skip if pre-executed SNP folder exists
     if [ -d "${strain}" ]; then
       cp -pvr "${strain}" "${OUTPUT_DIR}"/
@@ -92,7 +136,7 @@ function prepare4snpcaster() {
     fi
 
     # Find fastq file pair for the strain
-    local fastq_line=$(grep -P "^${strain}\t" "${FASTQ_LIST}" | tr -d '\n')
+    local fastq_line=$(grep -P "^${strain}\t" "${FASTQ_LIST}" | tr -d '\r\n')
 
     if [ -z "${fastq_line:-}" ]; then
       echo "${strain}" >> "${NOT_EXIST_LIST}"
@@ -134,10 +178,10 @@ function prepare4snpcaster() {
     exit 1
   fi
 
-  cp -pv "${LIST_FULL}" "${OUTPUT_DIR}"/ || exit 1
-  cp -pv "${REFERENCE_FILE}" "${OUTPUT_DIR}"/ || exit 1
+  copy_without_crlf "${LIST_FULL}" "${OUTPUT_DIR}" || exit 1
+  copy_without_crlf "${REFERENCE_FILE}" "${OUTPUT_DIR}" || exit 1
   if [ -n "${MASK_FILE}" ]; then
-    cp -pv "${MASK_FILE}" "${OUTPUT_DIR}"/ || exit 1
+    copy_without_crlf "${MASK_FILE}" "${OUTPUT_DIR}" || exit 1
   fi
   mv -v "${BACTSNP_LIST}" "${OUTPUT_DIR}"/
   mv -v "${BACTSNP_SKIP_LIST}" "${OUTPUT_DIR}"/
@@ -164,16 +208,13 @@ function process_bactsnp() {
   conda deactivate
 
   local PSEUDO_GENOME_DIR="${BACTSNP_OUTDIR}"/pseudo_genome
-  local TITLE="#CHROM\tPOS\tID\tREF\tALT"
-  source activate perl-bioperl-core
+  source activate original
   for strain in $(extract_strain_names "${BACTSNP_LIST}"); do
     file=${PSEUDO_GENOME_DIR}/${strain}.fa
-    perl "${SNPCASTER_SRC_DIR}"/bactsnp_vcf_script.pl "${REFERENCE_FILE}" "${file}"
-    # Add title to the result file
-    sed -i "1i ${TITLE}" result_vcf.txt
+    python "${SNPCASTER_SRC_DIR}"/vcf_converter.py "${file}" "${REFERENCE_FILE}" "${strain}"
     # Create SNP folder for each strain
     mkdir -v "${strain}"
-    mv -v result_vcf.txt "${strain}"/snps.vcf
+    mv -v "${strain}.vcf" "${strain}"/snps.vcf
     cp -v "${file}" "${strain}"/snps.aligned.fa
   done
   conda deactivate
@@ -258,8 +299,12 @@ function process_gubbins() {
   local THREAD=$1
   echo '========================= gubbins ==========================='
   source activate gubbins
-  run_gubbins.py --threads "${THREAD}" "${SNIPPY_OUTDIR}"/core.full.aln
+  local gubbins_rc=0
+  run_gubbins.py --threads "${THREAD}" "${SNIPPY_OUTDIR}"/core.full.aln || gubbins_rc=$?
   conda deactivate
+  if [ "${gubbins_rc}" -ne 0 ]; then
+    return "${gubbins_rc}"
+  fi
 
   mkdir "${GUBBINS_OUTDIR}"
   mv -v core.full.branch_base_reconstruction.embl \
@@ -337,6 +382,8 @@ function append_report_information() {
   echo "Before Gubbins : $(count_core_genome_length "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/"${FINAL_CORE_REGION_FILE_NAME}")" >> "${REPORT}"
   if [ "${WRITE_AFTER_GUBBINS}" -eq 1 ]; then
     echo "After Gubbins : $(count_core_genome_length "${RESULTS_WITH_GUBBINS_OUTDIR}"/core_summary_after_gubbins.tsv)" >> "${REPORT}"
+  elif [ "${WRITE_AFTER_GUBBINS}" -eq 2 ]; then
+    echo "After Gubbins : (Gubbins FAILED)" >> "${REPORT}"
   fi
 
   echo "" >> "${REPORT}"
@@ -350,8 +397,10 @@ function append_report_information() {
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking.csv)" >> "${REPORT}"
   fi
-  if [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
+  if [ "$WRITE_AFTER_GUBBINS" -eq 1 ]; then
     echo "After Gubbins : $(count_lines_without_header "${RESULTS_WITH_GUBBINS_OUTDIR}"/snp_position_after_gubbins.csv)" >> "${REPORT}"
+  elif [ "$WRITE_AFTER_GUBBINS" -eq 2 ]; then
+    echo "After Gubbins : (Gubbins FAILED)" >> "${REPORT}"
   fi
 
   echo "" >> "${REPORT}"
@@ -365,8 +414,10 @@ function append_report_information() {
   if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
     echo "After masking: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/snp_position_after_masking_sample_only.csv)" >> "${REPORT}"
   fi
-  if [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
+  if [ "$WRITE_AFTER_GUBBINS" -eq 1 ]; then
     echo "After Gubbins : $(count_lines_without_header "${RESULTS_WITH_GUBBINS_OUTDIR}"/snp_position_after_gubbins_sample_only.csv)" >> "${REPORT}"
+  elif [ "$WRITE_AFTER_GUBBINS" -eq 2 ]; then
+    echo "After Gubbins : (Gubbins FAILED)" >> "${REPORT}"
   fi
 
   if [ "$WRITE_CLUSTER_SNP_REMOVAL" -gt 0 ] || [ "$WRITE_AFTER_MASKING" -gt 0 ] || [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
@@ -378,8 +429,10 @@ function append_report_information() {
     if [ "$WRITE_AFTER_MASKING" -gt 0 ]; then
       echo "Masked region: $(count_lines_without_header "${RESULTS_WITHOUT_GUBBINS_OUTDIR}"/masked_region.csv)" >> "${REPORT}"
     fi
-    if [ "$WRITE_AFTER_GUBBINS" -gt 0 ]; then
+    if [ "$WRITE_AFTER_GUBBINS" -eq 1 ]; then
       echo "Gubbins: $(count_lines_without_header "${RESULTS_WITH_GUBBINS_OUTDIR}"/recombination_region.csv)" >> "${REPORT}"
+    elif [ "$WRITE_AFTER_GUBBINS" -eq 2 ]; then
+      echo "Gubbins: (Gubbins FAILED)" >> "${REPORT}"
     fi
   fi
 }

@@ -1,7 +1,7 @@
 import os
 import tempfile
 from unittest.mock import patch, MagicMock
-from src.grape_qc_assembly.write_grape_qc import calculate_read_stats
+from grape_qc_assembly.write_grape_qc import calculate_read_stats
 
 def test_calculate_read_stats():
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -10,7 +10,7 @@ def test_calculate_read_stats():
         with open(fastq1, 'w') as f:
             f.write("dummy")
             
-        with patch('src.grape_qc_assembly.write_grape_qc.subprocess.run') as mock_run:
+        with patch('grape_qc_assembly.write_grape_qc.subprocess.run') as mock_run:
             mock_result = MagicMock()
             mock_result.stdout = "file\tformat\ttype\tnum_seqs\tsum_len\tmin_len\tavg_len\tmax_len\nstrain1_1.fastq.gz\tFASTQ\tDNA\t100\t15000\t150\t150\t150\n"
             mock_run.return_value = mock_result

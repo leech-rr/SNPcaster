@@ -27,8 +27,8 @@ def find_fastq_pairs(
     file_extension (str): Extension of the files to search for.
     output_file (str): Path to the output file.
     """
-    # Read strain names from the input file
-    strain_list = read_file(strain_list_file)
+    # Read strain names from the input file and filter out empty lines
+    strain_list = [strain.strip() for strain in read_file(strain_list_file) if strain.strip()]
 
     # Sort strain names by length to avoid partial matches (longest first)
     length_sorted_strain_list = sorted(strain_list, key=len, reverse=True)
@@ -40,13 +40,19 @@ def find_fastq_pairs(
     paired_strain_to_files = {}
     unpaired_strain_to_files = {}
 
+    # Normalize file extension: remove leading dot if present
+    clean_extension = file_extension.lstrip(".")
+
     # Search for paired files
     for strain in length_sorted_strain_list:
         if strain in paired_strain_to_files \
             or strain in unpaired_strain_to_files:
             raise Exception(f"Duplicate strain name [{strain}] found in the list.")
 
-        search_pattern = os.path.join(target_folder, f"{strain}*.{file_extension}")
+        if clean_extension:
+            search_pattern = os.path.join(target_folder, f"{strain}*.{clean_extension}")
+        else:
+            search_pattern = os.path.join(target_folder, f"{strain}*")
         files = list(map(lambda p: basename(p), glob.glob(search_pattern)))
 
         # Filter out files that have already been used
@@ -77,6 +83,8 @@ def find_fastq_pairs(
     if len(unpaired_strains) > 0:
         write_tsv_file(unpaired_file, unpaired_strains)
         logger.warning(f"Unpaired files found for {len(unpaired_strains)} strain(s). Check the output file [{unpaired_file}].")
+    elif os.path.exists(unpaired_file):
+        os.remove(unpaired_file)
 
 def main() -> None:
     """
