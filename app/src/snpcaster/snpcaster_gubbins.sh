@@ -76,7 +76,16 @@ if [ -d "${GUBBINS_OUTDIR}" ] || [ -d "${RESULTS_WITH_GUBBINS_OUTDIR}" ]; then
   exit 1
 fi
 
-process_gubbins "${THREAD}"
+STRAIN_COUNT=$(count_strains_in_snippy_core "${SNIPPY_OUTDIR}/core.txt") || exit 1
+if ! check_gubbins_strain_count "${STRAIN_COUNT}"; then
+  _usage
+  exit 1
+fi
+
+if ! process_gubbins "${THREAD}"; then
+  echo "Error: Gubbins execution failed." >&2
+  exit 1
+fi
 postprocess_gubbins "${THREAD}"
 
 REPORT=gubbins_report.txt

@@ -55,14 +55,37 @@ cd "${OUT_DIR}"
 source activate raxml-ng
 # run modeltest
 modeltest_prefix="modeltest-ng"
-modeltest-ng -i "${VARIABLE_SNP_FILE_NAME}" -t ml -p $2 --output "${modeltest_prefix}"
+modeltest-ng -i "${VARIABLE_SNP_FILE_NAME}" -t ml -p "$2" -a lewis -h ug --output "${modeltest_prefix}"
 modeltest_out="${modeltest_prefix}.out"
-# Extract raxml command from ModelTest-NG output
-raw_cmd=$(sed -n '/raxml-ng/p' "${modeltest_out}" | tail -n1 | sed 's/.*>[[:space:]]*//')
-# add +ASC_LEWIS to --model option to optimize SNP phylogenetic tree
-cmd=$(echo "$raw_cmd" | sed 's/--model \(\S*\)/--model \1+ASC_LEWIS/')
+
+# Extract the RAxML-NG model string selected by BIC
+best_model=$(awk '
+  /^Best model according to BIC$/ { in_bic = 1; next }
+  /^Best model according to /     { in_bic = 0 }
+  in_bic && /> raxml-ng / {
+    for (i = 1; i <= NF; i++) {
+      if ($i == "--model") {
+        print $(i + 1)
+        exit
+      }
+    }
+  }
+' "${modeltest_out}")
+
+if [[ -z "${best_model}" || "${best_model}" != *"+ASC_LEWIS" ]]; then
+  echo "Error: Failed to extract a valid BIC model with +ASC_LEWIS from '${modeltest_out}' (got: '${best_model}')." >&2
+  exit 1
+fi
+
 RAXML_PREFIX="${VARIABLE_SNP_FILE_NAME}"
-$cmd --prefix "${RAXML_PREFIX}" --all --bs-trees $SIZE --threads auto --workers auto
+raxml-ng \
+  --msa "${VARIABLE_SNP_FILE_NAME}" \
+  --model "${best_model}" \
+  --prefix "${RAXML_PREFIX}" \
+  --all \
+  --bs-trees "${SIZE}" \
+  --threads "auto{$2}" \
+  --workers auto
 
 # Change extension to nwk
 TREE_FILE="${RAXML_PREFIX}.raxml.support"

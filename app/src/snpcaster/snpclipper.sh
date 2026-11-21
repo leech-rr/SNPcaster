@@ -103,7 +103,7 @@ echo "OUTPUT_DIR: $OUTPUT_DIR"
 [ -d "${OUTPUT_DIR}" ] && rm -r "${OUTPUT_DIR}"
 mkdir -v "${OUTPUT_DIR}"
 if [ "${using_mask_file}" -eq 1 ]; then
-  cp -pv "${MASK_FILE}" "${OUTPUT_DIR}"
+  copy_without_crlf "${MASK_FILE}" "${OUTPUT_DIR}" || exit 1
 fi
 
 cd "${OUTPUT_DIR}" || exit 1

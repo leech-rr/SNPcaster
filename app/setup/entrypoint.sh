@@ -35,7 +35,23 @@ fi
 usermod -g "$EXEC_GROUP" "$EXEC_USER"
 
 # パーミッションを調整
-chown -Rv "$EXEC_USER:$EXEC_GROUP" "$HOME_DIR"
+chown -R "$EXEC_USER:$EXEC_GROUP" "$HOME_DIR"
+
+# --- custom_setup.sh の初回実行 ---
+CUSTOM_SETUP_SCRIPT="/usr/local/bin/custom_setup.sh"
+FLAG_FILE="/var/run/.custom_setup_done"
+if [ -f "$CUSTOM_SETUP_SCRIPT" ]; then
+    if [ ! -f "$FLAG_FILE" ]; then
+        echo "[Entrypoint] Running custom_setup.sh for the first time..."
+        chmod +x "$CUSTOM_SETUP_SCRIPT"
+        bash "$CUSTOM_SETUP_SCRIPT"
+        touch "$FLAG_FILE"
+        echo "[Entrypoint] custom_setup.sh finished."
+    else
+        echo "[Entrypoint] custom_setup.sh has already been executed. Skipping."
+    fi
+fi
+# -----------------------------------
 
 # コマンド実行
 echo "Starting with UID: $HOST_UID, GID: $HOST_GID as USER: $EXEC_USER"

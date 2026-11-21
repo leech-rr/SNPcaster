@@ -118,7 +118,7 @@ echo "[INFO] Created log folder: $LOG_DIR"
 
 cleanup() {
   shopt -s nullglob
-  for f in *_out *_plus_out; do
+  for f in *_out.tsv *_plus_out.tsv *_out *_plus_out; do
     [[ -e "$f" ]] || continue
     mv -f "$f" "$TS_DIR/" 2>/dev/null || true
   done
@@ -168,6 +168,9 @@ while IFS=$'\n' read -r strain || [[ -n "$strain" ]]; do
 
   mv -f "$out" "$TS_DIR/"
 done < "$INPUT_LIST"
+
+echo "[INFO] Merging AMRFinder results..."
+conda run -n original merge_amrfinder.py "$TS_DIR" "$INPUT_LIST" "$TS_DIR"
 
 echo "[INFO] Done. Results in: $TS_DIR ; logs in: $LOG_DIR"
 
